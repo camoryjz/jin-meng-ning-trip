@@ -1,0 +1,2757 @@
+{
+  "$schema": "./schemas/trip-data.schema.json",
+  "schemaVersion": "2.0-lite",
+  "config": {
+    "schemaVersion": "1.0.0",
+    "modules": {
+      "flights": true,
+      "overview": true,
+      "itinerary": true,
+      "todo": true,
+      "driving": true,
+      "ledger": true
+    },
+    "language": "zh-CN",
+    "persistence": {
+      "mode": "d1",
+      "apiBase": "/api/trip",
+      "sharedCollections": [
+        "todos",
+        "tickets",
+        "ledger"
+      ]
+    }
+  },
+  "metadata": {
+    "tripId": "jin-meng-ning-roadtrip-20260924",
+    "title": "晋蒙宁14日自驾｜2026.09.24—10.07（10.08备选返程）",
+    "language": "zh-CN",
+    "assets": {
+      "routeMaps": [
+        "assets/maps/templates/template-05-river-highland.webp"
+      ]
+    }
+  },
+  "trip": {
+    "status": "draft",
+    "startDate": "2026-09-24",
+    "endDate": "2026-10-07",
+    "dayCount": 14,
+    "nightCountAway": 13,
+    "countries": [
+      "中国"
+    ],
+    "primaryDestinationCountries": [
+      "CN"
+    ],
+    "primaryDestinationName": "山西·内蒙古·宁夏",
+    "citiesAndAreas": [
+      "太原",
+      "忻州",
+      "应县",
+      "浑源",
+      "大同",
+      "乌兰哈达",
+      "呼和浩特",
+      "希拉穆仁",
+      "包头",
+      "巴彦淖尔",
+      "乌海",
+      "腾格里沙漠",
+      "中卫",
+      "吴忠",
+      "银川"
+    ],
+    "routeSummary": "上海飞太原取车，沿山西—内蒙古—宁夏一路自驾至银川；主方案10月7日还车后飞返上海，备选方案延后一晚，于10月8日10:30按现有租车订单在银川河东机场还车后返沪。",
+    "groupSize": null
+  },
+  "flightJourneys": [
+    {
+      "id": "flight-outbound",
+      "title": "9月24日｜上海虹桥 → 太原",
+      "status": "confirmed"
+    },
+    {
+      "id": "flight-return-primary",
+      "title": "主方案｜10月7日 银川 → 上海",
+      "placeholder": true,
+      "status": "pending",
+      "missingFields": [
+        "航空公司",
+        "航班号",
+        "出发时间",
+        "抵达时间",
+        "上海抵达机场"
+      ]
+    },
+    {
+      "id": "flight-return-option",
+      "title": "备选方案｜10月8日 银川 → 上海",
+      "placeholder": true,
+      "status": "pending",
+      "missingFields": [
+        "航空公司",
+        "航班号",
+        "出发时间",
+        "抵达时间",
+        "上海抵达机场"
+      ]
+    }
+  ],
+  "flights": [
+    {
+      "id": "flight-outbound-1",
+      "journeyId": "flight-outbound",
+      "sequence": 1,
+      "airline": {
+        "name": "Shanghai Airlines",
+        "nameZh": "上海航空"
+      },
+      "flightNumber": "FM9139",
+      "departure": {
+        "airportCode": "SHA",
+        "city": "上海",
+        "airportName": "虹桥国际机场",
+        "terminal": "T2",
+        "date": "2026-09-24",
+        "time": "07:00",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "TYN",
+        "city": "太原",
+        "airportName": "武宿国际机场",
+        "terminal": "T2",
+        "date": "2026-09-24",
+        "time": "09:10",
+        "utcOffset": "+08:00"
+      },
+      "duration": "2小时10分",
+      "cabin": "经济舱",
+      "aircraft": "波音737-800",
+      "meal": "早餐"
+    }
+  ],
+  "accommodations": [],
+  "groundTransport": {
+    "rentalCar": {
+      "company": "租车公司待确认",
+      "rentalPeriodDays": 14,
+      "vehicle": {
+        "example": "大众途昂Pro",
+        "class": "2.0T自动 · SUV 7座 · 车龄1年内 · 车牌待定"
+      },
+      "unlimitedKilometers": false,
+      "price": {
+        "currency": "CNY",
+        "payAtCounter": 0,
+        "note": "订单截图未显示整单租车总价；优选服务包为¥1120（¥80×14天）。"
+      },
+      "insurance": [
+        "优选服务包：¥1120（¥80×14天）",
+        "基础服务费：¥0",
+        "本车停运费：免收",
+        "特惠加油：返¥10×2张券",
+        "全程无忧：车损保障全额（含轮胎）",
+        "第三者保障：提高至150万元",
+        "乘客保障：10万元/人"
+      ],
+      "pickup": {
+        "date": "2026-09-24",
+        "time": "10:30",
+        "location": "太原武宿机场服务点",
+        "address": "订单显示“武宿机场服务点”；具体门店地址与联系方式待补充。",
+        "utcOffset": "+08:00"
+      },
+      "dropoff": {
+        "date": "2026-10-08",
+        "time": "10:30",
+        "timeZoneLabel": "北京时间",
+        "vehicleReturnPoint": "银川河东机场服务点",
+        "deadlineWarning": "现有租车订单为10月8日10:30还车：与10月8日备选返程方案一致；若采用10月7日主方案，需要提前修改租车订单的还车日期/时间。",
+        "recommendedArrivalTime": "待确认",
+        "utcOffset": "+08:00"
+      }
+    },
+    "rentalChecklist": [
+      "9月24日10:30在太原武宿机场服务点取车。",
+      "车型：大众途昂Pro，2.0T自动，SUV 7座，车龄1年内；车牌待定。",
+      "主方案：10月7日银川还车并返沪，需要将当前10月8日的还车订单提前1天。",
+      "备选方案：10月8日10:30在银川河东机场服务点还车，与现有租车订单一致。"
+    ],
+    "drivingNotes": [
+      "租车公司名称、具体门店地址及联系电话暂未从截图中确认。",
+      "订单截图中的优选服务包为¥1120（¥80×14天）；截图未显示整单租车总价，因此网页不把¥1120当作租车总价。",
+      "订单保障：车损保障全额（含轮胎），第三者保障提高至150万元，乘客保障10万元/人。",
+      "腾格里沙漠五湖穿越的越野车线路、集合点及服务商仍待确认。"
+    ],
+    "drivingReferenceLinks": [],
+    "plannedRoadLegs": [],
+    "publicTransitAndRail": []
+  },
+  "days": [
+    {
+      "day": 1,
+      "date": "2026-09-24",
+      "title": "上海→太原｜晋祠·太原植物园",
+      "locations": [
+        "太原武宿国际机场",
+        "晋祠",
+        "太原植物园"
+      ],
+      "schedule": [
+        {
+          "id": "d1-flight",
+          "time": "07:00—09:10",
+          "type": "flight",
+          "text": "FM9139 上海航空：07:00 上海虹桥国际机场T2起飞，09:10抵达太原武宿国际机场T2；经济舱，波音737-800，含早餐。"
+        },
+        {
+          "id": "d1-pickup",
+          "time": "10:30",
+          "type": "drive",
+          "text": "太原武宿机场服务点取车（租车公司名称待确认）",
+          "placeId": "taiyuan-airport"
+        },
+        {
+          "id": "d1-jinci",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "游览晋祠",
+          "placeId": "jinci"
+        },
+        {
+          "id": "d1-botanical",
+          "time": "日落前后",
+          "type": "attraction",
+          "text": "太原植物园，安排日落及夜景",
+          "placeId": "taiyuan-botanical"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "date": "2026-09-25",
+      "title": "太原→忻州｜山西博物院·忻州古城",
+      "locations": [
+        "山西博物院",
+        "忻州古城"
+      ],
+      "schedule": [
+        {
+          "id": "d2-museum",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "参观山西博物院",
+          "placeId": "shanxi-museum"
+        },
+        {
+          "id": "d2-drive",
+          "time": "待确认",
+          "type": "drive",
+          "text": "自驾前往忻州",
+          "placeIds": [
+            "taiyuan-city",
+            "xinzhou-ancient-city"
+          ]
+        },
+        {
+          "id": "d2-ancient",
+          "time": "傍晚",
+          "type": "attraction",
+          "text": "逛忻州古城",
+          "placeId": "xinzhou-ancient-city"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "date": "2026-09-26",
+      "title": "忻州→应县→浑源｜应县木塔",
+      "locations": [
+        "忻州",
+        "应县木塔",
+        "浑源"
+      ],
+      "schedule": [
+        {
+          "id": "d3-drive1",
+          "time": "待确认",
+          "type": "drive",
+          "text": "忻州出发，自驾前往应县",
+          "placeIds": [
+            "xinzhou-ancient-city",
+            "yingxian-pagoda"
+          ]
+        },
+        {
+          "id": "d3-pagoda",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "游览应县木塔",
+          "placeId": "yingxian-pagoda"
+        },
+        {
+          "id": "d3-drive2",
+          "time": "待确认",
+          "type": "drive",
+          "text": "继续前往浑源",
+          "placeId": "hunyuan"
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "date": "2026-09-27",
+      "title": "浑源→大同｜悬空寺",
+      "locations": [
+        "悬空寺",
+        "大同"
+      ],
+      "schedule": [
+        {
+          "id": "d4-hanging",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "游览悬空寺",
+          "placeId": "hanging-temple"
+        },
+        {
+          "id": "d4-drive",
+          "time": "待确认",
+          "type": "drive",
+          "text": "游览后出发前往大同",
+          "placeIds": [
+            "hanging-temple",
+            "datong"
+          ]
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "date": "2026-09-28",
+      "title": "大同｜云冈石窟·大同古城",
+      "locations": [
+        "云冈石窟",
+        "大同古城"
+      ],
+      "schedule": [
+        {
+          "id": "d5-yungang",
+          "time": "全天",
+          "type": "attraction",
+          "text": "全天游玩云冈石窟",
+          "placeId": "yungang-grottoes"
+        },
+        {
+          "id": "d5-ancient",
+          "time": "夜间",
+          "type": "attraction",
+          "text": "夜游大同古城",
+          "placeId": "datong-ancient-city"
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "date": "2026-09-29",
+      "title": "大同→乌兰哈达→呼和浩特",
+      "locations": [
+        "大同",
+        "乌兰哈达火山",
+        "呼和浩特"
+      ],
+      "schedule": [
+        {
+          "id": "d6-drive1",
+          "time": "待确认",
+          "type": "drive",
+          "text": "大同出发，自驾前往乌兰哈达火山",
+          "placeIds": [
+            "datong",
+            "ulanhada-volcano"
+          ]
+        },
+        {
+          "id": "d6-volcano",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "游玩乌兰哈达火山",
+          "placeId": "ulanhada-volcano"
+        },
+        {
+          "id": "d6-drive2",
+          "time": "待确认",
+          "type": "drive",
+          "text": "继续自驾前往呼和浩特",
+          "placeId": "hohhot"
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "date": "2026-09-30",
+      "title": "呼和浩特→希拉穆仁草原｜博物院·日落星空",
+      "locations": [
+        "内蒙古博物院",
+        "希拉穆仁草原"
+      ],
+      "schedule": [
+        {
+          "id": "d7-museum",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "参观内蒙古博物院",
+          "placeId": "inner-mongolia-museum"
+        },
+        {
+          "id": "d7-drive",
+          "time": "待确认",
+          "type": "drive",
+          "text": "前往希拉穆仁草原",
+          "placeIds": [
+            "hohhot",
+            "xilamuren-grassland"
+          ]
+        },
+        {
+          "id": "d7-sunset",
+          "time": "日落",
+          "type": "attraction",
+          "text": "草原看日落",
+          "placeId": "xilamuren-grassland"
+        },
+        {
+          "id": "d7-stars",
+          "time": "夜间",
+          "type": "attraction",
+          "text": "草原观星",
+          "placeId": "xilamuren-grassland"
+        }
+      ]
+    },
+    {
+      "day": 8,
+      "date": "2026-10-01",
+      "title": "希拉穆仁→包头→巴彦淖尔",
+      "locations": [
+        "希拉穆仁草原",
+        "包头",
+        "巴彦淖尔"
+      ],
+      "schedule": [
+        {
+          "id": "d8-drive1",
+          "time": "待确认",
+          "type": "drive",
+          "text": "从草原出发前往包头",
+          "placeIds": [
+            "xilamuren-grassland",
+            "baotou"
+          ]
+        },
+        {
+          "id": "d8-rest",
+          "time": "待确认",
+          "type": "rest",
+          "text": "包头休整",
+          "placeId": "baotou"
+        },
+        {
+          "id": "d8-drive2",
+          "time": "待确认",
+          "type": "drive",
+          "text": "继续前往巴彦淖尔",
+          "placeId": "bayannur"
+        }
+      ]
+    },
+    {
+      "day": 9,
+      "date": "2026-10-02",
+      "title": "巴彦淖尔→乌海湖→腾格里沙漠",
+      "locations": [
+        "巴彦淖尔",
+        "乌海湖",
+        "腾格里沙漠"
+      ],
+      "schedule": [
+        {
+          "id": "d9-drive1",
+          "time": "待确认",
+          "type": "drive",
+          "text": "巴彦淖尔出发前往乌海湖",
+          "placeIds": [
+            "bayannur",
+            "wuhai-lake"
+          ]
+        },
+        {
+          "id": "d9-wuhai",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "游玩乌海湖",
+          "placeId": "wuhai-lake"
+        },
+        {
+          "id": "d9-drive2",
+          "time": "待确认",
+          "type": "drive",
+          "text": "继续前往腾格里沙漠（具体营地/集合点待确认）",
+          "placeId": "tengger-desert"
+        },
+        {
+          "id": "d9-sunset",
+          "time": "日落",
+          "type": "attraction",
+          "text": "沙丘看日落",
+          "placeId": "tengger-desert"
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "date": "2026-10-03",
+      "title": "腾格里沙漠｜五湖穿越·观星",
+      "locations": [
+        "腾格里沙漠",
+        "五湖穿越区域"
+      ],
+      "schedule": [
+        {
+          "id": "d10-desert",
+          "time": "全天",
+          "type": "attraction",
+          "text": "腾格里沙漠全天游玩",
+          "placeId": "tengger-desert"
+        },
+        {
+          "id": "d10-offroad",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "越野车五湖穿越（具体线路及集合点待确认）",
+          "placeId": "tengger-five-lakes"
+        },
+        {
+          "id": "d10-stars",
+          "time": "夜间",
+          "type": "attraction",
+          "text": "沙漠观星",
+          "placeId": "tengger-desert"
+        }
+      ]
+    },
+    {
+      "day": 11,
+      "date": "2026-10-04",
+      "title": "腾格里→中卫｜66号公路",
+      "locations": [
+        "腾格里沙漠",
+        "中卫66号公路"
+      ],
+      "schedule": [
+        {
+          "id": "d11-exit",
+          "time": "待确认",
+          "type": "drive",
+          "text": "离开腾格里沙漠前往中卫",
+          "placeIds": [
+            "tengger-desert",
+            "zhongwei"
+          ]
+        },
+        {
+          "id": "d11-route66",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "打卡中卫66号公路",
+          "placeId": "zhongwei-route66"
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "date": "2026-10-05",
+      "title": "中卫→吴忠→银川｜早茶·怀远夜市",
+      "locations": [
+        "中卫",
+        "吴忠",
+        "银川",
+        "怀远夜市"
+      ],
+      "schedule": [
+        {
+          "id": "d12-drive1",
+          "time": "待确认",
+          "type": "drive",
+          "text": "中卫出发前往吴忠",
+          "placeIds": [
+            "zhongwei",
+            "wuzhong"
+          ]
+        },
+        {
+          "id": "d12-breakfast",
+          "time": "早间",
+          "type": "restaurant",
+          "text": "吴忠吃早茶（具体店铺待确认）",
+          "placeId": "wuzhong"
+        },
+        {
+          "id": "d12-drive2",
+          "time": "待确认",
+          "type": "drive",
+          "text": "继续前往银川",
+          "placeId": "yinchuan"
+        },
+        {
+          "id": "d12-market",
+          "time": "夜间",
+          "type": "attraction",
+          "text": "逛怀远夜市",
+          "placeId": "huaiyuan-night-market"
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "date": "2026-10-06",
+      "title": "银川西线｜西夏王陵·贺兰山岩画",
+      "locations": [
+        "西夏王陵",
+        "贺兰山岩画",
+        "银川"
+      ],
+      "schedule": [
+        {
+          "id": "d13-tombs",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "游览西夏王陵",
+          "placeId": "xixia-tombs"
+        },
+        {
+          "id": "d13-rock",
+          "time": "待确认",
+          "type": "attraction",
+          "text": "游览贺兰山岩画",
+          "placeId": "helan-rock-art"
+        },
+        {
+          "id": "d13-return",
+          "time": "待确认",
+          "type": "drive",
+          "text": "结束银川西线行程，返回银川",
+          "placeId": "yinchuan"
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "date": "2026-10-07",
+      "title": "银川→上海｜主方案10/7返程 · 备选10/8返程",
+      "locations": [
+        "银川"
+      ],
+      "schedule": [
+        {
+          "id": "d14-primary-return-car",
+          "time": "主方案 · 待确认",
+          "type": "return",
+          "text": "10月7日在银川还车。现有租车订单为10月8日10:30还车，如采用主方案，需要提前把租车订单还车日期调整为10月7日。",
+          "placeId": "yinchuan"
+        },
+        {
+          "id": "d14-primary-flight",
+          "time": "主方案 · 待确认",
+          "type": "flight",
+          "text": "10月7日银川飞上海（航司、航班号、起降时间及上海抵达机场待确认）。"
+        },
+        {
+          "id": "d14-option-stay",
+          "time": "备选 · 10月7日",
+          "type": "free",
+          "text": "若改为10月8日返程：10月7日保留为银川自由活动、休整与机动时间，并在银川延住1晚。",
+          "placeId": "yinchuan"
+        },
+        {
+          "id": "d14-option-return-car",
+          "time": "备选 · 10月8日10:30",
+          "type": "return",
+          "text": "按现有租车订单，在银川河东机场服务点还车。",
+          "placeId": "yinchuan"
+        },
+        {
+          "id": "d14-option-flight",
+          "time": "备选 · 10月8日",
+          "type": "flight",
+          "text": "还车后从银川飞返上海；具体返程航班待确认。"
+        }
+      ],
+      "notes": [
+        "当前默认采用10月7日返程；10月8日仅作为可选延后方案，不改变主行程的14天日期范围。",
+        "10月8日备选方案与现有租车订单的10:30还车时间一致。"
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "taiyuan-airport",
+      "nameZh": "太原武宿国际机场",
+      "name": "太原武宿国际机场"
+    },
+    {
+      "id": "taiyuan-city",
+      "nameZh": "太原",
+      "name": "太原"
+    },
+    {
+      "id": "jinci",
+      "nameZh": "晋祠",
+      "name": "晋祠"
+    },
+    {
+      "id": "taiyuan-botanical",
+      "nameZh": "太原植物园",
+      "name": "太原植物园"
+    },
+    {
+      "id": "shanxi-museum",
+      "nameZh": "山西博物院",
+      "name": "山西博物院"
+    },
+    {
+      "id": "xinzhou-ancient-city",
+      "nameZh": "忻州古城",
+      "name": "忻州古城"
+    },
+    {
+      "id": "yingxian-pagoda",
+      "nameZh": "应县木塔",
+      "name": "应县木塔"
+    },
+    {
+      "id": "hunyuan",
+      "nameZh": "浑源",
+      "name": "浑源"
+    },
+    {
+      "id": "hanging-temple",
+      "nameZh": "悬空寺",
+      "name": "悬空寺"
+    },
+    {
+      "id": "datong",
+      "nameZh": "大同",
+      "name": "大同"
+    },
+    {
+      "id": "yungang-grottoes",
+      "nameZh": "云冈石窟",
+      "name": "云冈石窟"
+    },
+    {
+      "id": "datong-ancient-city",
+      "nameZh": "大同古城",
+      "name": "大同古城"
+    },
+    {
+      "id": "ulanhada-volcano",
+      "nameZh": "乌兰哈达火山",
+      "name": "乌兰哈达火山"
+    },
+    {
+      "id": "hohhot",
+      "nameZh": "呼和浩特",
+      "name": "呼和浩特"
+    },
+    {
+      "id": "inner-mongolia-museum",
+      "nameZh": "内蒙古博物院",
+      "name": "内蒙古博物院"
+    },
+    {
+      "id": "xilamuren-grassland",
+      "nameZh": "希拉穆仁草原",
+      "name": "希拉穆仁草原"
+    },
+    {
+      "id": "baotou",
+      "nameZh": "包头",
+      "name": "包头"
+    },
+    {
+      "id": "bayannur",
+      "nameZh": "巴彦淖尔",
+      "name": "巴彦淖尔"
+    },
+    {
+      "id": "wuhai-lake",
+      "nameZh": "乌海湖",
+      "name": "乌海湖"
+    },
+    {
+      "id": "tengger-desert",
+      "nameZh": "腾格里沙漠",
+      "name": "腾格里沙漠"
+    },
+    {
+      "id": "tengger-five-lakes",
+      "nameZh": "腾格里沙漠五湖穿越区域",
+      "name": "腾格里沙漠五湖穿越区域"
+    },
+    {
+      "id": "zhongwei",
+      "nameZh": "中卫",
+      "name": "中卫"
+    },
+    {
+      "id": "zhongwei-route66",
+      "nameZh": "中卫66号公路",
+      "name": "中卫66号公路"
+    },
+    {
+      "id": "wuzhong",
+      "nameZh": "吴忠",
+      "name": "吴忠"
+    },
+    {
+      "id": "yinchuan",
+      "nameZh": "银川",
+      "name": "银川"
+    },
+    {
+      "id": "huaiyuan-night-market",
+      "nameZh": "怀远夜市",
+      "name": "怀远夜市"
+    },
+    {
+      "id": "xixia-tombs",
+      "nameZh": "西夏王陵",
+      "name": "西夏王陵"
+    },
+    {
+      "id": "helan-rock-art",
+      "nameZh": "贺兰山岩画",
+      "name": "贺兰山岩画"
+    }
+  ],
+  "restaurants": [],
+  "bookingsAndTickets": [],
+  "ticketPlanning": {
+    "statusStorage": "local",
+    "statusStorageNote": "门票状态默认只保存在当前浏览器。",
+    "items": []
+  },
+  "preTrip": {
+    "packingItems": [],
+    "preparationsExplicitlyMentioned": [],
+    "missingNote": "暂无用户明确提供的 To Do，可在网页中自行添加。"
+  },
+  "mapLinks": {
+    "providedGoogleMapsLinks": [],
+    "note": "地图为模板化路线示意；腾格里沙漠等宽泛地点的具体营地/集合点待确认。",
+    "cityLevelNavigationDisabled": false,
+    "navigationPolicy": {
+      "noNavigationTypes": [
+        "flight",
+        "note",
+        "rest"
+      ],
+      "selfNavigationTypes": [
+        "drive",
+        "return",
+        "transfer",
+        "check-in",
+        "check-out",
+        "restaurant",
+        "attraction",
+        "walk",
+        "hike"
+      ]
+    },
+    "navigationPlaces": []
+  },
+  "issuesAndUncertainties": [
+    {
+      "id": "year-inferred",
+      "status": "inferred",
+      "text": "用户未写年份；按当前日期推定为2026年9月24日至10月7日。"
+    },
+    {
+      "id": "stay-pending",
+      "status": "pending",
+      "text": "14天住宿酒店与入住信息尚未提供。"
+    },
+    {
+      "id": "desert-pending",
+      "status": "pending",
+      "text": "腾格里沙漠具体营地、五湖穿越线路/集合点与越野车服务商待确认。"
+    },
+    {
+      "id": "return-primary-pending",
+      "status": "pending",
+      "text": "当前主方案为10月7日银川返上海，返程航司、航班号及起降时间待确认；若采用该方案，需要同步把租车还车日期从10月8日改到10月7日。"
+    },
+    {
+      "id": "return-option-oct8",
+      "status": "option",
+      "text": "已增加10月8日返程备选方案：10月7日银川自由活动并延住1晚，10月8日10:30按现有订单在银川河东机场还车，再乘待确认航班返上海。"
+    }
+  ],
+  "map": {
+    "schemaVersion": "1.0-lite",
+    "mapMode": "template-auto",
+    "templateId": "auto",
+    "disclaimer": "本图仅表达地点的相对方位与路线顺序，不代表真实比例或精确地理边界。",
+    "places": [
+      {
+        "id": "taiyuan-airport",
+        "name": "太原武宿国际机场",
+        "geo": {
+          "lat": 37.7469,
+          "lng": 112.628
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "taiyuan-city",
+        "name": "太原",
+        "geo": {
+          "lat": 37.8706,
+          "lng": 112.5489
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "jinci",
+        "name": "晋祠",
+        "geo": {
+          "lat": 37.704,
+          "lng": 112.443
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "taiyuan-botanical",
+        "name": "太原植物园",
+        "geo": {
+          "lat": 37.6848,
+          "lng": 112.487
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "shanxi-museum",
+        "name": "山西博物院",
+        "geo": {
+          "lat": 37.8657,
+          "lng": 112.531
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "xinzhou-ancient-city",
+        "name": "忻州古城",
+        "geo": {
+          "lat": 38.4097,
+          "lng": 112.7337
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "yingxian-pagoda",
+        "name": "应县木塔",
+        "geo": {
+          "lat": 39.5658,
+          "lng": 113.1907
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "hunyuan",
+        "name": "浑源",
+        "geo": {
+          "lat": 39.699,
+          "lng": 113.692
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "hanging-temple",
+        "name": "悬空寺",
+        "geo": {
+          "lat": 39.6663,
+          "lng": 113.7056
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "datong",
+        "name": "大同",
+        "geo": {
+          "lat": 40.0768,
+          "lng": 113.3001
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "yungang-grottoes",
+        "name": "云冈石窟",
+        "geo": {
+          "lat": 40.1094,
+          "lng": 113.122
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "datong-ancient-city",
+        "name": "大同古城",
+        "geo": {
+          "lat": 40.0898,
+          "lng": 113.296
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "ulanhada-volcano",
+        "name": "乌兰哈达火山",
+        "geo": {
+          "lat": 41.324,
+          "lng": 113.107
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "hohhot",
+        "name": "呼和浩特",
+        "geo": {
+          "lat": 40.8426,
+          "lng": 111.7492
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "inner-mongolia-museum",
+        "name": "内蒙古博物院",
+        "geo": {
+          "lat": 40.8494,
+          "lng": 111.7428
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "xilamuren-grassland",
+        "name": "希拉穆仁草原",
+        "geo": {
+          "lat": 41.319,
+          "lng": 111.186
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "baotou",
+        "name": "包头",
+        "geo": {
+          "lat": 40.6574,
+          "lng": 109.8403
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "bayannur",
+        "name": "巴彦淖尔",
+        "geo": {
+          "lat": 40.7432,
+          "lng": 107.3877
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "wuhai-lake",
+        "name": "乌海湖",
+        "geo": {
+          "lat": 39.673,
+          "lng": 106.794
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "tengger-desert",
+        "name": "腾格里沙漠",
+        "geo": {
+          "lat": 37.529,
+          "lng": 105.018
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "tengger-five-lakes",
+        "name": "腾格里沙漠五湖穿越区域",
+        "geo": {
+          "lat": 37.483,
+          "lng": 104.957
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "zhongwei",
+        "name": "中卫",
+        "geo": {
+          "lat": 37.5003,
+          "lng": 105.1968
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "zhongwei-route66",
+        "name": "中卫66号公路",
+        "geo": {
+          "lat": 37.34,
+          "lng": 105.23
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "wuzhong",
+        "name": "吴忠",
+        "geo": {
+          "lat": 37.9976,
+          "lng": 106.1988
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "yinchuan",
+        "name": "银川",
+        "geo": {
+          "lat": 38.4872,
+          "lng": 106.2309
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "huaiyuan-night-market",
+        "name": "怀远夜市",
+        "geo": {
+          "lat": 38.4955,
+          "lng": 106.143
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "xixia-tombs",
+        "name": "西夏王陵",
+        "geo": {
+          "lat": 38.424,
+          "lng": 105.995
+        },
+        "countryCode": "CN"
+      },
+      {
+        "id": "helan-rock-art",
+        "name": "贺兰山岩画",
+        "geo": {
+          "lat": 38.743,
+          "lng": 105.922
+        },
+        "countryCode": "CN"
+      }
+    ],
+    "routes": [
+      {
+        "day": 1,
+        "placeIds": [
+          "taiyuan-airport",
+          "jinci",
+          "taiyuan-botanical",
+          "taiyuan-city"
+        ]
+      },
+      {
+        "day": 2,
+        "placeIds": [
+          "taiyuan-city",
+          "shanxi-museum",
+          "xinzhou-ancient-city"
+        ]
+      },
+      {
+        "day": 3,
+        "placeIds": [
+          "xinzhou-ancient-city",
+          "yingxian-pagoda",
+          "hunyuan"
+        ]
+      },
+      {
+        "day": 4,
+        "placeIds": [
+          "hunyuan",
+          "hanging-temple",
+          "datong"
+        ]
+      },
+      {
+        "day": 5,
+        "placeIds": [
+          "datong",
+          "yungang-grottoes",
+          "datong-ancient-city",
+          "datong"
+        ]
+      },
+      {
+        "day": 6,
+        "placeIds": [
+          "datong",
+          "ulanhada-volcano",
+          "hohhot"
+        ]
+      },
+      {
+        "day": 7,
+        "placeIds": [
+          "hohhot",
+          "inner-mongolia-museum",
+          "xilamuren-grassland"
+        ]
+      },
+      {
+        "day": 8,
+        "placeIds": [
+          "xilamuren-grassland",
+          "baotou",
+          "bayannur"
+        ]
+      },
+      {
+        "day": 9,
+        "placeIds": [
+          "bayannur",
+          "wuhai-lake",
+          "tengger-desert"
+        ]
+      },
+      {
+        "day": 10,
+        "placeIds": [
+          "tengger-desert",
+          "tengger-five-lakes"
+        ]
+      },
+      {
+        "day": 11,
+        "placeIds": [
+          "tengger-desert",
+          "zhongwei-route66",
+          "zhongwei"
+        ]
+      },
+      {
+        "day": 12,
+        "placeIds": [
+          "zhongwei",
+          "wuzhong",
+          "yinchuan",
+          "huaiyuan-night-market"
+        ]
+      },
+      {
+        "day": 13,
+        "placeIds": [
+          "yinchuan",
+          "xixia-tombs",
+          "helan-rock-art",
+          "yinchuan"
+        ]
+      }
+    ],
+    "dailyRoutes": [
+      {
+        "day": 1,
+        "placeIds": [
+          "taiyuan-airport",
+          "jinci",
+          "taiyuan-botanical",
+          "taiyuan-city"
+        ]
+      },
+      {
+        "day": 2,
+        "placeIds": [
+          "taiyuan-city",
+          "shanxi-museum",
+          "xinzhou-ancient-city"
+        ]
+      },
+      {
+        "day": 3,
+        "placeIds": [
+          "xinzhou-ancient-city",
+          "yingxian-pagoda",
+          "hunyuan"
+        ]
+      },
+      {
+        "day": 4,
+        "placeIds": [
+          "hunyuan",
+          "hanging-temple",
+          "datong"
+        ]
+      },
+      {
+        "day": 5,
+        "placeIds": [
+          "datong",
+          "yungang-grottoes",
+          "datong-ancient-city",
+          "datong"
+        ]
+      },
+      {
+        "day": 6,
+        "placeIds": [
+          "datong",
+          "ulanhada-volcano",
+          "hohhot"
+        ]
+      },
+      {
+        "day": 7,
+        "placeIds": [
+          "hohhot",
+          "inner-mongolia-museum",
+          "xilamuren-grassland"
+        ]
+      },
+      {
+        "day": 8,
+        "placeIds": [
+          "xilamuren-grassland",
+          "baotou",
+          "bayannur"
+        ]
+      },
+      {
+        "day": 9,
+        "placeIds": [
+          "bayannur",
+          "wuhai-lake",
+          "tengger-desert"
+        ]
+      },
+      {
+        "day": 10,
+        "placeIds": [
+          "tengger-desert",
+          "tengger-five-lakes"
+        ]
+      },
+      {
+        "day": 11,
+        "placeIds": [
+          "tengger-desert",
+          "zhongwei-route66",
+          "zhongwei"
+        ]
+      },
+      {
+        "day": 12,
+        "placeIds": [
+          "zhongwei",
+          "wuzhong",
+          "yinchuan",
+          "huaiyuan-night-market"
+        ]
+      },
+      {
+        "day": 13,
+        "placeIds": [
+          "yinchuan",
+          "xixia-tombs",
+          "helan-rock-art",
+          "yinchuan"
+        ]
+      }
+    ],
+    "region": {
+      "id": "jin-meng-ning",
+      "label": "山西·内蒙古·宁夏",
+      "countryCode": "CN",
+      "countryCodes": [
+        "CN"
+      ],
+      "heading": "SHANXI · INNER MONGOLIA · NINGXIA / 晋蒙宁",
+      "description": "2026年9月24日至10月7日，太原取车后经山西北上内蒙古，再向西南进入宁夏，最终在银川还车返程。"
+    }
+  },
+  "routeMap": {
+    "defaultRegionId": "jin-meng-ning",
+    "regions": [
+      {
+        "id": "jin-meng-ning",
+        "label": "山西·内蒙古·宁夏",
+        "countryCode": "CN",
+        "scope": "template-schematic",
+        "mapMode": "frozen-template",
+        "templateId": "river-highland",
+        "mapModeReason": "separated-clusters-or-long-jump",
+        "mapModeMetrics": {
+          "placeCount": 28,
+          "geoPlaceCount": 28,
+          "widthKm": 753.96,
+          "heightKm": 442.22,
+          "spanKm": 819.68,
+          "averageNearestKm": 32.6,
+          "components": 1,
+          "largestLegKm": 283.98,
+          "jumpRatio": 7.88
+        },
+        "days": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "canvas": {
+          "width": 1448,
+          "height": 1086
+        },
+        "projection": {
+          "type": "relative-schematic",
+          "bounds": null
+        },
+        "baseImage": "assets/maps/templates/template-05-river-highland.webp",
+        "title": "山西·内蒙古·宁夏 · 旅行路线",
+        "ariaLabel": "山西·内蒙古·宁夏模板化旅行路线示意图，共13天",
+        "description": "2026年9月24日至10月7日，太原取车后经山西北上内蒙古，再向西南进入宁夏，最终在银川还车返程。",
+        "disclaimer": "本图仅表达地点的相对方位与路线顺序，不代表真实比例或精确地理边界。",
+        "heading": {
+          "text": "SHANXI · INNER MONGOLIA · NINGXIA / 晋蒙宁",
+          "x": 33,
+          "y": 105,
+          "size": 40
+        },
+        "legend": {
+          "x": 35,
+          "y": 168,
+          "gap": 43
+        },
+        "annotations": [],
+        "routes": [
+          {
+            "day": 1,
+            "color": "#397dc1",
+            "placeIds": [
+              "taiyuan-airport",
+              "jinci",
+              "taiyuan-botanical",
+              "taiyuan-city"
+            ],
+            "paths": [
+              "M1134.07 725.73 C1112.7 729.0 1092.2 726.3 1073.65 717.68 C1110.2 713.3 1142.6 699.3 1169.08 676.64 C1135.4 665.6 1107.4 646.3 1086.77 619.88"
+            ],
+            "overviewPaths": [
+              "M1134.07 725.73 C1107.4 694.5 1091.3 658.5 1086.77 619.88"
+            ]
+          },
+          {
+            "day": 2,
+            "color": "#e77e22",
+            "placeIds": [
+              "taiyuan-city",
+              "shanxi-museum",
+              "xinzhou-ancient-city"
+            ],
+            "paths": [
+              "M1086.77 619.88 C1089.6 640.0 1097.6 657.8 1110.33 672.16 C1117.3 650.4 1129.5 632.3 1146.41 618.87"
+            ],
+            "overviewPaths": [
+              "M1086.77 619.88 C1107.1 625.5 1127.4 625.2 1146.41 618.87"
+            ]
+          },
+          {
+            "day": 3,
+            "color": "#618344",
+            "placeIds": [
+              "xinzhou-ancient-city",
+              "yingxian-pagoda",
+              "hunyuan"
+            ],
+            "paths": [
+              "M1146.41 618.87 C1136.7 583.9 1137.2 549.1 1147.86 516.52 C1184.9 514.0 1218.2 501.7 1246 480.23"
+            ],
+            "overviewPaths": [
+              "M1146.41 618.87 C1166.4 561.8 1200.3 514.6 1246 480.23"
+            ]
+          },
+          {
+            "day": 4,
+            "color": "#209aaa",
+            "placeIds": [
+              "hunyuan",
+              "hanging-temple",
+              "datong"
+            ],
+            "paths": [
+              "M1246 480.23 C1228.4 492.3 1215.5 508.1 1208.04 526.8 C1195.7 510.0 1188.9 491.2 1188.05 471.51"
+            ],
+            "overviewPaths": [
+              "M1246 480.23 C1227.2 471.5 1207.5 468.5 1188.05 471.51"
+            ]
+          },
+          {
+            "day": 5,
+            "color": "#8865a5",
+            "placeIds": [
+              "datong",
+              "yungang-grottoes",
+              "datong-ancient-city",
+              "datong"
+            ],
+            "paths": [
+              "M1188.05 471.51 C1166.4 472.6 1146.3 467.8 1128.69 457.31 C1147.0 447.0 1161.1 432.6 1170.19 414.92 C1181.9 432.4 1188.0 451.6 1188.05 471.51"
+            ],
+            "overviewPaths": []
+          },
+          {
+            "day": 6,
+            "color": "#df6185",
+            "placeIds": [
+              "datong",
+              "ulanhada-volcano",
+              "hohhot"
+            ],
+            "paths": [
+              "M1188.05 471.51 C1192.6 422.6 1183.5 376.3 1161.39 335.39 C1136.5 371.6 1103.8 398.2 1065.22 413.65"
+            ],
+            "overviewPaths": [
+              "M1188.05 471.51 C1152.1 439.6 1110.3 419.9 1065.22 413.65"
+            ]
+          },
+          {
+            "day": 7,
+            "color": "#397dc1",
+            "placeIds": [
+              "hohhot",
+              "inner-mongolia-museum",
+              "xilamuren-grassland"
+            ],
+            "paths": [
+              "M1065.22 413.65 C1058.0 394.1 1056.6 374.2 1061.24 355.01 C1044.4 340.8 1025.2 332.3 1004.49 329.99"
+            ],
+            "overviewPaths": [
+              "M1065.22 413.65 C1036.2 391.3 1015.6 362.8 1004.49 329.99"
+            ]
+          },
+          {
+            "day": 8,
+            "color": "#e77e22",
+            "placeIds": [
+              "xilamuren-grassland",
+              "baotou",
+              "bayannur"
+            ],
+            "paths": [
+              "M1004.49 329.99 C966.5 344.9 935.6 368.9 913.61 400.51 C849.5 416.3 786.3 413.4 727.57 392.13"
+            ],
+            "overviewPaths": [
+              "M1004.49 329.99 C904.1 323.4 810.0 344.6 727.57 392.13"
+            ]
+          },
+          {
+            "day": 9,
+            "color": "#618344",
+            "placeIds": [
+              "bayannur",
+              "wuhai-lake",
+              "tengger-desert"
+            ],
+            "paths": [
+              "M727.57 392.13 C722.7 432.2 707.4 467.7 682.54 496.69 C620.9 546.1 577.5 608.2 554.9 679.49"
+            ],
+            "overviewPaths": [
+              "M727.57 392.13 C694.6 505.3 635.9 603.0 554.9 679.49"
+            ]
+          },
+          {
+            "day": 10,
+            "color": "#209aaa",
+            "placeIds": [
+              "tengger-desert",
+              "tengger-five-lakes"
+            ],
+            "paths": [
+              "M554.9 679.49 C534.9 685.8 518.1 697.0 505.68 712.55"
+            ],
+            "overviewPaths": [
+              "M554.9 679.49 C534.9 685.8 518.1 697.0 505.68 712.55"
+            ]
+          },
+          {
+            "day": 11,
+            "color": "#8865a5",
+            "placeIds": [
+              "tengger-desert",
+              "zhongwei-route66",
+              "zhongwei"
+            ],
+            "paths": [
+              "M554.9 679.49 C560.8 704.3 559.6 728.7 551.21 751.29 C571.1 745.1 587.8 734.1 600.21 718.75"
+            ],
+            "overviewPaths": [
+              "M554.9 679.49 C574.2 688.3 589.6 701.7 600.21 718.75"
+            ]
+          },
+          {
+            "day": 12,
+            "color": "#df6185",
+            "placeIds": [
+              "zhongwei",
+              "wuzhong",
+              "yinchuan",
+              "huaiyuan-night-market"
+            ],
+            "paths": [
+              "M600.21 718.75 C621.7 712.1 639.6 700.2 652.97 683.67 C650.5 647.4 658.0 613.4 675.02 583.54 C638.8 584.4 605.8 595.1 577.8 614.8"
+            ],
+            "overviewPaths": [
+              "M600.21 718.75 C639.2 680.3 664.6 634.3 675.02 583.54 C645.1 603.9 612.0 614.5 577.8 614.8"
+            ]
+          },
+          {
+            "day": 13,
+            "color": "#397dc1",
+            "placeIds": [
+              "yinchuan",
+              "xixia-tombs",
+              "helan-rock-art",
+              "yinchuan"
+            ],
+            "paths": [
+              "M675.02 583.54 C666.0 602.4 652.5 617.3 635.51 627.34 C634.8 605.9 628.4 586.3 616.54 569.8 C637.8 568.6 657.7 573.3 675.02 583.54"
+            ],
+            "overviewPaths": []
+          }
+        ],
+        "places": [
+          {
+            "id": "taiyuan-airport",
+            "x": 1134.07,
+            "y": 725.73,
+            "color": "#397dc1",
+            "tx": 1166.07,
+            "ty": 775.73,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "太原武宿国际机场"
+            ],
+            "query": "太原武宿国际机场 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.7469,
+              "lng": 112.628
+            },
+            "days": [
+              1
+            ]
+          },
+          {
+            "id": "taiyuan-city",
+            "x": 1086.77,
+            "y": 619.88,
+            "color": "#397dc1",
+            "tx": 1054.77,
+            "ty": 587.88,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "太原"
+            ],
+            "query": "太原 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.8706,
+              "lng": 112.5489
+            },
+            "days": [
+              1,
+              2
+            ]
+          },
+          {
+            "id": "jinci",
+            "x": 1073.65,
+            "y": 717.68,
+            "color": "#397dc1",
+            "tx": 995.65,
+            "ty": 655.68,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "晋祠"
+            ],
+            "query": "晋祠 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.704,
+              "lng": 112.443
+            },
+            "days": [
+              1
+            ]
+          },
+          {
+            "id": "taiyuan-botanical",
+            "x": 1169.08,
+            "y": 676.64,
+            "color": "#397dc1",
+            "tx": 1031.08,
+            "ty": 778.64,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "太原植物园"
+            ],
+            "query": "太原植物园 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.6848,
+              "lng": 112.487
+            },
+            "days": [
+              1
+            ]
+          },
+          {
+            "id": "shanxi-museum",
+            "x": 1110.33,
+            "y": 672.16,
+            "color": "#e77e22",
+            "tx": 1248.33,
+            "ty": 584.16,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "山西博物院"
+            ],
+            "query": "山西博物院 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.8657,
+              "lng": 112.531
+            },
+            "days": [
+              2
+            ]
+          },
+          {
+            "id": "xinzhou-ancient-city",
+            "x": 1146.41,
+            "y": 618.87,
+            "color": "#e77e22",
+            "tx": 1224.41,
+            "ty": 694.87,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "忻州古城"
+            ],
+            "query": "忻州古城 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 38.4097,
+              "lng": 112.7337
+            },
+            "days": [
+              2,
+              3
+            ]
+          },
+          {
+            "id": "yingxian-pagoda",
+            "x": 1147.86,
+            "y": 516.52,
+            "color": "#618344",
+            "tx": 1115.86,
+            "ty": 484.52,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "应县木塔"
+            ],
+            "query": "应县木塔 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 39.5658,
+              "lng": 113.1907
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "hunyuan",
+            "x": 1246,
+            "y": 480.23,
+            "color": "#618344",
+            "tx": 1168,
+            "ty": 556.23,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "浑源"
+            ],
+            "query": "浑源 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 39.699,
+              "lng": 113.692
+            },
+            "days": [
+              3,
+              4
+            ]
+          },
+          {
+            "id": "hanging-temple",
+            "x": 1208.04,
+            "y": 526.8,
+            "color": "#209aaa",
+            "tx": 1240.04,
+            "ty": 494.8,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "悬空寺"
+            ],
+            "query": "悬空寺 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 39.6663,
+              "lng": 113.7056
+            },
+            "days": [
+              4
+            ]
+          },
+          {
+            "id": "datong",
+            "x": 1188.05,
+            "y": 471.51,
+            "color": "#209aaa",
+            "tx": 1266.05,
+            "ty": 409.51,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "大同"
+            ],
+            "query": "大同 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 40.0768,
+              "lng": 113.3001
+            },
+            "days": [
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "id": "yungang-grottoes",
+            "x": 1128.69,
+            "y": 457.31,
+            "color": "#8865a5",
+            "tx": 1096.69,
+            "ty": 425.31,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "云冈石窟"
+            ],
+            "query": "云冈石窟 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 40.1094,
+              "lng": 113.122
+            },
+            "days": [
+              5
+            ]
+          },
+          {
+            "id": "datong-ancient-city",
+            "x": 1170.19,
+            "y": 414.92,
+            "color": "#8865a5",
+            "tx": 1202.19,
+            "ty": 382.92,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "大同古城"
+            ],
+            "query": "大同古城 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 40.0898,
+              "lng": 113.296
+            },
+            "days": [
+              5
+            ]
+          },
+          {
+            "id": "ulanhada-volcano",
+            "x": 1161.39,
+            "y": 335.39,
+            "color": "#df6185",
+            "tx": 1193.39,
+            "ty": 303.39,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "乌兰哈达火山"
+            ],
+            "query": "乌兰哈达火山 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 41.324,
+              "lng": 113.107
+            },
+            "days": [
+              6
+            ]
+          },
+          {
+            "id": "hohhot",
+            "x": 1065.22,
+            "y": 413.65,
+            "color": "#df6185",
+            "tx": 927.22,
+            "ty": 325.65,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "呼和浩特"
+            ],
+            "query": "呼和浩特 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 40.8426,
+              "lng": 111.7492
+            },
+            "days": [
+              6,
+              7
+            ]
+          },
+          {
+            "id": "inner-mongolia-museum",
+            "x": 1061.24,
+            "y": 355.01,
+            "color": "#397dc1",
+            "tx": 923.24,
+            "ty": 267.01,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "内蒙古博物院"
+            ],
+            "query": "内蒙古博物院 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 40.8494,
+              "lng": 111.7428
+            },
+            "days": [
+              7
+            ]
+          },
+          {
+            "id": "xilamuren-grassland",
+            "x": 1004.49,
+            "y": 329.99,
+            "color": "#397dc1",
+            "tx": 1142.49,
+            "ty": 241.99,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "希拉穆仁草原"
+            ],
+            "query": "希拉穆仁草原 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 41.319,
+              "lng": 111.186
+            },
+            "days": [
+              7,
+              8
+            ]
+          },
+          {
+            "id": "baotou",
+            "x": 913.61,
+            "y": 400.51,
+            "color": "#e77e22",
+            "tx": 881.61,
+            "ty": 450.51,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "包头"
+            ],
+            "query": "包头 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 40.6574,
+              "lng": 109.8403
+            },
+            "days": [
+              8
+            ]
+          },
+          {
+            "id": "bayannur",
+            "x": 727.57,
+            "y": 392.13,
+            "color": "#e77e22",
+            "tx": 589.57,
+            "ty": 494.13,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "巴彦淖尔"
+            ],
+            "query": "巴彦淖尔 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 40.7432,
+              "lng": 107.3877
+            },
+            "days": [
+              8,
+              9
+            ]
+          },
+          {
+            "id": "wuhai-lake",
+            "x": 682.54,
+            "y": 496.69,
+            "color": "#618344",
+            "tx": 714.54,
+            "ty": 546.69,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "乌海湖"
+            ],
+            "query": "乌海湖 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 39.673,
+              "lng": 106.794
+            },
+            "days": [
+              9
+            ]
+          },
+          {
+            "id": "tengger-desert",
+            "x": 554.9,
+            "y": 679.49,
+            "color": "#618344",
+            "tx": 522.9,
+            "ty": 647.49,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "腾格里沙漠"
+            ],
+            "query": "腾格里沙漠 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.529,
+              "lng": 105.018
+            },
+            "days": [
+              9,
+              10,
+              11
+            ]
+          },
+          {
+            "id": "tengger-five-lakes",
+            "x": 505.68,
+            "y": 712.55,
+            "color": "#209aaa",
+            "tx": 583.68,
+            "ty": 788.55,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "腾格里沙漠五湖穿越区域"
+            ],
+            "query": "腾格里沙漠五湖穿越区域 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.483,
+              "lng": 104.957
+            },
+            "days": [
+              10
+            ]
+          },
+          {
+            "id": "zhongwei",
+            "x": 600.21,
+            "y": 718.75,
+            "color": "#8865a5",
+            "tx": 522.21,
+            "ty": 794.75,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "中卫"
+            ],
+            "query": "中卫 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.5003,
+              "lng": 105.1968
+            },
+            "days": [
+              11,
+              12
+            ]
+          },
+          {
+            "id": "zhongwei-route66",
+            "x": 551.21,
+            "y": 751.29,
+            "color": "#8865a5",
+            "tx": 689.21,
+            "ty": 853.29,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "中卫66号公路"
+            ],
+            "query": "中卫66号公路 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.34,
+              "lng": 105.23
+            },
+            "days": [
+              11
+            ]
+          },
+          {
+            "id": "wuzhong",
+            "x": 652.97,
+            "y": 683.67,
+            "color": "#df6185",
+            "tx": 684.97,
+            "ty": 651.67,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "吴忠"
+            ],
+            "query": "吴忠 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 37.9976,
+              "lng": 106.1988
+            },
+            "days": [
+              12
+            ]
+          },
+          {
+            "id": "yinchuan",
+            "x": 675.02,
+            "y": 583.54,
+            "color": "#df6185",
+            "tx": 707.02,
+            "ty": 551.54,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "银川"
+            ],
+            "query": "银川 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 38.4872,
+              "lng": 106.2309
+            },
+            "days": [
+              12,
+              13
+            ]
+          },
+          {
+            "id": "huaiyuan-night-market",
+            "x": 577.8,
+            "y": 614.8,
+            "color": "#df6185",
+            "tx": 545.8,
+            "ty": 582.8,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "怀远夜市"
+            ],
+            "query": "怀远夜市 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 38.4955,
+              "lng": 106.143
+            },
+            "days": [
+              12
+            ]
+          },
+          {
+            "id": "xixia-tombs",
+            "x": 635.51,
+            "y": 627.34,
+            "color": "#397dc1",
+            "tx": 557.51,
+            "ty": 565.34,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "西夏王陵"
+            ],
+            "query": "西夏王陵 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 38.424,
+              "lng": 105.995
+            },
+            "days": [
+              13
+            ]
+          },
+          {
+            "id": "helan-rock-art",
+            "x": 616.54,
+            "y": 569.8,
+            "color": "#397dc1",
+            "tx": 754.54,
+            "ty": 481.8,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "贺兰山岩画"
+            ],
+            "query": "贺兰山岩画 山西·内蒙古·宁夏",
+            "geo": {
+              "lat": 38.743,
+              "lng": 105.922
+            },
+            "days": [
+              13
+            ]
+          }
+        ],
+        "overviewPlaceIds": [
+          "taiyuan-city",
+          "xinzhou-ancient-city",
+          "hunyuan",
+          "datong",
+          "hohhot",
+          "xilamuren-grassland",
+          "bayannur",
+          "tengger-desert",
+          "zhongwei",
+          "yinchuan"
+        ],
+        "dailyLayouts": {
+          "1": {
+            "places": [
+              "taiyuan-airport",
+              "jinci",
+              "taiyuan-botanical",
+              "taiyuan-city"
+            ],
+            "labels": {
+              "taiyuan-airport": {
+                "x": 1166.07,
+                "y": 775.73,
+                "anchor": "start"
+              },
+              "jinci": {
+                "x": 995.65,
+                "y": 655.68,
+                "anchor": "end"
+              },
+              "taiyuan-botanical": {
+                "x": 1031.08,
+                "y": 778.64,
+                "anchor": "end"
+              },
+              "taiyuan-city": {
+                "x": 1054.77,
+                "y": 587.88,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 1103.86,
+                "y": 721.7
+              },
+              {
+                "items": [],
+                "x": 1121.37,
+                "y": 697.16
+              },
+              {
+                "items": [],
+                "x": 1127.92,
+                "y": 648.26
+              }
+            ]
+          },
+          "2": {
+            "places": [
+              "taiyuan-city",
+              "shanxi-museum",
+              "xinzhou-ancient-city"
+            ],
+            "labels": {
+              "taiyuan-city": {
+                "x": 1054.77,
+                "y": 587.88,
+                "anchor": "end"
+              },
+              "shanxi-museum": {
+                "x": 1248.33,
+                "y": 584.16,
+                "anchor": "start"
+              },
+              "xinzhou-ancient-city": {
+                "x": 1224.41,
+                "y": 694.87,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 1098.55,
+                "y": 646.02
+              },
+              {
+                "items": [],
+                "x": 1128.37,
+                "y": 645.51
+              }
+            ]
+          },
+          "3": {
+            "places": [
+              "xinzhou-ancient-city",
+              "yingxian-pagoda",
+              "hunyuan"
+            ],
+            "labels": {
+              "xinzhou-ancient-city": {
+                "x": 1224.41,
+                "y": 694.87,
+                "anchor": "start"
+              },
+              "yingxian-pagoda": {
+                "x": 1115.86,
+                "y": 484.52,
+                "anchor": "end"
+              },
+              "hunyuan": {
+                "x": 1168,
+                "y": 556.23,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 1147.13,
+                "y": 567.69
+              },
+              {
+                "items": [],
+                "x": 1196.93,
+                "y": 498.38
+              }
+            ]
+          },
+          "4": {
+            "places": [
+              "hunyuan",
+              "hanging-temple",
+              "datong"
+            ],
+            "labels": {
+              "hunyuan": {
+                "x": 1168,
+                "y": 556.23,
+                "anchor": "end"
+              },
+              "hanging-temple": {
+                "x": 1240.04,
+                "y": 494.8,
+                "anchor": "start"
+              },
+              "datong": {
+                "x": 1266.05,
+                "y": 409.51,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 1227.02,
+                "y": 503.51
+              },
+              {
+                "items": [],
+                "x": 1198.05,
+                "y": 499.15
+              }
+            ]
+          },
+          "5": {
+            "places": [
+              "datong",
+              "yungang-grottoes",
+              "datong-ancient-city"
+            ],
+            "labels": {
+              "datong": {
+                "x": 1266.05,
+                "y": 409.51,
+                "anchor": "start"
+              },
+              "yungang-grottoes": {
+                "x": 1096.69,
+                "y": 425.31,
+                "anchor": "end"
+              },
+              "datong-ancient-city": {
+                "x": 1202.19,
+                "y": 382.92,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 1158.37,
+                "y": 464.41
+              },
+              {
+                "items": [],
+                "x": 1149.44,
+                "y": 436.12
+              },
+              {
+                "items": [],
+                "x": 1179.12,
+                "y": 443.22
+              }
+            ]
+          },
+          "6": {
+            "places": [
+              "datong",
+              "ulanhada-volcano",
+              "hohhot"
+            ],
+            "labels": {
+              "datong": {
+                "x": 1266.05,
+                "y": 409.51,
+                "anchor": "start"
+              },
+              "ulanhada-volcano": {
+                "x": 1193.39,
+                "y": 303.39,
+                "anchor": "start"
+              },
+              "hohhot": {
+                "x": 927.22,
+                "y": 325.65,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 1174.72,
+                "y": 403.45
+              },
+              {
+                "items": [],
+                "x": 1113.31,
+                "y": 374.52
+              }
+            ]
+          },
+          "7": {
+            "places": [
+              "hohhot",
+              "inner-mongolia-museum",
+              "xilamuren-grassland"
+            ],
+            "labels": {
+              "hohhot": {
+                "x": 927.22,
+                "y": 325.65,
+                "anchor": "end"
+              },
+              "inner-mongolia-museum": {
+                "x": 923.24,
+                "y": 267.01,
+                "anchor": "end"
+              },
+              "xilamuren-grassland": {
+                "x": 1142.49,
+                "y": 241.99,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 1063.23,
+                "y": 384.33
+              },
+              {
+                "items": [],
+                "x": 1032.87,
+                "y": 342.5
+              }
+            ]
+          },
+          "8": {
+            "places": [
+              "xilamuren-grassland",
+              "baotou",
+              "bayannur"
+            ],
+            "labels": {
+              "xilamuren-grassland": {
+                "x": 1142.49,
+                "y": 241.99,
+                "anchor": "start"
+              },
+              "baotou": {
+                "x": 881.61,
+                "y": 450.51,
+                "anchor": "end"
+              },
+              "bayannur": {
+                "x": 589.57,
+                "y": 494.13,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 959.05,
+                "y": 365.25
+              },
+              {
+                "items": [],
+                "x": 820.59,
+                "y": 396.32
+              }
+            ]
+          },
+          "9": {
+            "places": [
+              "bayannur",
+              "wuhai-lake",
+              "tengger-desert"
+            ],
+            "labels": {
+              "bayannur": {
+                "x": 589.57,
+                "y": 494.13,
+                "anchor": "end"
+              },
+              "wuhai-lake": {
+                "x": 714.54,
+                "y": 546.69,
+                "anchor": "start"
+              },
+              "tengger-desert": {
+                "x": 522.9,
+                "y": 647.49,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 705.06,
+                "y": 444.41
+              },
+              {
+                "items": [],
+                "x": 618.72,
+                "y": 588.09
+              }
+            ]
+          },
+          "10": {
+            "places": [
+              "tengger-desert",
+              "tengger-five-lakes"
+            ],
+            "labels": {
+              "tengger-desert": {
+                "x": 522.9,
+                "y": 647.49,
+                "anchor": "end"
+              },
+              "tengger-five-lakes": {
+                "x": 583.68,
+                "y": 788.55,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 530.29,
+                "y": 696.02
+              }
+            ]
+          },
+          "11": {
+            "places": [
+              "tengger-desert",
+              "zhongwei-route66",
+              "zhongwei"
+            ],
+            "labels": {
+              "tengger-desert": {
+                "x": 522.9,
+                "y": 647.49,
+                "anchor": "end"
+              },
+              "zhongwei-route66": {
+                "x": 689.21,
+                "y": 853.29,
+                "anchor": "start"
+              },
+              "zhongwei": {
+                "x": 522.21,
+                "y": 794.75,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 553.06,
+                "y": 715.39
+              },
+              {
+                "items": [],
+                "x": 575.71,
+                "y": 735.02
+              }
+            ]
+          },
+          "12": {
+            "places": [
+              "zhongwei",
+              "wuzhong",
+              "yinchuan",
+              "huaiyuan-night-market"
+            ],
+            "labels": {
+              "zhongwei": {
+                "x": 522.21,
+                "y": 794.75,
+                "anchor": "end"
+              },
+              "wuzhong": {
+                "x": 684.97,
+                "y": 651.67,
+                "anchor": "start"
+              },
+              "yinchuan": {
+                "x": 707.02,
+                "y": 551.54,
+                "anchor": "start"
+              },
+              "huaiyuan-night-market": {
+                "x": 545.8,
+                "y": 582.8,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 626.59,
+                "y": 701.21
+              },
+              {
+                "items": [],
+                "x": 664,
+                "y": 633.61
+              },
+              {
+                "items": [],
+                "x": 626.41,
+                "y": 599.17
+              }
+            ]
+          },
+          "13": {
+            "places": [
+              "yinchuan",
+              "xixia-tombs",
+              "helan-rock-art"
+            ],
+            "labels": {
+              "yinchuan": {
+                "x": 707.02,
+                "y": 551.54,
+                "anchor": "start"
+              },
+              "xixia-tombs": {
+                "x": 557.51,
+                "y": 565.34,
+                "anchor": "end"
+              },
+              "helan-rock-art": {
+                "x": 754.54,
+                "y": 481.8,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 655.26,
+                "y": 605.44
+              },
+              {
+                "items": [],
+                "x": 626.02,
+                "y": 598.57
+              },
+              {
+                "items": [],
+                "x": 645.78,
+                "y": 576.67
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

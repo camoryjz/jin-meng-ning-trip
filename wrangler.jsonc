@@ -1,8 +1,12 @@
 {
   "name": "jin-meng-ning-trip",
   "compatibility_date": "2026-09-04",
-  "assets": {
-    "directory": "./public",
-    "not_found_handling": "single-page-application"
-  }
+  "pages_build_output_dir": "./public",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "jin-meng-ning-trip-db",
+      "database_id": "fb9f5df0-b483-475b-9700-3a14f7d75dac"
+    }
+  ]
 }

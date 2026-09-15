@@ -1,349 +1,148 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light dark">
-<title>晋蒙宁14天自驾旅行手册｜2026.09.24–10.07</title>
-<style>
-:root{--bg:#f5f1e8;--paper:#fffdf7;--ink:#20221f;--muted:#6d7069;--line:#d9d2c3;--accent:#b8523b;--accent2:#2f6f6d;--gold:#b48a3d;--warn:#a43b2b;--ok:#3d715b;--shadow:0 14px 40px rgba(59,49,35,.10);--radius:22px;--soft:#eee7da}
-html[data-theme="dark"]{--bg:#111614;--paper:#19201d;--ink:#edf2ed;--muted:#aab4ad;--line:#35413a;--accent:#ec8168;--accent2:#72b7b2;--gold:#dfbd72;--warn:#ff907c;--ok:#83c9aa;--shadow:0 18px 45px rgba(0,0,0,.24);--soft:#222c27}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.65}a{color:inherit}.wrap{max-width:980px;margin:auto;padding:16px 14px 72px}.hero{padding:22px 4px 14px}.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--muted)}h1{font-size:clamp(28px,7vw,48px);line-height:1.08;margin:6px 0 12px;font-weight:850;letter-spacing:-.03em}.sub{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;background:var(--paper)}.section{margin-top:22px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:0 2px 10px}.section-title h2{margin:0;font-size:20px}.section-title small{color:var(--muted)}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.focus{padding:20px;overflow:hidden;position:relative}.focus-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.focus-label{font-size:12px;color:var(--muted);letter-spacing:.1em}#nextEvent{font-size:19px;font-weight:800;margin-top:3px}#nextTime{font-size:12px;color:var(--muted);margin-top:4px}.theme-state{font-size:12px;padding:5px 8px;border-radius:999px;background:var(--soft);white-space:nowrap}.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}.timebox{background:var(--soft);border-radius:16px;padding:12px 8px;text-align:center}.timebox b{display:block;font-variant-numeric:tabular-nums;font-size:clamp(25px,7vw,42px);line-height:1}.timebox span{font-size:11px;color:var(--muted)}.notice{margin-top:12px;padding:10px 12px;border-left:3px solid var(--warn);background:color-mix(in srgb,var(--warn) 7%,var(--paper));font-size:13px;border-radius:8px}.map-card{padding:14px;overflow:hidden}.map-note{font-size:12px;color:var(--muted);margin:2px 6px 10px}svg{max-width:100%;height:auto;display:block}.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:12px 4px 3px}.leg{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted)}.swatch{width:20px;height:4px;border-radius:4px;flex:none}.orders{padding:18px}.empty{border:1px dashed var(--line);border-radius:16px;padding:18px;text-align:center}.empty b{display:block}.empty span,.privacy{font-size:12px;color:var(--muted)}.privacy{margin-top:12px}.day{margin:13px 0;overflow:hidden}.day-head{padding:17px 17px 12px}.day-kicker{font-size:12px;color:var(--accent);font-weight:750}.day-title{font-size:18px;font-weight:850;margin:2px 0}.day-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}.mini{font-size:11px;padding:4px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}.risk{margin:0 17px 13px;padding:10px 12px;background:color-mix(in srgb,var(--warn) 8%,var(--paper));border-radius:12px;font-size:12px}.risk strong{color:var(--warn)}details.routebox{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}details.routebox summary{padding:11px 17px;cursor:pointer;font-size:13px;font-weight:750;list-style:none}details.routebox summary::-webkit-details-marker{display:none}details.routebox summary:after{content:"＋";float:right;color:var(--muted)}details.routebox[open] summary:after{content:"－"}.route-inner{padding:0 17px 14px}.route-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:var(--paper);text-decoration:none;font-size:12px;font-weight:750;cursor:pointer}.btn.primary{background:var(--accent2);border-color:var(--accent2);color:#fff}.timeline{padding:10px 17px 17px}.event{display:grid;grid-template-columns:92px 1fr;gap:13px;position:relative;padding:9px 0}.event:before{content:"";position:absolute;left:97px;top:0;bottom:0;width:1px;background:var(--line)}.event:last-child:before{bottom:50%}.when{font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;text-align:right;padding-right:10px}.tz{display:block;font-size:9px;color:var(--muted);font-weight:600}.what{padding-left:13px;position:relative}.what:before{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--accent2);left:-3px;top:8px;box-shadow:0 0 0 4px var(--paper)}.badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:999px;font-size:9px;vertical-align:1px;font-weight:800}.badge.book{background:#f8dfda;color:var(--warn)}.badge.food{background:#f1e6cd;color:var(--gold)}.badge.stay{background:#dcecdf;color:var(--ok)}.badge.anchor{background:#d9e9e7;color:var(--accent2)}.place{text-decoration:none;border-bottom:1px dashed var(--accent2);color:var(--accent2);font-weight:700}.todos{padding:6px 18px 14px}.todo{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.todo:last-child{border:0}.todo-time{font-size:11px;font-weight:800;color:var(--accent)}.todo-text{font-size:14px}.tips{display:grid;gap:10px}.tip{padding:16px}.tip h3{font-size:15px;margin:0 0 7px}.tip p{margin:0;font-size:13px;color:var(--muted)}.sources{padding:13px 17px}.sources summary{cursor:pointer;font-weight:750;font-size:13px}.sources ul{padding-left:20px}.sources li{margin:7px 0;font-size:12px;color:var(--muted)}.sources a{color:var(--accent2)}.footer{text-align:center;margin-top:26px;color:var(--muted);font-size:11px}.offlinebar{position:sticky;bottom:10px;z-index:20;display:flex;justify-content:center;pointer-events:none;margin-top:18px}.offlinebar button{pointer-events:auto;box-shadow:var(--shadow);background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:10px 15px;font-weight:800}
-
-.day.today{border:2px solid var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 12%,transparent),var(--shadow)}
-.day.today .day-head{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 12%,var(--paper)),var(--paper))}
-.day.past{opacity:.78}.today-pill{display:inline-block;margin-left:7px;padding:2px 7px;border-radius:999px;background:var(--accent);color:#fff;font-size:10px;vertical-align:2px}
-.theme-btn{appearance:none;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:inherit;font-size:12px;padding:7px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
-.navcard{padding:14px;overflow:hidden}.nav-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 10px}.nav-toolbar select{max-width:100%;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;font-size:12px}.navframe-wrap{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--soft);min-height:380px}.navframe{display:block;width:100%;height:430px;border:0;background:var(--soft)}.navhint{font-size:12px;color:var(--muted);margin:9px 2px 0}.navfallback{position:absolute;left:12px;right:12px;bottom:12px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--paper) 92%,transparent);color:var(--muted);font-size:11px;pointer-events:none}
-
-@media(min-width:720px){.legend{grid-template-columns:repeat(4,minmax(0,1fr))}.tips{grid-template-columns:repeat(2,1fr)}.event{grid-template-columns:110px 1fr}.event:before{left:115px}}
-@media print{.offlinebar,.route-actions{display:none!important}body{background:#fff;color:#111}.card{box-shadow:none;break-inside:avoid}}
-
-/* ===== 内置编辑器 ===== */
-.edit-fab{position:fixed;right:14px;bottom:64px;z-index:60;border:0;border-radius:999px;padding:12px 16px;background:var(--accent);color:#fff;font-weight:850;box-shadow:0 12px 30px rgba(0,0,0,.22);cursor:pointer}
-.editor-mask{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.5);display:none;align-items:flex-end;justify-content:center;padding:0}
-.editor-mask.open{display:flex}
-.editor-panel{width:min(100%,980px);height:min(92vh,980px);background:var(--paper);border-radius:24px 24px 0 0;box-shadow:0 -16px 55px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden;color:var(--ink)}
-.editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--paper)}
-.editor-head h2{font-size:18px;margin:0}
-.editor-head-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-.editor-body{overflow:auto;padding:14px 14px 110px}
-.editor-note{padding:11px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent2) 8%,var(--paper));font-size:12px;color:var(--muted);margin-bottom:12px}
-.editor-tabs{display:flex;gap:7px;overflow:auto;padding-bottom:10px;position:sticky;top:0;background:var(--paper);z-index:4}
-.editor-tab{border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:8px 11px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:800;cursor:pointer}
-.editor-tab.active{background:var(--accent2);border-color:var(--accent2);color:#fff}
-.editor-view{display:none}.editor-view.active{display:block}
-.edit-day{border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden;background:color-mix(in srgb,var(--paper) 94%,var(--soft))}
-.edit-day summary{cursor:pointer;padding:12px 13px;font-weight:850;list-style:none}.edit-day summary::-webkit-details-marker{display:none}
-.edit-day[open] summary{border-bottom:1px solid var(--line)}
-.edit-pad{padding:12px}
-.form-grid{display:grid;grid-template-columns:1fr;gap:9px}
-@media(min-width:700px){.form-grid.two{grid-template-columns:1fr 1fr}}
-.field label{display:block;font-size:11px;color:var(--muted);font-weight:800;margin:0 0 4px}
-.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:9px 10px;font:inherit;font-size:13px}
-.field textarea{min-height:78px;resize:vertical}
-.event-edit,.todo-edit,.order-edit{display:grid;gap:7px;padding:9px;border:1px solid var(--line);border-radius:12px;margin:8px 0;background:var(--paper)}
-.event-edit{grid-template-columns:88px 1fr 92px 44px}
-.todo-edit{grid-template-columns:120px 1fr 44px}
-.order-edit{grid-template-columns:1fr}
-@media(max-width:620px){.event-edit,.todo-edit{grid-template-columns:1fr}.event-edit .remove-btn,.todo-edit .remove-btn{justify-self:end}}
-.remove-btn{border:0;background:color-mix(in srgb,var(--warn) 12%,var(--paper));color:var(--warn);border-radius:9px;cursor:pointer;font-weight:900}
-.small-action{border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:8px 10px;border-radius:10px;font-size:12px;font-weight:800;cursor:pointer}
-.editor-bottom{position:absolute;left:0;right:0;bottom:0;display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--paper) 96%,transparent);border-top:1px solid var(--line);backdrop-filter:blur(12px)}
-.editor-bottom button{flex:1;min-width:130px}
-.publish-help{padding:12px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}
-.order-card{padding:13px 0;border-bottom:1px solid var(--line)}.order-card:last-child{border-bottom:0}
-.order-type{font-size:10px;color:var(--accent);font-weight:900;letter-spacing:.08em}
-.order-name{font-size:15px;font-weight:850}.order-meta{font-size:12px;color:var(--muted);margin-top:3px}
-.toast{position:fixed;left:50%;bottom:126px;transform:translateX(-50%) translateY(20px);z-index:200;background:var(--ink);color:var(--bg);padding:9px 13px;border-radius:999px;font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.2s}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-
-.todo.done{opacity:.62}
-.todo.done .todo-text{text-decoration:line-through}
-.todo-status{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;background:var(--soft);color:var(--muted);margin-right:8px;vertical-align:-2px}
-.todo.done .todo-status{background:color-mix(in srgb,var(--ok) 18%,var(--paper));color:var(--ok)}
-.todo-progressbar{height:7px;background:var(--soft);border-radius:999px;overflow:hidden;margin:4px 0 10px}
-.todo-progressbar>span{display:block;height:100%;background:var(--ok);border-radius:999px}
-
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3f6f2">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>AI 旅行网页模板</title>
+  <link rel="stylesheet" href="styles.css?v=20260910-3">
+  <link rel="stylesheet" href="ledger.css?v=20260910-2">
+  <script src="runtime-storage.js?v=20260916-1" defer></script>
+  <script src="overview-map.js?v=20260910-2" defer></script>
+  <script src="route-ui.js?v=20260910-2" defer></script>
+  <script src="app.js?v=20260910-4" defer></script>
+  <script src="ticket-pdf-preview.js?v=20260910-2" defer></script>
+  <script src="ledger.js?v=20260910-3" defer></script>
+  <script src="site-navigation.js?v=20260910-2" defer></script>
 </head>
-<body><div class="wrap">
-<header class="hero"><div class="eyebrow">TRAVEL FIELD GUIDE · 2026 AUTUMN ROAD TRIP</div><h1>晋蒙宁<br>14天自驾旅行手册</h1><div class="sub"><span class="chip">2026.09.24 → 10.07</span><span class="chip">4位成人 · 3位司机</span><span class="chip">上海出发 · 太原取车 · 银川异地还车</span><span class="chip">行程时区：Asia/Shanghai · UTC+8</span></div></header>
-<section class="section"><div class="section-title"><h2>此刻关注</h2><small>每秒更新</small></div><div class="card focus"><div class="focus-top"><div><div class="focus-label">下一个行程事件</div><div id="nextEvent">正在计算…</div><div id="nextTime"></div></div><button class="theme-btn" id="themeToggle" type="button">自动配色</button></div><div class="countdown"><div class="timebox"><b id="cdD">--</b><span>天</span></div><div class="timebox"><b id="cdH">--</b><span>时</span></div><div class="timebox"><b id="cdM">--</b><span>分</span></div><div class="timebox"><b id="cdS">--</b><span>秒</span></div></div><div class="notice"><strong>当前待办：</strong><span id="currentTodo">正在读取…</span><br><span style="font-size:11px;color:var(--muted)">已确认去程航班与取车时间；倒计时按真实行程事件计算。</span></div></div></section>
-<section class="section"><div class="section-title"><h2>行程总览地图</h2><small>手绘示意 · 不作导航</small></div><div class="card map-card"><div class="map-note">彩色线段对应每天移动；🏠表示当晚住宿地。点击逐日行程里的地点名可唤起地图。</div>
-<svg viewBox="0 0 800 620" role="img" aria-label="晋蒙宁十四天自驾路线手绘地图"><g opacity=".16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M85 70 C170 45 260 80 350 58 S535 36 705 74 C740 150 725 250 747 345 C690 440 605 500 497 540 C360 560 245 532 130 470 C98 345 65 220 85 70Z"/><path d="M510 75 C560 125 575 200 566 312"/><path d="M312 176 C350 236 350 320 292 392"/></g><text x="555" y="275" font-size="22" opacity=".15" font-weight="800">山西</text><text x="385" y="105" font-size="22" opacity=".15" font-weight="800">内蒙古</text><text x="205" y="335" font-size="22" opacity=".15" font-weight="800">宁夏</text>
-<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" opacity=".88"><path d="M720 555 Q640 460 570 310" stroke="#d35454" stroke-dasharray="7 8"/><path d="M570 310 Q555 337 575 255" stroke="#df8d36"/><path d="M575 255 Q607 213 650 224" stroke="#bd9b35"/><path d="M650 224 Q650 190 640 170" stroke="#6b9b61"/><path d="M640 170 q-38 20 -5 36 q35 15 5 -36" stroke="#3f9c91"/><path d="M640 170 Q615 110 520 155" stroke="#3d83bd"/><path d="M520 155 Q495 115 500 90" stroke="#6358bd"/><path d="M500 90 Q455 122 380 160" stroke="#8d55b1"/><path d="M380 160 Q320 180 300 220 Q255 255 220 310" stroke="#b95589"/><path d="M220 310 q-20 28 8 44 q24 -9 -8 -44" stroke="#c35c66"/><path d="M220 310 Q235 338 250 360" stroke="#b56b3f"/><path d="M250 360 Q270 330 280 300" stroke="#8a7c3f"/><path d="M280 300 q-32 -25 -10 -47 q42 -5 38 32 q-4 28 -28 15" stroke="#477f6d"/><path d="M280 300 Q470 430 720 555" stroke="#526aa0" stroke-dasharray="7 8"/></g>
-<g font-size="13" font-weight="800"><circle cx="720" cy="555" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="730" y="560">上海</text><circle cx="570" cy="310" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="580" y="316">太原 🏠</text><circle cx="575" cy="255" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="585" y="252">忻州 🏠</text><circle cx="610" cy="215" r="4" fill="var(--ink)"/><text x="570" y="205" font-size="11">应县</text><circle cx="650" cy="224" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="660" y="230">浑源 🏠</text><circle cx="640" cy="170" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="650" y="168">大同 🏠×2</text><circle cx="595" cy="112" r="4" fill="var(--ink)"/><text x="607" y="108" font-size="11">乌兰哈达</text><circle cx="520" cy="155" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="455" y="170">呼和浩特 🏠</text><circle cx="500" cy="90" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="450" y="78">希拉穆仁 🏠</text><circle cx="380" cy="160" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="325" y="150">巴彦淖尔 🏠</text><circle cx="300" cy="220" r="4" fill="var(--ink)"/><text x="250" y="215" font-size="11">乌海</text><circle cx="220" cy="310" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="143" y="303">腾格里 🏠×2</text><circle cx="250" cy="360" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="260" y="379">中卫 🏠</text><circle cx="280" cy="300" r="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="290" y="298">银川 🏠×2</text></g></svg><div class="legend" id="legend"></div></div></section>
-<section class="section"><div class="section-title"><h2>高德内嵌导航</h2><small>联网显示 · 离线自动降级</small></div><div class="card navcard"><div class="nav-toolbar"><select id="navDaySelect" aria-label="选择日期"></select><a class="btn primary" id="amapOpenBtn" href="#" target="_blank" rel="noopener">用高德App/网页打开</a><button class="btn" id="navReloadBtn" type="button">刷新内嵌路线</button></div><div class="navframe-wrap"><iframe class="navframe" id="amapFrame" title="高德H5导航" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div class="navfallback">如果当前浏览器阻止第三方地图内嵌，请点上方“用高德App/网页打开”。断网时仍可查看本页SVG路线。</div></div><div class="navhint" id="navHint">高德官方URI路径规划最多支持1个途经点；本页会自动保留当天最关键的中途点。完整站点顺序见逐日行程。</div></div></section>
-<section class="section"><div class="section-title"><h2>已确认的机票 / 租车 / 酒店 / 门票</h2><small>公开页不放敏感编号</small></div><div class="card orders" id="orders"></div></section>
-<section class="section"><div class="section-title"><h2>逐日行程</h2><small>所有时间均为 UTC+8</small></div><div id="days"></div></section>
-<section class="section"><div class="section-title"><h2>待办清单</h2><small id="todoProgress">完成进度计算中</small></div><div class="card todos" id="todos"></div></section>
-<section class="section"><div class="section-title"><h2>实用贴士</h2><small>核验后写入</small></div><div class="tips">
-<div class="card tip"><h3>节假日风险</h3><p>2026年中秋假期为9月25–27日，国庆假期为10月1–7日。悬空寺9月27日、10月1日高速、10月6日银川西线都按高客流日处理。</p></div>
-<div class="card tip"><h3>山西博物院</h3><p>常态开放09:00–17:00，16:00停止入馆。当前可提前3日预约；2026年6月升级后，前三日20:00及参观当日08:00可放票。一个预约单最多3人，4人需拆单。</p></div>
-<div class="card tip"><h3>云冈石窟</h3><p>自2026年4月15日起预约周期调整为提前15日（不含当日）；包括免票人群在内都需实名预约。9月28日参观，9月13日起开始处理。</p></div>
-<div class="card tip"><h3>悬空寺</h3><p>2026年继续严格限流，线上可预约7日内登临票；线上购票启用同行人脸核验。9月27日又是中秋假期最后一天，是全程最需提前抢票的点。</p></div>
-<div class="card tip"><h3>内蒙古博物院</h3><p>2026年9月起恢复常态化：09:00–17:00，16:00停止入馆，周一闭馆（法定节假日除外）；可提前7日预约。9月30日是周三，没有闭馆冲突。</p></div>
-<div class="card tip"><h3>银川西线</h3><p>西夏陵公开开放时间08:00–17:00、咨询0951-5668966；贺兰山岩画08:00–18:00、咨询0951-3948806。10月6日仍在国庆，上午西夏陵优先。</p></div>
-<div class="card tip"><h3>驾驶节奏</h3><p>最重的两天是9月29日大同→乌兰哈达→呼市，以及10月2日巴彦淖尔→乌海→腾格里。10月1日只到巴彦淖尔，是刻意避免国庆首日夜间疲劳。</p></div>
-<div class="card tip"><h3>沙漠安全</h3><p>普通租赁SUV不进沙。到营地指定入口后换正规越野/接驳车辆；沙漠夜间保暖、带头灯与水。五湖路线以当日天气、水位和安全条件为准。</p></div>
-<div class="card tip"><h3>导航与离线</h3><p>地点按钮会调起高德/百度；导航本身需要网络或地图App离线包。本网页零外部依赖，要保证断网仍能打开，请用底部“保存离线副本”。</p></div>
-<div class="card tip"><h3>摄影节奏</h3><p>中午最拥挤、光线最硬的时段优先吃饭、转场或午休。重点留给忻州蓝调、大同古建、乌兰哈达、金色草原、腾格里日落/星空、66号公路与贺兰山。</p></div>
-</div></section>
-<section class="section"><details class="card sources"><summary>信息核验来源（联网时可打开）</summary><ul id="sources"></ul></details></section>
+<body>
+  <a class="skip-link" id="skip-link" href="#main">跳到主要内容</a>
+  <header class="topbar" id="topbar">
+    <a class="wordmark" id="wordmark" href="#top" aria-label="返回顶部"></a>
+    <nav class="primary-navigation" aria-label="主要模块">
+      <details class="travel-navigation" id="travel-navigation" hidden>
+        <summary id="travel-navigation-trigger">旅行信息</summary>
+        <div class="travel-navigation-menu" role="menu" aria-label="旅行信息栏目">
+          <a href="#flights" role="menuitem" data-module="flights" hidden>航班</a>
+          <a href="#route" role="menuitem" data-module="overview" hidden>路线</a>
+          <a href="#itinerary" role="menuitem" data-module="itinerary" hidden>行程</a>
+          <a href="#drive" role="menuitem" data-module="driving" hidden>自驾</a>
+          <a href="#prep" role="menuitem" data-module="todo" hidden>Todo</a>
+        </div>
+      </details>
+      <a class="primary-navigation__ledger" id="ledger-navigation-link" href="#ledger" data-module="ledger" hidden>记账</a>
+    </nav>
+  </header>
 
-<button class="edit-fab" id="editFab" type="button">✎ 编辑行程</button>
-<div class="editor-mask" id="editorMask" aria-hidden="true">
-  <div class="editor-panel" role="dialog" aria-modal="true" aria-label="旅行手册编辑器">
-    <div class="editor-head">
-      <div><h2>旅行手册编辑器</h2><div style="font-size:11px;color:var(--muted)">保存到本浏览器 · 导出HTML后可发布</div></div>
-      <div class="editor-head-actions"><button class="small-action" id="closeEditor" type="button">关闭</button></div>
-    </div>
-    <div class="editor-body">
-      <div class="editor-note"><b>怎么用：</b>直接修改下面内容 → 点“保存到浏览器”。你自己再次打开这个页面会继续看到修改；要让公开网址上的所有人看到，点“导出新版HTML”，然后用导出的文件替换GitHub里的<code>public/index.html</code>并提交，Cloudflare会自动发布。</div>
-      <div class="editor-tabs">
-        <button class="editor-tab active" data-tab="days" type="button">逐日行程</button>
-        <button class="editor-tab" data-tab="todos" type="button">待办</button>
-        <button class="editor-tab" data-tab="orders" type="button">订单</button>
-        <button class="editor-tab" data-tab="backup" type="button">备份/发布</button>
-      </div>
-      <div class="editor-view active" id="edit-days"></div>
-      <div class="editor-view" id="edit-todos"></div>
-      <div class="editor-view" id="edit-orders"></div>
-      <div class="editor-view" id="edit-backup">
-        <div class="publish-help">
-          <b>发布到现有Cloudflare网址：</b><br>
-          ① 点击下方“导出新版HTML” → ② 把文件改名为<code>index.html</code> → ③ 在GitHub仓库进入<code>public</code>文件夹，替换旧<code>index.html</code>并Commit → ④ Cloudflare自动部署，同一个workers.dev网址更新。<br><br>
-          也可以导出JSON作为行程数据备份，之后再导入回来。
+  <main id="main" data-site-view="travel">
+    <section class="hero" id="top" aria-labelledby="trip-title">
+      <div class="hero__eyebrow" id="trip-eyebrow"></div>
+      <h1 id="trip-title">正在载入旅程</h1>
+      <p class="hero__date" id="trip-date"></p>
+    </section>
+
+    <section class="section flights-section" id="flights" aria-labelledby="flights-title" data-module="flights" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">BOARDING</p>
+          <h2 id="flights-title">航班行程</h2>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-          <button class="small-action" id="exportJsonBtn" type="button">导出数据JSON</button>
-          <label class="small-action" style="cursor:pointer">导入JSON<input id="importJsonInput" type="file" accept=".json,application/json" hidden></label>
-          <button class="small-action" id="resetBtn" type="button" style="color:var(--warn)">恢复最初版本</button>
-        </div>
+        <p class="section-index" id="flight-index" aria-live="polite">1 / 3</p>
       </div>
-    </div>
-    <div class="editor-bottom">
-      <button class="btn" id="saveLocalBtn" type="button">保存到浏览器</button>
-      <button class="btn primary" id="exportHtmlBtn" type="button">导出新版HTML</button>
-    </div>
+      <div class="flight-carousel" id="flight-carousel" aria-label="航班卡片，可左右滑动"></div>
+      <div class="carousel-dots" id="flight-dots" aria-hidden="true"></div>
+    </section>
+
+    <section class="section route-section" id="route" aria-labelledby="route-title" data-module="overview" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">THE WHOLE JOURNEY</p>
+          <h2 id="route-title">本次旅程</h2>
+        </div>
+        <span class="soft-label" id="route-day-count"></span>
+      </div>
+      <div id="route-explorer"></div>
+      <p class="route-caption">路线为行程示意，实际驾驶和步行请使用当天的 Google Maps 导航。</p>
+    </section>
+
+    <section class="section itinerary-section" id="itinerary" aria-labelledby="itinerary-title" data-module="itinerary" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">DAY BY DAY</p>
+          <h2 id="itinerary-title">每日行程</h2>
+        </div>
+        <span class="soft-label" id="day-count"></span>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="section drive-section" id="drive" aria-labelledby="drive-title" data-module="driving" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">ON THE ROAD</p>
+          <h2 id="drive-title">自驾信息</h2>
+        </div>
+        <span class="soft-label" id="rental-provider-label">RENTAL</span>
+      </div>
+      <div id="rental-card"></div>
+      <div class="accordion-stack" id="drive-notes"></div>
+    </section>
+
+    <section class="section prep-section" id="prep" aria-labelledby="prep-title" data-module="todo" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">BEFORE WE GO</p>
+          <h2 id="prep-title">旅行前准备</h2>
+        </div>
+        <span class="soft-label" id="todo-progress">0 / 0</span>
+      </div>
+      <form class="todo-form" id="todo-form">
+        <input id="todo-input" type="text" maxlength="80" placeholder="添加一项准备事项" aria-label="准备事项">
+        <button type="submit">添加</button>
+      </form>
+      <div class="todo-list" id="todo-list"></div>
+    </section>
+
+    <footer class="footer">
+      <p id="footer-mark"></p>
+      <a href="#top">回到顶部 ↑</a>
+    </footer>
+  </main>
+
+  <main class="ledger-view" id="ledger-view" data-site-view="ledger" data-module="ledger" hidden>
+    <div id="ledger-root"></div>
+  </main>
+
+  <dialog class="map-dialog" id="map-dialog">
+    <button type="button" class="dialog-close" id="map-close" aria-label="关闭路线图">关闭</button>
+    <div id="map-dialog-content"></div>
+  </dialog>
+
+  <dialog class="ticket-dialog" id="ticket-dialog" aria-labelledby="ticket-dialog-title">
+    <header>
+      <div>
+        <span>门票与预订</span>
+        <h2 id="ticket-dialog-title">门票详情</h2>
+      </div>
+      <button type="button" id="ticket-dialog-close" aria-label="关闭门票详情">关闭</button>
+    </header>
+    <div class="ticket-dialog__body" id="ticket-dialog-body"></div>
+  </dialog>
+
+  <div class="place-map-overlay" id="place-map" hidden>
+    <section class="place-map-sheet" role="dialog" aria-modal="true" aria-labelledby="place-map-title">
+      <header><h2 id="place-map-title">地点地图</h2><button id="place-map-close" type="button" aria-label="关闭地点地图">关闭</button></header>
+      <iframe id="place-map-frame" title="地点地图" src="about:blank" sandbox="allow-scripts allow-same-origin allow-forms" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <footer><p>地图需要能够访问 Google 的网络。若一直空白，请在系统浏览器中打开。</p><a id="place-map-external" target="_blank" rel="noopener noreferrer">用 Google Maps 打开 ↗</a></footer>
+    </section>
   </div>
-</div>
-<div class="toast" id="toast"></div>
 
-<div class="offlinebar"><button id="saveBtn" type="button">↓ 保存离线副本</button></div><div class="footer">晋蒙宁14天自驾 · 页面使用中国标准时间 UTC+8 排行程 · 地图路线为旅行示意，驾驶以实时导航为准</div></div>
-<script id="trip-seed" type="application/json">{"places": {"上海": {"lat": 31.2304, "lng": 121.4737, "address": "上海市", "phone": ""}, "太原武宿国际机场": {"lat": 37.74582, "lng": 112.639835, "address": "太原市小店区机场路", "phone": "0351-96566"}, "山西博物院": {"lat": 37.865449, "lng": 112.531258, "address": "太原市万柏林区滨河西路13号", "phone": "0351-8789188"}, "钟楼街": {"lat": 37.8708, "lng": 112.5654, "address": "太原市迎泽区钟楼街", "phone": ""}, "晋祠": {"lat": 37.704552, "lng": 112.450794, "address": "太原市晋源区晋祠镇", "phone": "0351-2149649"}, "忻州古城": {"lat": 38.391814, "lng": 112.746165, "address": "忻州市忻府区南关大街", "phone": "0350-2666166"}, "应县木塔": {"lat": 39.566465, "lng": 113.188831, "address": "朔州市应县应元街1号", "phone": "0349-5088889"}, "净土寺": {"lat": 39.566, "lng": 113.1858, "address": "朔州市应县城内", "phone": ""}, "浑源县城": {"lat": 39.699, "lng": 113.692, "address": "大同市浑源县", "phone": ""}, "悬空寺": {"lat": 39.661139, "lng": 113.715781, "address": "大同市浑源县大磁窑镇203省道恒山山腰", "phone": ""}, "大同古城": {"lat": 40.0915, "lng": 113.3034, "address": "大同市平城区古城片区", "phone": ""}, "华严寺": {"lat": 40.0935, "lng": 113.2948, "address": "大同市平城区下寺坡街459号", "phone": ""}, "善化寺": {"lat": 40.0832, "lng": 113.3024, "address": "大同市平城区南寺街6号", "phone": ""}, "云冈石窟": {"lat": 40.113157, "lng": 113.137763, "address": "大同市云冈区云冈镇", "phone": "0352-7992666"}, "乌兰哈达火山": {"lat": 41.555532, "lng": 113.122579, "address": "乌兰察布市察哈尔右翼后旗208国道266公里路", "phone": "0474-4811717"}, "内蒙古博物院": {"lat": 40.841694, "lng": 111.76568, "address": "呼和浩特市赛罕区新华东街76号", "phone": "0471-4614000"}, "大召寺": {"lat": 40.8086, "lng": 111.6586, "address": "呼和浩特市玉泉区大召前街", "phone": ""}, "希拉穆仁草原": {"lat": 41.320843, "lng": 111.235763, "address": "包头市达尔罕茂明安联合旗希拉穆仁镇", "phone": "0472-8313777"}, "包头": {"lat": 40.6574, "lng": 109.8403, "address": "包头市", "phone": ""}, "巴彦淖尔": {"lat": 40.7432, "lng": 107.3877, "address": "巴彦淖尔市临河区", "phone": ""}, "乌海湖": {"lat": 39.659664, "lng": 106.77926, "address": "乌海市海勃湾区环湖路与君正街交汇处", "phone": "0473-2885155"}, "腾格里沙漠入口": {"lat": 37.534275, "lng": 104.999675, "address": "中卫腾格里沙漠区域；具体营地入口以订单为准", "phone": ""}, "中卫市区": {"lat": 37.5149, "lng": 105.1968, "address": "中卫市沙坡头区", "phone": ""}, "66号公路": {"lat": 37.400691, "lng": 104.85778, "address": "中卫市沙坡头区中卫66号公路", "phone": ""}, "吴忠": {"lat": 37.9976, "lng": 106.1988, "address": "吴忠市", "phone": ""}, "银川市区": {"lat": 38.4872, "lng": 106.2309, "address": "银川市", "phone": ""}, "西夏陵": {"lat": 38.428325, "lng": 105.981569, "address": "银川市西夏区贺兰山东麓西夏陵景区", "phone": "0951-5668966"}, "贺兰山岩画": {"lat": 38.742015, "lng": 106.026081, "address": "银川市贺兰县山东麓贺兰口", "phone": "0951-3948806"}, "银川河东国际机场": {"lat": 38.321759, "lng": 106.393399, "address": "银川市灵武市空港大道", "phone": "0951-96111"}}, "days": [{"day": 1, "date": "2026-09-24", "title": "上海虹桥 → 太原武宿｜FM9139落地取车", "stay": "太原", "drive": "07:00上海虹桥T2起飞；09:10抵达太原武宿T2；10:00机场取车", "risk": "航班未出票，下午行程必须跟着实际落地时间移动。", "route": ["太原武宿国际机场", "山西博物院", "钟楼街"], "events": [["05:30", "抵达上海虹桥国际机场T2，办理值机与安检", "anchor"], ["07:00", "上海航空FM9139：上海虹桥T2→太原武宿T2", "book"], ["09:10", "抵达太原武宿国际机场T2，取行李", "anchor"], ["10:00", "武宿机场服务点取车：奥迪Q5L 2.0T自动SUV 5座，车牌待定", "book"], ["11:15", "前往太原市区，午饭后根据预约与体力安排山西博物院", ""], ["14:00", "山西博物院：若已约到当日时段则参观；未约到则不硬塞", "book"], ["18:00", "钟楼街/柳巷晚餐与散步", "food"], ["20:30", "入住太原", "stay"]]}, {"day": 2, "date": "2026-09-25", "title": "太原 → 晋祠 → 忻州古城｜中秋第一天", "stay": "忻州", "drive": "约170公里 / 2.5–3小时净驾驶", "risk": "中秋假期首日，晋祠与高速都可能比平日拥挤；早出发。", "route": ["晋祠", "忻州古城"], "events": [["07:30", "太原酒店出发", ""], ["08:30", "晋祠：圣母殿、鱼沼飞梁、难老泉；上午光线更柔和", "book"], ["11:30", "太原/晋祠周边午饭", "food"], ["13:00", "北上忻州；途中不加景点", ""], ["15:30", "忻州入住、休息", "stay"], ["16:30", "忻州古城：城门、老街、日落、蓝调与夜景；晚饭在古城解决", "food"]]}, {"day": 3, "date": "2026-09-26", "title": "忻州 → 应县木塔 → 浑源｜辽金古建日", "stay": "浑源", "drive": "约300公里 / 4小时上下", "risk": "中秋假期仍在客流高位；木塔建议上午到达，净土寺作为加分项。", "route": ["忻州古城", "应县木塔", "浑源县城"], "events": [["07:30", "忻州出发，北上应县", ""], ["10:30", "应县木塔：预留2小时；目前仅开放塔内一层参观", "book"], ["12:45", "应县午饭：凉粉、滴溜、当地面食", "food"], ["14:00", "净土寺可选：时间与体力允许再去，不为打卡硬塞", ""], ["15:30", "前往浑源", ""], ["17:30", "浑源县城入住；浑源凉粉、黄芪羊肉", "stay"]]}, {"day": 4, "date": "2026-09-27", "title": "悬空寺 → 大同｜全程最高售馨风险日", "stay": "大同", "drive": "约100公里 / 2小时左右，另加摆渡", "risk": "当天是中秋假期最后一天。悬空寺登临票严格限量；抢不到票时不要赌现场，把“远观悬空寺＋浑源古建”作为正式备选。", "route": ["浑源县城", "悬空寺", "大同古城"], "events": [["06:30", "浑源出发，前往恒山游客中心；节假日给停车和摆渡留足时间", ""], ["07:20", "悬空寺登临：以实际预约时段为准；同行4人线上购票需按当期人脸核验规则操作", "book"], ["10:30", "离开景区；未登临则在下方观景台拍全景，不临时排数小时", ""], ["11:30", "浑源午饭", "food"], ["13:00", "前往大同，入住后稍休息", "stay"], ["15:30", "华严寺 / 善化寺二选一或顺游", ""], ["18:00", "大同古城夜景＋百花烧麦/刀削面", "food"]]}, {"day": 5, "date": "2026-09-28", "title": "大同慢游｜云冈石窟 + 辽金古城", "stay": "大同", "drive": "市内与景区往返约1.5小时", "risk": "云冈实行全员实名预约；不要把购票留到前一晚。", "route": ["大同古城", "云冈石窟"], "events": [["07:30", "大同酒店出发；按预约时段提前到", ""], ["08:30", "云冈石窟：预留3.5–4小时，建议讲解器/讲解员", "book"], ["13:30", "返回大同午饭，随后回酒店休息", "food"], ["16:00", "华严寺 / 善化寺补完；不追求景点数量", ""], ["18:30", "古城散步、城墙周边夜景", "stay"]]}, {"day": 6, "date": "2026-09-29", "title": "大同 → 乌兰哈达火山 → 呼和浩特", "stay": "呼和浩特", "drive": "约430公里 / 5.5–6.5小时净驾驶", "risk": "火山段风大且暴露，若大风、沙尘或降雨，直接缩短停留，优先保证天黑前到呼市。", "route": ["大同古城", "乌兰哈达火山", "内蒙古博物院"], "events": [["07:30", "大同出发，三位司机轮换", ""], ["10:30", "乌兰哈达火山：选1–2个核心火山，不做全套打卡", ""], ["13:00", "景区附近简餐/车上补给后继续西行", "food"], ["17:30", "呼和浩特入住", "stay"], ["19:00", "锅茶、羊肉烧麦、手把肉；早点睡", "food"]]}, {"day": 7, "date": "2026-09-30", "title": "呼和浩特 → 希拉穆仁｜博物馆 + 金色草原", "stay": "希拉穆仁", "drive": "约100公里 / 1.5–2小时", "risk": "9月底草原是金黄/枯黄季，不是盛夏绿草原；营地必须确认仍营业、独卫、热水和取暖。", "route": ["内蒙古博物院", "希拉穆仁草原"], "events": [["09:00", "内蒙古博物院：新馆，优先看北疆历史与民族文化", "book"], ["12:00", "呼市午饭后出发", "food"], ["14:30", "抵达希拉穆仁营地，办理入住", "stay"], ["15:30", "骑马/草原散步；只选正规、明码标价项目", ""], ["18:00", "金色草甸日落；夜间看天气决定是否观星", ""]]}, {"day": 8, "date": "2026-10-01", "title": "希拉穆仁 → 包头 → 巴彦淖尔｜国庆首日转场", "stay": "巴彦淖尔", "drive": "约450–500公里 / 6–7小时基础车程；拥堵时更长", "risk": "国庆首日不建议硬开到乌海。把巴彦淖尔作为安全落点，避免夜间疲劳驾驶。", "route": ["希拉穆仁草原", "包头", "巴彦淖尔"], "events": [["06:45", "草原日出；天气差就放弃，保证睡眠", ""], ["08:00", "早餐后立即出发，避开更晚的国庆车流", ""], ["12:00", "包头附近午饭 + 加油 + 司机轮换", "food"], ["15:30", "继续西行；每2小时至少休息一次", ""], ["18:00", "巴彦淖尔入住；河套菜/巴盟烩菜", "stay"]]}, {"day": 9, "date": "2026-10-02", "title": "巴彦淖尔 → 乌海湖 → 腾格里｜第一晚星空", "stay": "腾格里", "drive": "约430–500公里 / 6小时上下，视营地入口而定", "risk": "当天必须早走；乌海湖只短停。营地的真实入口/接驳点以订单为准，租车严禁自行驶入无铺装沙地。", "route": ["巴彦淖尔", "乌海湖", "腾格里沙漠入口"], "events": [["06:45", "巴彦淖尔出发", ""], ["08:45", "乌海湖短停60–90分钟；若大风/沙尘则直接跳过", ""], ["10:15", "继续向阿拉善/中卫方向；中途加油补给", ""], ["13:00", "路上午饭", "food"], ["15:30", "到约定沙漠入口，换营地车辆进沙", "book"], ["18:00", "沙丘日落；天黑后第一晚观星", "stay"]]}, {"day": 10, "date": "2026-10-03", "title": "腾格里全天｜五湖穿越 + 沙漠慢下来", "stay": "腾格里", "drive": "沙漠内只坐正规营地/越野车辆", "risk": "不要自己开租赁SUV进沙。五湖/乌兰湖颜色与水位受季节影响，不把“粉色心形”当保证。", "route": ["腾格里沙漠入口"], "events": [["07:00", "自愿看日出；睡不够就取消", ""], ["09:30", "正规越野车辆五湖穿越/乌兰湖路线", "book"], ["14:30", "回营地休息2–3小时，洗澡、午睡", "stay"], ["17:00", "沙漠人像与第二次日落", ""], ["20:00", "第二晚观星；避开营地强光，注意保暖", ""]]}, {"day": 11, "date": "2026-10-04", "title": "腾格里 → 中卫 → 66号公路｜黄河与戈壁", "stay": "中卫", "drive": "约150–220公里 / 3–4小时", "risk": "66号公路有社会车辆与大货车，严禁站在行车道中央拍照。", "route": ["腾格里沙漠入口", "中卫市区", "66号公路"], "events": [["08:30", "早餐后出沙，取租车", ""], ["11:00", "中卫入住/寄存行李；蒿子面", "food"], ["14:00", "66号公路方向；只在安全停车区和路外土坡拍摄", ""], ["16:00", "北长滩/黄河沿线视路况与体力决定，不强求", ""], ["18:00", "黄河日落后返回中卫", "stay"]]}, {"day": 12, "date": "2026-10-05", "title": "中卫 → 吴忠 → 银川｜宁夏美食转场日", "stay": "银川", "drive": "约230公里 / 3小时左右", "risk": "国庆假期仍在高峰，银川热门餐厅与夜市拥挤；不安排沙坡头，避免与腾格里重复。", "route": ["中卫市区", "吴忠", "银川市区"], "events": [["09:30", "睡到自然醒后退房", ""], ["11:30", "吴忠早茶/午餐：拉面、八宝茶、小菜", "food"], ["13:30", "前往银川", ""], ["15:30", "银川入住、休息", "stay"], ["17:30", "览山公园可选；晚上怀远夜市", "food"]]}, {"day": 13, "date": "2026-10-06", "title": "银川西线｜西夏陵 + 贺兰山岩画", "stay": "银川", "drive": "往返约120–160公里 / 2.5–3小时", "risk": "国庆假期仍未结束。西夏陵优先级高于岩画；若客流或体力不理想，下午岩画直接取消。", "route": ["银川市区", "西夏陵", "贺兰山岩画"], "events": [["07:15", "银川出发，尽量第一批进西夏陵", ""], ["08:00", "西夏陵：遗址区 + 博物馆，预留3小时", "book"], ["11:30", "午饭与短休息", "food"], ["13:30", "贺兰山岩画；看太阳神岩画、山谷与岩羊", "book"], ["17:30", "返回银川，最后一顿手抓羊肉/羊杂", "stay"]]}, {"day": 14, "date": "2026-10-07", "title": "银川 → 上海｜还车返程", "stay": "上海", "drive": "市区→机场约40–60分钟；国庆返程需加缓冲", "risk": "返沪航班尚未提供；当前租车订单显示10月8日10:00在银川河东机场还车，与现有10月7日返沪框架存在1天差异。收到返程机票后，以出票时间为锚统一调整，暂不硬排。", "route": ["银川市区", "银川河东国际机场"], "events": [["09:00", "返沪航班待确认；当天安排暂不锁死", "anchor"], ["待确认", "租车订单当前还车时间为10月8日10:00，需与返程机票统一核对", "book"], ["待确认", "收到返程机票后再确定银川市区出发、加油、还车和值机时间", "anchor"]]}], "todos": [["现在", "去程上海→太原航班已出票；返程银川→上海航班仍待确认。", true], ["现在", "太原武宿机场取车→银川河东机场异地还车已确认：奥迪Q5L；还车时间为10月8日10:00，需与返程航班最终核对。", true], ["现在", "预订13晚住宿：太原→忻州→浑源→大同×2→呼和浩特→希拉穆仁→巴彦淖尔→腾格里×2→中卫→银川×2；节假日房优先可取消。", false], ["9月13日起", "云冈石窟9月28日门票进入“提前15日（不含当日）”预约窗口；4人全部实名预约。", false], ["9月20日起重点盯", "悬空寺9月27日登临票进入7日窗口；现行规则有严格限流与人脸核验，4人需提前安排好购票设备与人员到场。", false], ["9月21日20:00", "山西博物院9月24日预约：目前可提前3日；一个预约单最多3人，4人要拆成至少2个预约单。", false], ["9月23日起", "内蒙古博物院9月30日预约：可提前7日，使用官网/微信公众号/“云游内博”，不要买第三方所谓代预约。", false], ["出发前7天", "确认希拉穆仁营地仍正常营业，必须问清独立卫浴、24小时热水、暖气/电热毯、停车和退改。", false], ["出发前7天", "确认腾格里两晚营地：准确接驳点、越野接送、供暖热水、晚餐、观星区域、五湖路线、天气退改。", false], ["出发前3–5天", "购买/预约西夏陵与贺兰山岩画国庆时段票；若限流，以西夏陵为优先。", false], ["出发前", "下载山西、内蒙古、宁夏高德/百度离线地图；三位司机提前完成租车平台驾驶员认证。", false], ["出发前", "准备羽绒/厚外套、冲锋衣、防晒、墨镜、润唇膏、保湿用品、头灯、充电宝、三脚架。", false]], "orders": [{"type": "机票", "name": "上海虹桥T2 → 太原武宿T2｜上海航空 FM9139", "time": "2026-09-24 07:00起飞 · 09:10抵达（UTC+8）", "address": "上海虹桥国际机场T2 → 太原武宿国际机场T2", "phone": "", "note": "经济舱 · 波音737-800 · 预计飞行2小时10分"}, {"type": "租车", "name": "奥迪Q5L 2.0T自动｜SUV 5座", "time": "2026-09-24 10:00取车 → 2026-10-08 10:00还车", "address": "取车：太原武宿机场服务点｜还车：银川河东机场服务点", "phone": "", "note": "异地还车 · 车牌待定"}], "sources": [["2026年节假日安排（国务院）", "https://www.gov.cn/gongbao/2025/issue_12406/content_7048922.html"], ["山西博物院官网", "https://shanximuseum.com.cn/sx/index/index.html"], ["云冈石窟预约周期公告（大同市政府）", "https://www.dt.gov.cn/dt12345/rxdt1/202604/29b73c0aa08148e3baca536eb7166bb9.shtml"], ["悬空寺2026年限流信息（大同市政府）", "https://www.dt.gov.cn/dtszf/tzggnr/202606/fbff2b4ec29f4cdca4273dcde6b52d03.shtml"], ["悬空寺人脸核验公告（大同12345）", "https://www.dt.gov.cn/dt12345/rxdt1/202606/023c13b2379b40cd8543f122c85c2d0d.shtml"], ["内蒙古博物院官网", "http://www.nmgbwy.cn/Home/Indexs"], ["西夏陵（宁夏文旅厅）", "https://whhlyt.nx.gov.cn/jqjd/ycs_66553/xxl/"], ["贺兰山岩画（宁夏文旅厅）", "https://whhlyt.nx.gov.cn/jqjd/ycs_66553/hlsyh/"], ["高德URI API路径规划", "https://lbs.amap.com/api/uri-api/guide/travel/route"], ["Cloudflare Workers GitHub集成", "https://developers.cloudflare.com/workers/ci-cd/builds/git-integration/github-integration/"]]}</script>
-<script>
-const SEED=JSON.parse(document.getElementById('trip-seed').textContent);
-const PLACES=SEED.places,SOURCES=SEED.sources,TZ='Asia/Shanghai';
-let DAYS=SEED.days,TODOS=SEED.todos,ORDERS=SEED.orders||[];
-const STORAGE_KEY='jinmengning-trip-editor-v1';
-try{
-  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
-  if(saved){
-    if(Array.isArray(saved.days))DAYS=saved.days;
-    if(Array.isArray(saved.todos))TODOS=saved.todos;
-    if(Array.isArray(saved.orders))ORDERS=saved.orders;
-  }
-}catch(e){}
-
-const dayColors=['#d35454','#df8d36','#bd9b35','#6b9b61','#3f9c91','#3d83bd','#6358bd','#8d55b1','#b95589','#c35c66','#b56b3f','#8a7c3f','#477f6d','#526aa0'];
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function amapSearch(name,callnative=1){return'https://uri.amap.com/search?keyword='+encodeURIComponent(name)+'&view=map&src=jinmengning.manual&callnative='+callnative}
-function amapDayRoute(names,callnative=0){
-  const pts=names.map(n=>({name:n,...(PLACES[n]||{})})).filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lng));
-  if(!pts.length)return'';
-  if(pts.length===1)return amapSearch(pts[0].name,callnative);
-  const f=pts[0],t=pts[pts.length-1];
-  const enc=p=>`${p.lng},${p.lat},${encodeURIComponent(p.name)}`;
-  let u='https://uri.amap.com/navigation?from='+enc(f)+'&to='+enc(t)+'&mode=car&policy=1&src=jinmengning.manual&callnative='+callnative;
-  if(pts.length>2){const mid=pts[Math.floor((pts.length-1)/2)];u+='&via='+enc(mid)}
-  return u;
-}
-function getChinaDateISO(){const parts=new Intl.DateTimeFormat('en-US',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const o=Object.fromEntries(parts.map(p=>[p.type,p.value]));return `${o.year}-${o.month}-${o.day}`}
-
-function placeify(text){let out=esc(text);for(const name of Object.keys(PLACES).sort((a,b)=>b.length-a.length)){const safe=esc(name);out=out.replaceAll(safe,'<a class="place" href="'+amapSearch(name)+'" target="_blank" rel="noopener">'+safe+'</a>')}return out}
-function baiduDayRoute(names){const pts=names.map(n=>({name:n,...(PLACES[n]||{})})).filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lng));if(pts.length<2)return'';const first=pts[0],last=pts[pts.length-1],via=pts.slice(1,-1),origin=`latlng:${first.lat},${first.lng}|name:${first.name}`,dest=`latlng:${last.lat},${last.lng}|name:${last.name}`,vias=encodeURIComponent(JSON.stringify({viaPoints:via.map(p=>({name:p.name,lat:p.lat,lng:p.lng}))}));return'baidumap://map/direction?origin='+encodeURIComponent(origin)+'&destination='+encodeURIComponent(dest)+'&mode=driving&coord_type=gcj02&viaPoints='+vias+'&src=ios.jinmengning.manual'}
-function miniSvg(names,color){if(!names.length)return'';const W=720,H=110,pad=48,pts=names.map((n,i)=>({x:names.length===1?W/2:pad+i*(W-2*pad)/(names.length-1),y:55+(i%2?11:-8),n}));let d='M '+pts[0].x+' '+pts[0].y;for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],mx=(a.x+b.x)/2;d+=` Q ${mx} ${(a.y+b.y)/2+(i%2?8:-8)} ${b.x} ${b.y}`}const circles=pts.map((p,i)=>`<circle cx="${p.x}" cy="${p.y}" r="6" fill="var(--paper)" stroke="${color}" stroke-width="3"/><text x="${p.x}" y="${p.y+(i%2?-17:28)}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">${esc(p.n)}</text>`).join('');return`<svg viewBox="0 0 ${W} ${H}"><path d="${d}" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round" stroke-dasharray="7 5"/>${circles}</svg>`}
-function badge(k){const m={book:['需预约','book'],food:['美食','food'],stay:['住宿','stay'],anchor:['锚点','anchor']};return m[k]?`<span class="badge ${m[k][1]}">${m[k][0]}</span>`:''}
-function renderDays(){const today=getChinaDateISO();document.getElementById('days').innerHTML=DAYS.map((d,i)=>{const a=amapDayRoute(d.route,1),r=baiduDayRoute(d.route),todayClass=d.date===today?' today':(d.date<today?' past':''),todayPill=d.date===today?'<span class="today-pill">今天</span>':'';const routeButton=d.day===10?'<span class="btn">沙漠内不使用租车导航</span>':(a?`<a class="btn primary" href="${a}" target="_blank" rel="noopener">高德一键导航</a>`:'');const embedButton=d.day===10?'':`<button class="btn" type="button" onclick="loadAmapDay(${i});document.getElementById('amapFrame').scrollIntoView({behavior:'smooth',block:'center'})">页面内看高德路线</button>`;const baiduButton=r?`<a class="btn" href="${r}">百度多点路线</a>`:'';const amapButtons=d.route.map(n=>`<a class="btn" href="${amapSearch(n,1)}" target="_blank" rel="noopener">高德 · ${esc(n)}</a>`).join('');return`<article class="card day${todayClass}" id="day-${d.day}"><div class="day-head"><div class="day-kicker">DAY ${d.day} · ${d.date}${todayPill}</div><div class="day-title">${esc(d.title)}</div><div class="day-meta"><span class="mini">住：${esc(d.stay)}</span><span class="mini">${esc(d.drive)}</span><span class="mini">UTC+8</span></div></div><div class="risk"><strong>风险：</strong>${esc(d.risk)}</div><details class="routebox"><summary>展开当日路线地图</summary><div class="route-inner">${miniSvg(d.route,dayColors[i])}<div class="route-actions">${routeButton}${embedButton}${baiduButton}${amapButtons}</div><div class="map-note">高德一键路线使用官方URI：起点→1个关键途经点→终点；当天更多站点按下方时间线顺序逐站导航。实时路况以地图App当天计算为准。</div></div></details><div class="timeline">${d.events.map(e=>`<div class="event"><div class="when">${esc(e[0])}<span class="tz">${e[0].includes(':')?'UTC+8':'以实际订单为准'}</span></div><div class="what">${placeify(e[1])}${badge(e[2])}</div></div>`).join('')}</div></article>`}).join('')}
-function renderTodos(){
-  const done=TODOS.filter(t=>!!t[2]).length,total=TODOS.length,pct=total?Math.round(done/total*100):0;
-  const root=document.getElementById('todos');
-  root.innerHTML=`<div class="todo-progressbar" aria-label="待办完成进度"><span style="width:${pct}%"></span></div>`+
-    TODOS.map(t=>`<div class="todo${t[2]?' done':''}"><div class="todo-time">${esc(t[0])}</div><div class="todo-text"><span class="todo-status">${t[2]?'✓':'○'}</span>${esc(t[1])}</div></div>`).join('');
-  const p=document.getElementById('todoProgress');if(p)p.textContent=`${done}/${total} 已完成 · ${pct}%`;
-  const cur=TODOS.find(t=>!t[2]);
-  const c=document.getElementById('currentTodo');if(c)c.textContent=cur?`${cur[0]} · ${cur[1]}`:'全部待办已完成';
-}
-function renderOrders(){
-  const root=document.getElementById('orders');
-  if(!root)return;
-  if(!ORDERS.length){
-    root.innerHTML='<div class="empty"><b>目前暂无已确认订单</b><span>编辑模式里可以新增机票、租车、酒店和门票。公开页不会显示确认号、证件号、房间号等敏感信息。</span></div><div class="privacy">隐私规则：订单号 / PNR / 身份证件号 / 手机号 / 房号 / 支付信息永不进入公开网页。</div>';
-    return;
-  }
-  root.innerHTML=ORDERS.map(o=>`<div class="order-card"><div class="order-type">${esc(o.type||'订单')}</div><div class="order-name">${esc(o.name||'未命名')}</div><div class="order-meta">${[o.time,o.address,o.phone,o.note].filter(Boolean).map(esc).join(' · ')}</div></div>`).join('')+'<div class="privacy">公开页仅显示旅行所需信息，不存放确认号、证件号、房间号等敏感字段。</div>';
-}
-function renderSources(){document.getElementById('sources').innerHTML=SOURCES.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join('')}
-function renderLegend(){document.getElementById('legend').innerHTML=DAYS.map((d,i)=>`<div class="leg"><span class="swatch" style="background:${dayColors[i]}"></span>D${d.day} ${d.date.slice(5)} · ${esc(d.stay)}</div>`).join('')}
-let keyEvents=[];function rebuildKeyEvents(){keyEvents=[];for(const d of DAYS){for(const e of d.events){if(/^\d{2}:\d{2}$/.test(e[0]))keyEvents.push({name:`D${d.day} · ${e[1].split('；')[0]}`,time:new Date(`${d.date}T${e[0]}:00+08:00`)})}}keyEvents.sort((a,b)=>a.time-b.time)}rebuildKeyEvents();
-function cnTime(date){return new Intl.DateTimeFormat('zh-CN',{timeZone:TZ,month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(date)+' · UTC+8'}
-function updateCountdown(){const now=new Date(),next=keyEvents.find(e=>e.time>now);if(!next){document.getElementById('nextEvent').textContent='旅程已结束';document.getElementById('nextTime').textContent='2026-10-07 · UTC+8';['cdD','cdH','cdM','cdS'].forEach(id=>document.getElementById(id).textContent='00');return}let sec=Math.max(0,Math.floor((next.time-now)/1000)),dd=Math.floor(sec/86400);sec%=86400;const hh=Math.floor(sec/3600);sec%=3600;const mm=Math.floor(sec/60),ss=sec%60;document.getElementById('nextEvent').textContent=next.name;document.getElementById('nextTime').textContent=cnTime(next.time);document.getElementById('cdD').textContent=String(dd).padStart(2,'0');document.getElementById('cdH').textContent=String(hh).padStart(2,'0');document.getElementById('cdM').textContent=String(mm).padStart(2,'0');document.getElementById('cdS').textContent=String(ss).padStart(2,'0')}
-let themePref=localStorage.getItem('tripTheme')||'auto';
-function chinaHour(){return Number(new Intl.DateTimeFormat('en-US',{timeZone:TZ,hour:'2-digit',hour12:false}).format(new Date()))}
-function updateTheme(){let dark;if(themePref==='dark')dark=true;else if(themePref==='light')dark=false;else{const h=chinaHour();dark=(h<6||h>=18)}document.documentElement.dataset.theme=dark?'dark':'light';const b=document.getElementById('themeToggle');if(b)b.textContent=themePref==='auto'?(dark?'☾ 夜间 · 自动':'☀ 日间 · 自动'):(themePref==='dark'?'☾ 深色 · 手动':'☀ 浅色 · 手动')}
-function cycleTheme(){themePref=themePref==='auto'?'light':(themePref==='light'?'dark':'auto');localStorage.setItem('tripTheme',themePref);updateTheme()}
-function setupAmapNav(){const s=document.getElementById('navDaySelect');s.innerHTML=DAYS.map((d,i)=>`<option value="${i}">D${d.day} · ${d.date.slice(5)} · ${esc(d.stay)}</option>`).join('');const today=getChinaDateISO();let idx=DAYS.findIndex(d=>d.date===today);if(idx<0)idx=DAYS.findIndex(d=>d.date>today);if(idx<0)idx=DAYS.length-1;s.value=idx;s.addEventListener('change',()=>loadAmapDay(Number(s.value)));document.getElementById('navReloadBtn').addEventListener('click',()=>loadAmapDay(Number(s.value)));loadAmapDay(idx)}
-function loadAmapDay(idx){const d=DAYS[idx],url=amapDayRoute(d.route,0),open=amapDayRoute(d.route,1),f=document.getElementById('amapFrame'),b=document.getElementById('amapOpenBtn'),s=document.getElementById('navDaySelect');if(s)s.value=idx;if(!url){f.removeAttribute('src');b.href='#';return}f.src=url;b.href=open;document.getElementById('navHint').textContent=`D${d.day} ${d.date} · ${d.title}。高德URI最多1个途经点；完整站点：${d.route.join(' → ')}`}
-
-
-function toast(msg){
-  const el=document.getElementById('toast'); if(!el)return;
-  el.textContent=msg;el.classList.add('show');clearTimeout(window.__toastTimer);
-  window.__toastTimer=setTimeout(()=>el.classList.remove('show'),1800);
-}
-function renderEditor(){
-  const daysRoot=document.getElementById('edit-days');
-  daysRoot.innerHTML=DAYS.map((d,di)=>`<details class="edit-day" ${di===0?'open':''}>
-    <summary>D${d.day} · ${esc(d.date)} · ${esc(d.stay)}</summary>
-    <div class="edit-pad" data-day="${di}">
-      <div class="form-grid two">
-        <div class="field"><label>日期</label><input data-k="date" value="${esc(d.date)}"></div>
-        <div class="field"><label>住宿地</label><input data-k="stay" value="${esc(d.stay)}"></div>
-      </div>
-      <div class="field"><label>标题</label><input data-k="title" value="${esc(d.title)}"></div>
-      <div class="field"><label>驾驶说明</label><input data-k="drive" value="${esc(d.drive)}"></div>
-      <div class="field"><label>风险提示</label><textarea data-k="risk">${esc(d.risk)}</textarea></div>
-      <div class="field"><label>当日路线（每行一个地点；已有地点库名称可用于一键路线）</label><textarea data-k="route">${esc(d.route.join('\n'))}</textarea></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><b style="font-size:13px">时间线</b><button type="button" class="small-action" onclick="addEventRow(${di})">＋新增事件</button></div>
-      <div class="events-editor" id="events-${di}">${renderEventEditorRows(d.events,di)}</div>
-    </div>
-  </details>`).join('');
-
-  const todoRoot=document.getElementById('edit-todos');
-  todoRoot.innerHTML=`<div style="display:flex;justify-content:flex-end"><button class="small-action" type="button" onclick="addTodoRow()">＋新增待办</button></div><div id="todoRows">${TODOS.map((t,i)=>todoRow(t,i)).join('')}</div>`;
-
-  const orderRoot=document.getElementById('edit-orders');
-  orderRoot.innerHTML=`<div style="display:flex;justify-content:flex-end"><button class="small-action" type="button" onclick="addOrderRow()">＋新增订单</button></div><div id="orderRows">${ORDERS.map((o,i)=>orderRow(o,i)).join('')}</div>`;
-}
-function renderEventEditorRows(events,di){
-  return events.map((e,ei)=>eventRow(e,di,ei)).join('');
-}
-function eventRow(e,di,ei){
-  const kind=e[2]||'';
-  return `<div class="event-edit" data-event="${ei}">
-    <input aria-label="时间" value="${esc(e[0]||'')}" placeholder="08:30">
-    <input aria-label="内容" value="${esc(e[1]||'')}" placeholder="行程内容">
-    <select aria-label="类型">
-      <option value="" ${kind===''?'selected':''}>普通</option>
-      <option value="book" ${kind==='book'?'selected':''}>需预约</option>
-      <option value="food" ${kind==='food'?'selected':''}>美食</option>
-      <option value="stay" ${kind==='stay'?'selected':''}>住宿</option>
-      <option value="anchor" ${kind==='anchor'?'selected':''}>锚点</option>
-    </select>
-    <button type="button" class="remove-btn" onclick="this.closest('.event-edit').remove()">×</button>
-  </div>`;
-}
-function addEventRow(di){
-  document.getElementById(`events-${di}`).insertAdjacentHTML('beforeend',eventRow(['','',''],di,999));
-}
-function todoRow(t,i){
-  return `<div class="todo-edit"><input value="${esc(t[0]||'')}" placeholder="时间/截止日"><input value="${esc(t[1]||'')}" placeholder="待办内容"><label style="display:flex;align-items:center;gap:5px;font-size:11px"><input type="checkbox" ${t[2]?'checked':''}>完成</label><button class="remove-btn" type="button" onclick="this.closest('.todo-edit').remove()">×</button></div>`;
-}
-function addTodoRow(){document.getElementById('todoRows').insertAdjacentHTML('beforeend',todoRow(['',''],999))}
-function orderRow(o,i){
-  return `<div class="order-edit">
-    <div class="form-grid two">
-      <div class="field"><label>类型</label><select data-ok="type"><option ${o.type==='机票'?'selected':''}>机票</option><option ${o.type==='租车'?'selected':''}>租车</option><option ${o.type==='酒店'?'selected':''}>酒店</option><option ${o.type==='门票'?'selected':''}>门票</option><option ${o.type==='其他'?'selected':''}>其他</option></select></div>
-      <div class="field"><label>名称</label><input data-ok="name" value="${esc(o.name||'')}" placeholder="如：上海→太原航班"></div>
-    </div>
-    <div class="form-grid two">
-      <div class="field"><label>时间</label><input data-ok="time" value="${esc(o.time||'')}" placeholder="2026-09-24 09:30 UTC+8"></div>
-      <div class="field"><label>公开电话</label><input data-ok="phone" value="${esc(o.phone||'')}"></div>
-    </div>
-    <div class="field"><label>地址</label><input data-ok="address" value="${esc(o.address||'')}"></div>
-    <div class="field"><label>备注（不要填订单号/证件号/房号）</label><input data-ok="note" value="${esc(o.note||'')}"></div>
-    <button class="remove-btn" style="padding:7px 12px;width:max-content" type="button" onclick="this.closest('.order-edit').remove()">删除此订单</button>
-  </div>`;
-}
-function addOrderRow(){document.getElementById('orderRows').insertAdjacentHTML('beforeend',orderRow({type:'酒店'},999))}
-function collectEditorData(){
-  const nd=DAYS.map((old,di)=>{
-    const box=document.querySelector(`[data-day="${di}"]`);
-    const get=k=>box.querySelector(`[data-k="${k}"]`).value.trim();
-    const events=[...box.querySelectorAll('.event-edit')].map(row=>{
-      const xs=row.querySelectorAll('input,select');
-      return [xs[0].value.trim(),xs[1].value.trim(),xs[2].value];
-    }).filter(e=>e[0]||e[1]);
-    return {...old,date:get('date'),title:get('title'),stay:get('stay'),drive:get('drive'),risk:get('risk'),route:get('route').split(/\n+/).map(s=>s.trim()).filter(Boolean),events};
-  });
-  const nt=[...document.querySelectorAll('#todoRows .todo-edit')].map(row=>{
-    const ins=row.querySelectorAll('input');return[ins[0].value.trim(),ins[1].value.trim(),!!ins[2]?.checked];
-  }).filter(t=>t[0]||t[1]);
-  const no=[...document.querySelectorAll('#orderRows .order-edit')].map(row=>{
-    const g=k=>row.querySelector(`[data-ok="${k}"]`).value.trim();
-    return {type:g('type'),name:g('name'),time:g('time'),address:g('address'),phone:g('phone'),note:g('note')};
-  }).filter(o=>o.name||o.time||o.address||o.note);
-  return {days:nd,todos:nt,orders:no};
-}
-function saveLocal(){
-  const data=collectEditorData();
-  DAYS=data.days;TODOS=data.todos;ORDERS=data.orders;
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
-  toast('已保存到这个浏览器');
-  setTimeout(()=>location.reload(),350);
-}
-function downloadBlob(content,name,type){
-  const blob=new Blob([content],{type}),a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1500);
-}
-function exportJson(){
-  const data=collectEditorData();
-  downloadBlob(JSON.stringify(data,null,2),'晋蒙宁旅行手册数据.json','application/json;charset=utf-8');
-}
-function exportEditableHtml(){
-  const data=collectEditorData();
-  const clone=document.documentElement.cloneNode(true);
-  const seedEl=clone.querySelector('#trip-seed');
-  const newSeed={places:PLACES,days:data.days,todos:data.todos,orders:data.orders,sources:SOURCES};
-  seedEl.textContent=JSON.stringify(newSeed).replace(/<\//g,'<\\/');
-  clone.querySelector('#editorMask')?.classList.remove('open');
-  clone.querySelector('#editorMask')?.setAttribute('aria-hidden','true');
-  const serialized='<!doctype html>\n'+clone.outerHTML;
-  downloadBlob(serialized,'index.html','text/html;charset=utf-8');
-  toast('已导出 index.html');
-}
-function resetData(){
-  if(!confirm('确定恢复为这份HTML最初内置的行程？你当前浏览器中的修改会被清除。'))return;
-  localStorage.removeItem(STORAGE_KEY);location.reload();
-}
-async function importJsonFile(file){
-  try{
-    const data=JSON.parse(await file.text());
-    if(!Array.isArray(data.days)||!Array.isArray(data.todos))throw new Error('格式不正确');
-    localStorage.setItem(STORAGE_KEY,JSON.stringify({days:data.days,todos:data.todos,orders:Array.isArray(data.orders)?data.orders:[]}));
-    toast('导入成功，正在刷新');
-    setTimeout(()=>location.reload(),350);
-  }catch(e){alert('导入失败：'+e.message)}
-}
-function openEditor(){renderEditor();document.getElementById('editorMask').classList.add('open');document.getElementById('editorMask').setAttribute('aria-hidden','false')}
-function closeEditor(){document.getElementById('editorMask').classList.remove('open');document.getElementById('editorMask').setAttribute('aria-hidden','true')}
-function setupEditor(){
-  document.getElementById('editFab').addEventListener('click',openEditor);
-  document.getElementById('closeEditor').addEventListener('click',closeEditor);
-  document.getElementById('editorMask').addEventListener('click',e=>{if(e.target.id==='editorMask')closeEditor()});
-  document.querySelectorAll('.editor-tab').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('.editor-tab').forEach(b=>b.classList.toggle('active',b===btn));
-    document.querySelectorAll('.editor-view').forEach(v=>v.classList.toggle('active',v.id==='edit-'+btn.dataset.tab));
-  }));
-  document.getElementById('saveLocalBtn').addEventListener('click',saveLocal);
-  document.getElementById('exportHtmlBtn').addEventListener('click',exportEditableHtml);
-  document.getElementById('exportJsonBtn').addEventListener('click',exportJson);
-  document.getElementById('resetBtn').addEventListener('click',resetData);
-  document.getElementById('importJsonInput').addEventListener('change',e=>{if(e.target.files[0])importJsonFile(e.target.files[0])});
-}
-
-function saveOffline(){const clone=document.documentElement.cloneNode(true),blob=new Blob(['<!doctype html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='晋蒙宁14天自驾旅行手册_2026.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
-renderDays();renderTodos();renderOrders();renderSources();renderLegend();setupAmapNav();setupEditor();updateTheme();updateCountdown();setInterval(updateCountdown,1000);setInterval(updateTheme,60000);document.getElementById('saveBtn').addEventListener('click',saveOffline);document.getElementById('themeToggle').addEventListener('click',cycleTheme);
-</script><noscript><div style="padding:20px">本手册需要启用浏览器内置JavaScript以运行倒计时和展开交互；所有代码都已内嵌，不会加载外部脚本。</div></noscript></body></html>
+  <div class="loading-error" id="loading-error" hidden>
+    <strong>行程暂时无法载入</strong>
+    <span>请确认 trip-data.json 已通过生成校验，并与网页位于同一目录。</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+Writes to /api/trip/* are protected by Cloudflare Pages secret EDIT_PIN.
+The browser asks for the PIN only when a shared edit is first saved and keeps it in sessionStorage for that browser session.
+GET remains public, so never store sensitive personal or booking data.

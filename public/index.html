@@ -16,6 +16,7 @@
   <script src="route-ui.js?v=20260910-2" defer></script>
   <script src="trip-title.js?v=20260916-1" defer></script>
   <script src="app.js?v=20260910-4" defer></script>
+  <script src="theme-status.js?v=20260916-1" defer></script>
   <script src="trip-enhancements.js?v=20260916-2" defer></script>
   <script src="coordinate-safety.js?v=20260916-1" defer></script>
   <script src="ticket-pdf-preview.js?v=20260910-2" defer></script>
@@ -46,6 +47,11 @@
       <div class="hero__eyebrow" id="trip-eyebrow"></div>
       <h1 id="trip-title">正在载入旅程</h1>
       <p class="hero__date" id="trip-date"></p>
+      <div class="enh-status-bar" id="enh-status-bar">
+        <div><span>距出发</span><strong id="enh-countdown">—</strong></div>
+        <div><span>北京时间</span><strong id="enh-clock">—</strong></div>
+        <button type="button" id="enh-theme-toggle" aria-label="切换深浅主题">◐ 主题</button>
+      </div>
     </section>
 
     <section class="section flights-section" id="flights" aria-labelledby="flights-title" data-module="flights" hidden>

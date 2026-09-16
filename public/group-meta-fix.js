@@ -3,6 +3,11 @@
 
   const NJ_JOURNEY_ID = "flight-outbound-nanjing";
   const NJ_FLIGHT_ID = "flight-outbound-nanjing-1";
+  let observer = null;
+
+  const esc = (value = "") => String(value).replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[ch]);
 
   function addNanjingFlight(data) {
     data.flightJourneys ||= [];
@@ -88,6 +93,67 @@
     ];
   }
 
+  function candidateMarkup(data) {
+    const journey = (data.flightJourneys || []).find((item) => item.id === NJ_JOURNEY_ID);
+    const flight = (data.flights || []).find((item) => item.id === NJ_FLIGHT_ID);
+    if (!journey || !flight) return "";
+    return `
+      <section class="section terminal-selected-flight" id="selected-transport">
+        <div class="section-heading">
+          <div><p class="section-kicker">SELECTED · NOT TICKETED</p><h2>南京出发机票</h2></div>
+          <span class="soft-label">待购买</span>
+        </div>
+        <div class="booking-grid">
+          <article class="booking-card">
+            <div class="booking-card__top"><span>候选航班</span><b style="color:#9c6500;background:#fff4d9">待出票</b></div>
+            <h3>${esc(`${flight.airline.nameZh} ${flight.flightNumber}`)}</h3>
+            <div class="booking-row"><span>时间</span><strong>2026-09-24 07:40 → 09:40 · 北京时间</strong></div>
+            <div class="booking-row"><span>航线</span><strong>南京禄口国际机场T2 → 太原武宿国际机场T2</strong></div>
+            <div class="booking-row"><span>舱位</span><strong>${esc(`${flight.cabin} · ${flight.baggage} · ${flight.aircraft}`)}</strong></div>
+            <div class="booking-row"><span>价格</span><strong>截图参考¥484起；东航官方直营截图价¥490，未锁价</strong></div>
+            <p class="booking-note">截图中的¥484特价标注“限1—3人可订”。本次为5位成人，正式下单时需要重新核验5人同订价格；如该特价仍有限购，可能需要分单或改选其他价格。当前截图属于选购页面，不作为已出票凭证。</p>
+          </article>
+        </div>
+      </section>
+    `;
+  }
+
+  function mountCandidate(data) {
+    if (document.querySelector("#selected-transport")) return true;
+    const html = candidateMarkup(data);
+    if (!html) return false;
+    const bookings = document.querySelector("#bookings");
+    const itinerary = document.querySelector("#itinerary");
+    if (bookings) {
+      bookings.insertAdjacentHTML("afterend", html);
+      return true;
+    }
+    if (itinerary) {
+      itinerary.insertAdjacentHTML("beforebegin", html);
+      return true;
+    }
+    return false;
+  }
+
+  function ensureCandidateSection(data) {
+    if (mountCandidate(data)) return;
+    if (observer) observer.disconnect();
+    observer = new MutationObserver(() => {
+      if (mountCandidate(data)) {
+        observer.disconnect();
+        observer = null;
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(() => {
+      if (observer) {
+        mountCandidate(data);
+        observer.disconnect();
+        observer = null;
+      }
+    }, 4000);
+  }
+
   function apply(data) {
     if (!data || typeof data !== "object") return;
     if (data.trip) {
@@ -96,6 +162,7 @@
     }
     addNanjingFlight(data);
     patchDayOne(data);
+    setTimeout(() => ensureCandidateSection(data), 0);
   }
 
   document.addEventListener("travel-data-ready", (event) => apply(event.detail));

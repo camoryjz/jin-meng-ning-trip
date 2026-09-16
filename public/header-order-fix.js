@@ -35,9 +35,11 @@
     const legacyFocus = main.querySelector(".cover-focus-section");
 
     if (hero) {
-      if (hero.hidden) hero.hidden = false;
-      if (hero.hasAttribute("hidden")) hero.removeAttribute("hidden");
-      if (hero.style.display) hero.style.removeProperty("display");
+      hero.hidden = false;
+      hero.removeAttribute("hidden");
+      // trip-terminal.css hides .hero after terminal mode starts. Keep the handbook
+      // cover explicitly visible so it remains a separate block above "此刻关注".
+      hero.style.setProperty("display", "block", "important");
     }
 
     if (focus && hero && focus.previousElementSibling !== hero) {
@@ -59,7 +61,7 @@
       if (legacyFocus.style.display !== "none") legacyFocus.style.display = "none";
     }
 
-    return Boolean(focus);
+    return Boolean(focus && hero);
   }
 
   function scheduleApply() {

@@ -8,6 +8,10 @@
   terminalScript.src = "trip-terminal.js?v=20260916-1";
   document.head.append(terminalScript);
 
+  const mapEnhancements = document.createElement("script");
+  mapEnhancements.src = "trip-map-enhancements.js?v=20260916-1";
+  document.head.append(mapEnhancements);
+
   document.addEventListener("travel-data-ready", (event) => {
     const data = event.detail;
     if (!data || typeof data !== "object") return;

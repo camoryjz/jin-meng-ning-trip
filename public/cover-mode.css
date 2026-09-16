@@ -2,13 +2,13 @@
 .cover-hero {
   width: 100%;
   max-width: none;
-  min-height: 720px;
-  padding: 54px max(22px, calc((100vw - 1040px) / 2)) 48px;
+  min-height: 360px;
+  padding: 54px max(22px, calc((100vw - 1040px) / 2)) 44px;
   color: #f2f5f2;
   background:
     radial-gradient(circle at 82% 8%, rgba(112, 151, 126, .13), transparent 30%),
     linear-gradient(180deg, #0d1511 0%, #0b120f 100%);
-  border-bottom: 1px solid rgba(220, 236, 225, .08);
+  border-bottom: 1px solid rgba(220, 236, 225, .10);
 }
 .cover-hero .hero__eyebrow {
   margin: 0 0 16px;
@@ -19,7 +19,7 @@
 }
 .cover-hero h1 {
   margin: 0;
-  max-width: 830px;
+  max-width: 900px;
   color: #f4f6f3;
   font-size: clamp(46px, 7vw, 78px);
   line-height: .98;
@@ -45,8 +45,22 @@
   font-size: 13px;
   font-weight: 690;
 }
+
+/* “此刻关注”独立于网页头部，作为单独的信息区块。 */
+.cover-focus-section {
+  width: 100%;
+  padding: 34px max(22px, calc((100vw - 1040px) / 2)) 46px;
+  color: #f2f5f2;
+  background: #101914;
+  border-bottom: 1px solid rgba(220, 236, 225, .09);
+}
+.cover-focus-shell {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
 .cover-focus-heading {
-  margin: 46px 2px 14px;
+  margin: 0 2px 14px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -167,10 +181,10 @@
 [data-theme="dark"] .footer { color: #e7eee9; }
 
 @media (max-width: 640px) {
-  .cover-hero { min-height: 650px; padding: 38px 18px 34px; }
+  .cover-hero { min-height: 300px; padding: 38px 18px 30px; }
   .cover-meta { gap: 7px; }
   .cover-meta span { min-height: 32px; padding-inline: 10px; font-size: 11px; }
-  .cover-focus-heading { margin-top: 34px; }
+  .cover-focus-section { padding: 28px 18px 34px; }
   .cover-focus-card { padding: 18px; border-radius: 20px; }
   .cover-focus-top { align-items: center; }
   .cover-countdown-grid { gap: 7px; }

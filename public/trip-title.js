@@ -13,7 +13,7 @@
   // kept a subtree MutationObserver alive, which caused severe mobile jank.
 
   const headerFix = document.createElement("script");
-  headerFix.src = "header-order-fix.js?v=20260917-1";
+  headerFix.src = "header-order-fix.js?v=20260917-2";
   document.head.append(headerFix);
 
   document.addEventListener("travel-data-ready", (event) => {

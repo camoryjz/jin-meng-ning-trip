@@ -4,9 +4,20 @@
   const NJ_JOURNEY_ID = "flight-outbound-nanjing";
   const NJ_FLIGHT_ID = "flight-outbound-nanjing-1";
   const LATEST_STAYS = [
-    [1, "太原"], [2, "忻州"], [3, "浑源"], [4, "大同"], [5, "大同"],
-    [6, "呼和浩特"], [7, "希拉穆仁草原"], [8, "巴彦淖尔"], [9, "乌海"],
-    [10, "银川"], [11, "银川"], [12, "中卫"], [13, "中卫"], [14, "银川"]
+    { day: 1, name: "太原温德姆酒店（山西博物院店）", nav: "太原温德姆酒店 山西博物院店", status: "已确认" },
+    { day: 2, name: "星程忻州古城北门酒店", nav: "星程忻州古城北门酒店", status: "已确认" },
+    { day: 3, name: "恒山驿馆（浑源古城店）", nav: "恒山驿馆 浑源古城店", status: "已确认" },
+    { day: 4, name: "大同东信广场城际酒店", nav: "大同东信广场城际酒店", status: "已确认" },
+    { day: 5, name: "大同东信广场城际酒店", nav: "大同东信广场城际酒店", status: "已确认" },
+    { day: 6, name: "呼和浩特东站内蒙古博物院城际酒店", nav: "呼和浩特东站内蒙古博物院城际酒店", status: "已确认" },
+    { day: 7, name: "塞北驿站（希拉穆仁草原安答店）", nav: "塞北驿站 希拉穆仁草原安答店", status: "已确认" },
+    { day: 8, name: "云栖酒店（摩尔城店）", nav: "巴彦淖尔 云栖酒店 摩尔城店", status: "已确认" },
+    { day: 9, name: "乌海海勃湾区桔子水晶酒店", nav: "乌海海勃湾区桔子水晶酒店", status: "已确认" },
+    { day: 10, name: "银川鼓楼喆啡锐品酒店", nav: "银川鼓楼喆啡锐品酒店", status: "确认中" },
+    { day: 11, name: "银川鼓楼喆啡锐品酒店", nav: "银川鼓楼喆啡锐品酒店", status: "确认中" },
+    { day: 12, name: "沙坡漫芸酒店（中卫鼓楼向阳步行街店）", nav: "沙坡漫芸酒店 中卫鼓楼向阳步行街店", status: "已确认" },
+    { day: 13, name: "中卫一叶星空酒店", nav: "中卫一叶星空酒店", status: "已确认 · 赠沙坡头票" },
+    { day: 14, name: "银川最后一晚酒店", nav: "银川", status: "待订" }
   ];
   let observer = null;
 
@@ -163,12 +174,12 @@
     const panel = document.querySelector(".stay-panel");
     if (!panel) return false;
     const header = panel.querySelector(".stay-panel__header span");
-    if (header) header.textContent = "14晚 · 酒店名称以已确认订单为准";
+    if (header) header.textContent = "14晚 · 11晚已确认 · 2晚确认中 · 1晚待订";
     const grid = panel.querySelector(".stay-grid");
     if (grid) {
-      grid.innerHTML = LATEST_STAYS.map(([day, place]) => `
-        <button type="button" class="stay-chip terminal-place-button" data-terminal-place="${esc(place)}">
-          <span>D${day}</span><strong>${esc(place)}</strong>
+      grid.innerHTML = LATEST_STAYS.map((stay) => `
+        <button type="button" class="stay-chip terminal-place-button" data-terminal-place="${esc(stay.nav)}">
+          <span>D${stay.day} · ${esc(stay.status)}</span><strong>${esc(stay.name)}</strong>
         </button>
       `).join("");
     }

@@ -33,3 +33,63 @@
 :root[data-theme="dark"] .offline-overview-shell,:root[data-theme="dark"] .offline-daily-mini-map,:root[data-theme="dark"] .offline-map-place-dialog,:root[data-theme="dark"] .offline-map-place-body section{background:#173029;border-color:#35554a;color:#edf8f4}
 :root[data-theme="dark"] .offline-marker text{fill:#effaf6;stroke:#173029}
 :root[data-theme="dark"] .offline-map-place-shell>header{background:rgba(23,48,41,.96);border-color:#35554a}
+
+
+/* 2026-09-18 usability pass: day zoom becomes a map + ordered clickable route list. */
+.offline-local-bg{fill:#f4faf7}
+.offline-local-grid line{stroke:#d6e6e0;stroke-width:1;stroke-dasharray:4 6;vector-effect:non-scaling-stroke}
+.offline-north{fill:#6b827a;font-size:11px;font-weight:850;paint-order:stroke;stroke:#f4faf7;stroke-width:3px}
+.offline-marker-number{fill:#fff!important;stroke:none!important;font-size:9px!important;font-weight:900!important;paint-order:normal!important;pointer-events:none}
+.offline-marker-label{pointer-events:none}
+.offline-overview-shell.is-day-zoom{padding:12px;background:#f7fbfa}
+.offline-day-map-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);gap:14px;min-height:430px}
+.offline-day-map-canvas{min-width:0;min-height:430px;border:1px solid #dbeae5;border-radius:16px;overflow:hidden;background:#f4faf7}
+.offline-day-map-canvas .offline-overview-svg{width:100%;height:100%;min-height:430px;aspect-ratio:auto!important}
+.offline-day-map-layout aside{min-width:0;padding:14px;border:1px solid #dbeae5;border-radius:16px;background:#fff;overflow:auto}
+.offline-day-map-title{display:grid;gap:3px;margin-bottom:10px}
+.offline-day-map-title small{color:#17806c;font-size:9px;font-weight:900;letter-spacing:.08em}
+.offline-day-map-title strong{color:#234d42;font-size:17px}
+.offline-day-map-title span{color:#758a82;font-size:10px;line-height:1.5}
+.offline-day-points{display:grid;gap:7px}
+.offline-day-points button{width:100%;min-width:0;padding:9px 10px;display:grid;grid-template-columns:26px minmax(0,1fr) 16px;align-items:center;gap:8px;border:1px solid #dce9e5;border-radius:12px;background:#f9fcfb;color:#23483e;text-align:left;cursor:pointer}
+.offline-day-points button:hover,.offline-day-points button:focus-visible{border-color:#9fcfc2;background:#eef8f5;outline:none}
+.offline-day-points button>b{width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#17806c;color:#fff;font:850 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace}
+.offline-day-points button>span{min-width:0;display:grid;gap:2px}
+.offline-day-points strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+.offline-day-points small{color:#7a8d86;font-size:9px}
+.offline-day-points i{color:#789087;font-style:normal;font-size:18px}
+.offline-daily-mini-map-host:empty{display:none}
+.offline-daily-mini-map{margin:0 0 12px;border:1px solid #d9e8e3;border-radius:14px;background:#f7fbfa;overflow:hidden}
+.offline-mini-canvas{height:190px;background:#f4faf7}
+.offline-mini-canvas svg{width:100%;height:100%!important;aspect-ratio:auto!important}
+.offline-mini-sequence{padding:8px;display:flex;gap:6px;overflow-x:auto;border-top:1px solid #e2ede9;scrollbar-width:none}
+.offline-mini-sequence::-webkit-scrollbar{display:none}
+.offline-mini-sequence button{flex:0 0 auto;max-width:210px;min-height:32px;padding:5px 8px;display:flex;align-items:center;gap:6px;border:1px solid #dce9e5;border-radius:999px;background:#fff;color:#315b50;font-size:9px;font-weight:760;white-space:nowrap;cursor:pointer}
+.offline-mini-sequence button b{width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:#e3f3ee;color:#177565;font-size:9px}
+.offline-mini-svg .offline-marker circle{r:8}
+.offline-mini-svg .offline-marker-number{font-size:8px!important}
+.offline-mini-svg .offline-routes path{stroke-width:3.5;opacity:.9}
+.route-leg-capsule{box-shadow:0 4px 14px rgba(28,86,70,.04)}
+
+@media(max-width:900px){
+  .offline-overview-shell.is-day-zoom{padding:8px}
+  .offline-day-map-layout{grid-template-columns:1fr;min-height:0}
+  .offline-day-map-canvas{min-height:320px}
+  .offline-day-map-canvas .offline-overview-svg{min-height:320px}
+  .offline-day-map-layout aside{max-height:none;padding:10px}
+  .offline-day-points{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .offline-day-points strong{white-space:normal;line-height:1.35}
+}
+@media(max-width:560px){
+  .offline-day-map-canvas{min-height:270px}
+  .offline-day-map-canvas .offline-overview-svg{min-height:270px}
+  .offline-day-points{grid-template-columns:1fr}
+  .offline-day-points button{padding:8px 9px}
+  .offline-mini-canvas{height:220px}
+  .offline-mini-sequence button{max-width:180px}
+}
+:root[data-theme="dark"] .offline-day-map-layout aside,
+:root[data-theme="dark"] .offline-day-points button,
+:root[data-theme="dark"] .offline-mini-sequence button{background:#173029;color:#edf8f4;border-color:#35554a}
+:root[data-theme="dark"] .offline-local-bg{fill:#132821}
+:root[data-theme="dark"] .offline-local-grid line{stroke:#35554a}

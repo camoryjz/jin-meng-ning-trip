@@ -5,13 +5,13 @@
     if (!document.querySelector('link[data-nav-itinerary-integration]')) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = "navigation-itinerary-integration-20260918.css?v=20260918-2";
+      link.href = "navigation-itinerary-integration-20260918.css?v=20260918-3";
       link.dataset.navItineraryIntegration = "1";
       document.head.append(link);
     }
     if (!document.querySelector('script[data-nav-itinerary-integration]')) {
       const script = document.createElement("script");
-      script.src = "navigation-itinerary-integration-20260918.js?v=20260918-2";
+      script.src = "navigation-itinerary-integration-20260918.js?v=20260918-3";
       script.defer = true;
       script.dataset.navItineraryIntegration = "1";
       document.head.append(script);

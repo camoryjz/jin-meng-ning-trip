@@ -538,13 +538,81 @@
 
   let tripModeDay = 1;
   let tripModeTab = "schedule";
-  function tripModeMarkup(day) {
+
+  function mainDayCard(dayNumber) {
+    return document.querySelector(`.day-card[data-day="${Number(dayNumber)}"]`);
+  }
+
+  function mainDayTitle(day) {
+    const card = mainDayCard(day.day);
+    return card?.querySelector(".day-title")?.textContent?.trim() || day.title || `DAY ${day.day}`;
+  }
+
+  function syncedScheduleMarkup(day) {
+    const card = mainDayCard(day.day);
+    const schedule = card?.querySelector(".day-detail .schedule");
+    if (schedule) {
+      const clone = schedule.cloneNode(true);
+      clone.classList.add("tm-main-schedule");
+      clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+      return `<div class="tm-live-note">与主页面每日行程同步，含住宿起点、建议时段、景点与今晚住宿。</div>${clone.outerHTML}`;
+    }
+
+    return `<div class="tm-stops">${(day.schedule || []).map((item)=>{
+      const key=scheduleKey(day,item);
+      return `<article><time>${esc(item.time || "建议时段")}</time><p>${esc(item.text)}</p>${["attraction","restaurant"].includes(item.type)?`<div><button data-checkin-key="${esc(key)}" class="checkin-btn${isChecked(key)?" is-done":""}">${isChecked(key)?"✓ 已去过":"○ 打卡"}</button><button data-attach-key="${esc(key)}" data-attach-label="${esc(item.text)}">＋ 资料</button></div>`:""}</article>`;
+    }).join("")}</div>`;
+  }
+
+  function syncedRouteMarkup(day) {
+    const card = mainDayCard(day.day);
+    const quick = card?.querySelector(".day-detail > .daily-route-quicknav");
+    const route = card?.querySelector(".day-detail > .daily-route-inline");
+    if (quick || route) {
+      const wrap = document.createElement("div");
+      wrap.className = "tm-live-route";
+      const note = document.createElement("div");
+      note.className = "tm-live-note";
+      note.textContent = "与主页面当日路线同步：保留景点与住宿导航，城市级导航节点已过滤。";
+      wrap.append(note);
+      if (quick) {
+        const q = quick.cloneNode(true);
+        q.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+        wrap.append(q);
+      }
+      if (route) {
+        const r = route.cloneNode(true);
+        r.open = true;
+        r.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+        wrap.append(r);
+      }
+      return wrap.outerHTML;
+    }
+
+    const locations = day.locations || [];
+    return `<div class="tm-route"><p>${esc(locations.join(" → "))}</p>${locations.map((name,index)=>`<div><b>${index+1}</b><span>${esc(name)}</span><a href="${esc(AMAP_SEARCH(name))}" target="_blank" rel="noopener noreferrer">高德</a><a href="${esc(BAIDU_SEARCH(name))}" target="_blank" rel="noopener noreferrer">百度</a></div>`).join("")}</div>`;
+  }
+
+  function syncedAdviceMarkup(day) {
+    const card = mainDayCard(day.day);
+    const extraGrid = card?.querySelector(".day-detail .day-extra-grid");
+    if (extraGrid) {
+      const clone = extraGrid.cloneNode(true);
+      clone.classList.add("tm-main-advice");
+      clone.querySelectorAll("details").forEach((details) => { details.open = true; });
+      clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+      return `<div class="tm-live-note">与主页面摄影、穿搭和备选方案同步。</div>${clone.outerHTML}`;
+    }
     const extra = DAY_EXTRAS[day.day] || {};
+    return `<div class="tm-advice"><article><h3>摄影</h3><p>${esc(extra.photo||"按当天光线和现场规则调整。")}</p></article><article><h3>穿搭</h3><p>${esc(extra.outfit||"以舒适和天气适配为主。")}</p></article><article><h3>备选</h3><p>${esc(extra.fallback||"按当天路况和体力调整。")}</p></article></div>`;
+  }
+
+  function tripModeMarkup(day) {
     const tabButtons = `<nav class="trip-mode-tabs"><button data-tm-tab="schedule" aria-pressed="${tripModeTab==="schedule"}">行程</button><button data-tm-tab="map" aria-pressed="${tripModeTab==="map"}">路线</button><button data-tm-tab="photo" aria-pressed="${tripModeTab==="photo"}">摄影/穿搭</button><button data-tm-tab="ledger" aria-pressed="${tripModeTab==="ledger"}">记账</button></nav>`;
     let body = "";
-    if (tripModeTab === "schedule") body = `<div class="tm-stops">${day.schedule.map((item)=>{const key=scheduleKey(day,item); return `<article><time>${esc(item.time)}</time><p>${esc(item.text)}</p>${["attraction","restaurant"].includes(item.type)?`<div><button data-checkin-key="${esc(key)}" class="checkin-btn${isChecked(key)?" is-done":""}">${isChecked(key)?"✓ 已去过":"○ 打卡"}</button><button data-attach-key="${esc(key)}" data-attach-label="${esc(item.text)}">＋ 资料</button></div>`:""}</article>`}).join("")}</div>`;
-    if (tripModeTab === "map") body = `<div class="tm-route"><p>${esc(day.locations.join(" → "))}</p>${day.locations.map((name,index)=>`<div><b>${index+1}</b><span>${esc(name)}</span><a href="${esc(AMAP_SEARCH(name))}" target="_blank" rel="noopener noreferrer">高德</a><a href="${esc(BAIDU_SEARCH(name))}" target="_blank" rel="noopener noreferrer">百度</a></div>`).join("")}</div>`;
-    if (tripModeTab === "photo") body = `<div class="tm-advice"><article><h3>摄影</h3><p>${esc(extra.photo||"按当天光线和现场规则调整。")}</p></article><article><h3>穿搭</h3><p>${esc(extra.outfit||"以舒适和天气适配为主。")}</p></article><article><h3>备选</h3><p>${esc(extra.fallback||"按当天路况和体力调整。")}</p></article></div>`;
+    if (tripModeTab === "schedule") body = syncedScheduleMarkup(day);
+    if (tripModeTab === "map") body = syncedRouteMarkup(day);
+    if (tripModeTab === "photo") body = syncedAdviceMarkup(day);
     if (tripModeTab === "ledger") body = `<div class="tm-ledger"><p>多人记账、分摊和结算继续使用原网页的云端记账模块。</p><button type="button" data-open-ledger>打开记账</button></div>`;
     return `${tabButtons}${body}`;
   }
@@ -552,10 +620,12 @@
   function renderTripMode() {
     const dialog = document.querySelector("#trip-mode-dialog");
     const data = window.TRAVEL_PLAN_DATA;
-    if (!dialog || !data) return;
-    const day = data.days.find((item)=>item.day===tripModeDay) || data.days[0];
-    dialog.querySelector(".trip-mode-day-tabs").innerHTML = data.days.map((item)=>`<button type="button" data-tm-day="${item.day}" aria-pressed="${item.day===day.day}">${item.date.slice(5).replace("-","/")}</button>`).join("");
-    dialog.querySelector("#trip-mode-title").textContent = `DAY ${String(day.day).padStart(2,"0")} · ${day.title}`;
+    if (!dialog || !data?.days?.length) return;
+    const days = [...data.days].sort((a,b)=>Number(a.day)-Number(b.day));
+    const day = days.find((item)=>Number(item.day)===Number(tripModeDay)) || days[0];
+    tripModeDay = Number(day.day);
+    dialog.querySelector(".trip-mode-day-tabs").innerHTML = days.map((item)=>`<button type="button" data-tm-day="${item.day}" aria-pressed="${Number(item.day)===Number(day.day)}">${String(item.date || "").slice(5).replace("-","/")}</button>`).join("");
+    dialog.querySelector("#trip-mode-title").textContent = `DAY ${String(day.day).padStart(2,"0")} · ${mainDayTitle(day)}`;
     dialog.querySelector(".trip-mode-body").innerHTML = tripModeMarkup(day);
   }
 
@@ -591,6 +661,15 @@
     const copy = event.target.closest("[data-copy-map-query]");
     if (copy) navigator.clipboard?.writeText(copy.dataset.copyMapQuery).then(()=>{copy.textContent="已复制"; setTimeout(()=>copy.textContent="复制地点",1200)}).catch(()=>{});
   });
+
+  const refreshOpenTripMode = () => {
+    const dialog = document.querySelector("#trip-mode-dialog");
+    if (dialog?.open) window.setTimeout(renderTripMode, 0);
+  };
+  document.addEventListener("travel-data-ready", () => {
+    [80, 450, 1200, 3200].forEach((delay) => window.setTimeout(refreshOpenTripMode, delay));
+  });
+  window.addEventListener("travel-view:shown", refreshOpenTripMode);
 
   document.addEventListener("DOMContentLoaded", () => {
     injectStatusBar();

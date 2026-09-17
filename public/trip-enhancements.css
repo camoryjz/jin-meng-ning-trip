@@ -163,3 +163,60 @@
   .cn-map-actions { grid-template-columns:1fr 1fr; }
   .cn-map-actions button { grid-column:1/-1; }
 }
+
+
+/* Route usability pass: readable on desktop and phone, with horizontal actions and mini map. */
+@media (min-width:561px){
+  .trip-mode-dialog{width:min(92vw,680px);max-width:680px}
+  .trip-mode-shell header h2{max-width:530px}
+}
+.tm-live-route{display:grid;gap:10px}
+.tm-live-route .daily-route-inline{border-radius:15px!important;overflow:hidden}
+.tm-live-route .daily-route-inline>summary{min-height:48px!important;padding:10px 12px!important}
+.tm-live-route .daily-route-inline__body{padding:0 10px 12px!important}
+.tm-live-route .daily-route-note{margin:0 0 9px!important;font-size:9px!important}
+.tm-live-route .offline-daily-mini-map{margin:0 0 10px!important}
+.tm-live-route .offline-mini-canvas{height:210px}
+.tm-live-route .offline-mini-sequence{padding:7px}
+.tm-live-route .daily-route-stop{
+  width:100%!important;
+  min-width:0!important;
+  padding:9px!important;
+  grid-template-columns:28px minmax(0,1fr)!important;
+  grid-template-areas:"idx name" "idx status" "actions actions"!important;
+  align-items:center!important;
+}
+.tm-live-route .daily-route-stop__actions{
+  width:100%!important;
+  min-width:0!important;
+  justify-self:stretch!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:7px!important;
+}
+.tm-live-route .daily-route-stop__actions button{
+  width:100%!important;
+  min-width:0!important;
+  min-height:36px!important;
+  padding:7px 10px!important;
+  white-space:nowrap!important;
+  writing-mode:horizontal-tb!important;
+  text-orientation:mixed!important;
+  line-height:1.2!important;
+}
+.tm-live-route .daily-route-actions{
+  width:100%!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+.tm-live-route .daily-route-actions button{
+  width:100%!important;
+  min-width:0!important;
+  white-space:normal!important;
+  line-height:1.35!important;
+}
+@media(max-width:560px){
+  .tm-live-route .offline-mini-canvas{height:230px}
+  .tm-live-route .daily-route-actions{grid-template-columns:1fr!important}
+  .tm-live-route .daily-route-stop__actions{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .tm-live-route .daily-route-stop__actions button{font-size:10px!important}
+}

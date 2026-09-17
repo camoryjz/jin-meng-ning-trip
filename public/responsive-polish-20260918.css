@@ -1,0 +1,112 @@
+/* Final responsive polish for desktop + mobile travel handbook */
+
+/* The active “此刻关注” panel is produced by trip-terminal.js. Base styles were
+   originally tuned for a narrow content column, so widen and rebalance it on desktop. */
+@media (min-width: 900px) {
+  .terminal-focus.section,
+  #focus.terminal-focus {
+    width: min(calc(100% - 48px), 1180px) !important;
+    max-width: 1180px !important;
+    margin: 28px auto 0 !important;
+    padding: 26px 30px !important;
+    border-radius: 24px !important;
+  }
+  .terminal-focus__heading {
+    margin-bottom: 18px !important;
+    align-items: center !important;
+  }
+  .terminal-focus__trip {
+    font-size: clamp(18px, 1.65vw, 24px) !important;
+  }
+  .terminal-focus__body {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.18fr) minmax(420px, .82fr) !important;
+    gap: 26px !important;
+    align-items: end !important;
+  }
+  .terminal-focus h1 {
+    max-width: 680px !important;
+    font-size: clamp(30px, 3.4vw, 48px) !important;
+    line-height: 1.06 !important;
+  }
+  .terminal-focus__detail {
+    max-width: 680px !important;
+    margin-top: 10px !important;
+    font-size: 13px !important;
+  }
+  .terminal-countdown {
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  .terminal-countdown > div {
+    min-width: 0;
+    padding: 15px 8px 12px !important;
+    border-radius: 15px !important;
+  }
+  .terminal-countdown strong {
+    font-size: clamp(28px, 3vw, 40px) !important;
+  }
+  .terminal-countdown span {
+    margin-top: 7px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Tablet: preserve one readable column without the oversized mobile feel. */
+@media (min-width: 701px) and (max-width: 899px) {
+  .terminal-focus.section,
+  #focus.terminal-focus {
+    width: min(calc(100% - 32px), 820px) !important;
+    margin: 22px auto 0 !important;
+    padding: 24px !important;
+  }
+  .terminal-focus h1 { font-size: clamp(30px, 5vw, 42px) !important; }
+}
+
+/* Phone: fit the viewport cleanly and keep all four countdown cells visible. */
+@media (max-width: 700px) {
+  .terminal-focus.section,
+  #focus.terminal-focus {
+    width: auto !important;
+    max-width: none !important;
+    margin: 16px 12px 0 !important;
+    padding: 18px 15px !important;
+    border-radius: 19px !important;
+  }
+  .terminal-focus__heading { margin-bottom: 16px !important; }
+  .terminal-focus__trip { font-size: 16px !important; }
+  .timezone-pill {
+    margin-top: 8px !important;
+    padding: 6px 9px !important;
+    font-size: 10px !important;
+  }
+  .terminal-focus h1 {
+    max-width: none !important;
+    font-size: clamp(25px, 8vw, 34px) !important;
+    line-height: 1.08 !important;
+  }
+  .terminal-focus__detail {
+    margin-top: 9px !important;
+    font-size: 11px !important;
+    line-height: 1.6 !important;
+  }
+  .terminal-countdown {
+    width: 100% !important;
+    margin-top: 16px !important;
+    gap: 5px !important;
+  }
+  .terminal-countdown > div {
+    min-width: 0 !important;
+    padding: 11px 3px 9px !important;
+    border-radius: 12px !important;
+  }
+  .terminal-countdown strong {
+    font-size: clamp(24px, 8vw, 32px) !important;
+  }
+  .terminal-countdown span {
+    margin-top: 6px !important;
+    font-size: 10px !important;
+  }
+}

@@ -3,6 +3,11 @@
 
   const NJ_JOURNEY_ID = "flight-outbound-nanjing";
   const NJ_FLIGHT_ID = "flight-outbound-nanjing-1";
+  const LATEST_STAYS = [
+    [1, "太原"], [2, "忻州"], [3, "浑源"], [4, "大同"], [5, "大同"],
+    [6, "呼和浩特"], [7, "希拉穆仁草原"], [8, "巴彦淖尔"], [9, "乌海"],
+    [10, "银川"], [11, "银川"], [12, "中卫"], [13, "中卫"], [14, "银川"]
+  ];
   let observer = null;
 
   const esc = (value = "") => String(value).replace(/[&<>"']/g, (ch) => ({
@@ -154,15 +159,41 @@
     }, 4000);
   }
 
+  function refreshStayPanel() {
+    const panel = document.querySelector(".stay-panel");
+    if (!panel) return false;
+    const header = panel.querySelector(".stay-panel__header span");
+    if (header) header.textContent = "14晚 · 酒店名称以已确认订单为准";
+    const grid = panel.querySelector(".stay-grid");
+    if (grid) {
+      grid.innerHTML = LATEST_STAYS.map(([day, place]) => `
+        <button type="button" class="stay-chip terminal-place-button" data-terminal-place="${esc(place)}">
+          <span>D${day}</span><strong>${esc(place)}</strong>
+        </button>
+      `).join("");
+    }
+    return true;
+  }
+
+  function scheduleStayRefresh() {
+    [50, 250, 700, 1500].forEach((delay) => window.setTimeout(refreshStayPanel, delay));
+  }
+
   function apply(data) {
     if (!data || typeof data !== "object") return;
+
+    if (typeof window.applyLatestItinerary20260918 === "function") {
+      window.applyLatestItinerary20260918(data);
+    }
+
     if (data.trip) {
       data.trip.groupSize = 5;
-      data.trip.routeSummary = "上海/南京分别出发，在太原汇合取车，沿山西—内蒙古—宁夏一路自驾至银川；主方案10月7日银川还车后返程，10月8日返程为次选。";
+      data.trip.routeSummary = "上海/南京分别出发，在太原汇合取车；经山西、内蒙古西行至乌海，10月3日从阿拉善英雄会梦想沙漠公园参加五湖/六湖穿越，随后进入宁夏，10月8日在银川还车返程。";
     }
     addNanjingFlight(data);
     patchDayOne(data);
     setTimeout(() => ensureCandidateSection(data), 0);
+    scheduleStayRefresh();
   }
 
   document.addEventListener("travel-data-ready", (event) => apply(event.detail));

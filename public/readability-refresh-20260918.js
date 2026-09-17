@@ -9,6 +9,13 @@
       link.dataset.navItineraryIntegration = "1";
       document.head.append(link);
     }
+    if (!document.querySelector('link[data-responsive-polish]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "responsive-polish-20260918.css?v=20260918-1";
+      link.dataset.responsivePolish = "1";
+      document.head.append(link);
+    }
     if (!document.querySelector('script[data-nav-itinerary-integration]')) {
       const script = document.createElement("script");
       script.src = "navigation-itinerary-integration-20260918.js?v=20260918-3";

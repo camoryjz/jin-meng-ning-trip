@@ -28,6 +28,81 @@
     { label: "已确认预订", href: "#bookings", icon: "✓" }
   ];
 
+  const TICKET_REMINDERS = [
+    {
+      key: "yungang",
+      re: /云冈石窟/,
+      label: "9月13日起",
+      at: "2026-09-13T00:00:00+08:00",
+      action: "立即完成实名预约",
+      kind: "官方规则",
+      detail: "9月28日参观。自2026年4月15日起可提前15日（不含当日）预约；所有游客，包括政策性免票人员，都需要提前实名预约。官方公告未写固定放票钟点。"
+    },
+    {
+      key: "hanging-temple",
+      re: /悬空寺/,
+      label: "9月20日 07:20",
+      at: "2026-09-20T07:20:00+08:00",
+      action: "抢登临票",
+      kind: "官方规则",
+      detail: "9月27日参观。线上每日07:20—21:00可预订7日内登临票，数量严格限量。5人同行建议提前完成购票账号与人脸核验准备。"
+    },
+    {
+      key: "shanxi-museum",
+      re: /山西博物院/,
+      label: "9月22日 20:00",
+      at: "2026-09-22T20:00:00+08:00",
+      action: "抢免费预约",
+      kind: "官方规则",
+      detail: "9月25日参观。新版预约系统在参观日前3天20:00放票；如果首轮未约到，参观当日08:00还有一轮预约机会。"
+    },
+    {
+      key: "inner-mongolia-museum",
+      re: /内蒙古博物院/,
+      label: "9月23日 20:00",
+      at: "2026-09-23T20:00:00+08:00",
+      action: "预约9月30日入馆",
+      kind: "官方规则",
+      detail: "可提前7日预约；公开的2026预约规则显示每日20:00开放第七日名额。通过官网、微信公众号或“云游内博”小程序办理。"
+    },
+    {
+      key: "iron-flower",
+      re: /打铁花|忻州古城/,
+      label: "现在起有票就锁",
+      at: "2026-09-18T00:00:00+08:00",
+      action: "优先确认20:30场",
+      kind: "行程建议",
+      detail: "演出场次和售票规则以忻州古城官方当天发布为准。9月25日正值假期客流期，建议不要等到现场再决定。"
+    },
+    {
+      key: "tengger",
+      re: /腾格里|五湖|六湖|沙漠/,
+      label: "现在就确认",
+      at: "2026-09-18T00:00:00+08:00",
+      action: "锁定正规穿越运营方",
+      kind: "行程建议",
+      detail: "这不是景区固定放票时点。10月3日处于国庆高峰，建议尽快把集合点、运营车辆、司机、返程停车点和取消规则一次确认清楚。"
+    },
+    {
+      key: "xixia",
+      re: /西夏陵|西夏王陵/,
+      label: "建议9月27日前",
+      at: "2026-09-27T09:00:00+08:00",
+      action: "完成门票/预约确认",
+      kind: "行程建议",
+      detail: "10月4日参观，国庆客流较高。当前公开信息未见固定放票钟点，因此这里给出的是行程锁定建议，不作为官方放票时刻。"
+    },
+    {
+      key: "ningxia-museum",
+      re: /宁夏博物馆/,
+      label: "10月4日起",
+      at: "2026-10-04T00:00:00+08:00",
+      action: "实名预约10月7日",
+      kind: "官方规则",
+      detail: "宁夏博物馆公开规则为可提前3天在官方微信公众号实名预约，每天限量。公开公告未注明固定放票钟点，10月4日进入预约窗口后尽早处理。"
+    }
+  ];
+
   const D1_START = { name: "太原武宿国际机场T2（集合起点）", nav: "太原武宿国际机场 T2", status: "上海/南京汇合" };
   const esc = (value = "") => String(value).replace(/[&<>"']/g, (ch) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -136,28 +211,29 @@
   }
 
   function integrateStaysIntoDays() {
-    const standalone = document.querySelector("#stays-section");
-    if (standalone) {
-      standalone.hidden = true;
-      standalone.setAttribute("aria-hidden", "true");
-    }
+    document.querySelectorAll("#stays-section").forEach((section) => section.remove());
 
     document.querySelectorAll(".day-card[data-day]").forEach((card) => {
       const day = Number(card.dataset.day);
-      if (!day) return;
+      const detail = card.querySelector(":scope > .day-detail");
+      if (!day || !detail) return;
       const start = startForDay(day);
       const tonight = day <= 14 ? stayForNight(day) : null;
-      let panel = card.querySelector(":scope > .day-stay-integrated");
+
+      let panel = detail.querySelector(":scope > .day-stay-integrated");
       if (!panel) {
         panel = document.createElement("div");
         panel.className = "day-stay-integrated";
-        const toggle = card.querySelector(":scope > .day-toggle");
-        toggle?.insertAdjacentElement("afterend", panel);
+        detail.prepend(panel);
       }
       panel.innerHTML = `${stayRow(day === 1 ? "今日集合起点" : "今日起点 · 昨晚住宿", start, "is-start")}${stayRow("今晚住宿", tonight, "is-night")}`;
 
       const routeDetails = card.querySelector(":scope > .daily-route-topper");
-      const list = routeDetails?.querySelector(".daily-route-stops");
+      if (routeDetails && routeDetails.parentElement !== detail) {
+        panel.insertAdjacentElement("afterend", routeDetails);
+      }
+
+      const list = detail.querySelector(".daily-route-stops");
       if (list && start && !list.querySelector(".day-stay-route-start")) {
         const li = document.createElement("li");
         li.className = "daily-route-stop day-stay-route-start";
@@ -168,12 +244,112 @@
           <div class="daily-route-stop__actions"><button type="button" data-stay-amap="${esc(start.nav)}">高德导航</button><button type="button" data-stay-baidu="${esc(start.nav)}">百度导航</button></div>`;
         list.prepend(li);
       }
-      const routeNote = routeDetails?.querySelector(".daily-route-note");
+      const routeNote = detail.querySelector(".daily-route-note");
       if (routeNote && !routeNote.dataset.stayStartNote) {
         routeNote.dataset.stayStartNote = "1";
-        routeNote.textContent = `今日路线起点按${day === 1 ? "机场集合点" : "昨晚住宿酒店"}显示；出发时先从该起点导航至第1站。${routeNote.textContent}`;
+        routeNote.textContent = `今日路线从${day === 1 ? "机场集合点" : "昨晚住宿酒店"}开始。${routeNote.textContent}`;
       }
     });
+  }
+
+  function reminderState(reminder) {
+    const target = new Date(reminder.at).getTime();
+    const now = Date.now();
+    if (!Number.isFinite(target)) return "请尽快处理";
+    if (now >= target) return reminder.kind === "官方规则" ? "窗口已开放" : "建议现在处理";
+    const days = Math.floor((target - now) / 86400000);
+    const hours = Math.floor(((target - now) % 86400000) / 3600000);
+    if (days > 0) return `${days}天后提醒`;
+    if (hours > 0) return `${hours}小时后提醒`;
+    return "即将开始";
+  }
+
+  function reminderMarkup(reminder, compact = false) {
+    return `
+      <div class="ticket-order-reminder${compact ? " is-compact" : ""}" data-reminder-key="${esc(reminder.key)}">
+        <div class="ticket-order-reminder__time"><span>${esc(reminder.label)}</span><small>${esc(reminderState(reminder))}</small></div>
+        <div class="ticket-order-reminder__copy"><strong>${esc(reminder.action)}</strong>${compact ? "" : `<p>${esc(reminder.detail)}</p>`}</div>
+        <em class="ticket-order-reminder__kind">${esc(reminder.kind)}</em>
+      </div>`;
+  }
+
+  function enhanceReservations() {
+    const section = document.querySelector("#reservations");
+    if (!section) return;
+    const cards = [...section.querySelectorAll(".booking-card")];
+    const matched = [];
+
+    cards.forEach((card) => {
+      const text = card.textContent || "";
+      const reminder = TICKET_REMINDERS.find((item) => item.re.test(text));
+      card.classList.add("reservation-card--timed");
+      card.querySelectorAll(":scope > .ticket-order-reminder").forEach((node) => node.remove());
+      if (!reminder) return;
+      matched.push(reminder);
+      card.insertAdjacentHTML("beforeend", reminderMarkup(reminder));
+    });
+
+    let board = section.querySelector(".reservation-reminder-board");
+    if (!board) {
+      board = document.createElement("div");
+      board.className = "reservation-reminder-board";
+      const heading = section.querySelector(".section-heading");
+      heading?.insertAdjacentElement("afterend", board);
+    }
+
+    const seen = new Set();
+    const reminders = matched.filter((item) => !seen.has(item.key) && seen.add(item.key));
+    const ordered = reminders.sort((a, b) => {
+      const aOpen = Date.now() >= new Date(a.at).getTime() ? 0 : 1;
+      const bOpen = Date.now() >= new Date(b.at).getTime() ? 0 : 1;
+      if (aOpen !== bOpen) return aOpen - bOpen;
+      return new Date(a.at) - new Date(b.at);
+    });
+    board.innerHTML = `
+      <div class="reservation-reminder-board__head"><div><span>下单 / 抢票提醒</span><strong>先看时间，再处理门票</strong></div><small>按2026-09-18前可核实的公开规则整理；官方临时调整优先</small></div>
+      <div class="reservation-reminder-board__grid">${ordered.slice(0, 4).map((item) => reminderMarkup(item, true)).join("")}</div>`;
+  }
+
+  function compactConfirmedBookings() {
+    const section = document.querySelector("#bookings");
+    if (!section || !/已确认预订/.test(section.querySelector("h2")?.textContent || "")) return;
+
+    const cards = [...section.querySelectorAll(".booking-card")];
+    let flightCount = 0;
+    let rentalCount = 0;
+    cards.forEach((card) => {
+      const type = card.querySelector(".booking-card__top span")?.textContent?.trim() || "";
+      card.classList.add("booking-card--compact");
+      if (/酒店/.test(type)) {
+        card.hidden = true;
+        card.setAttribute("aria-hidden", "true");
+      } else {
+        card.hidden = false;
+        card.removeAttribute("aria-hidden");
+        if (/机票|航班/.test(type)) flightCount += 1;
+        if (/租车/.test(type)) rentalCount += 1;
+      }
+    });
+
+    let summary = section.querySelector(".confirmed-booking-summary");
+    if (!summary) {
+      summary = document.createElement("div");
+      summary.className = "confirmed-booking-summary";
+      section.querySelector(".section-heading")?.insertAdjacentElement("afterend", summary);
+    }
+    const confirmedNights = STAYS.filter((item) => item.status.startsWith("已确认")).length;
+    const pendingNights = STAYS.filter((item) => item.status === "确认中").length;
+    const openNights = STAYS.filter((item) => item.status === "待订").length;
+    summary.innerHTML = `
+      <div><span>交通</span><strong>${flightCount || 1}项航班已确认 · ${rentalCount || 1}项租车已确认</strong></div>
+      <div><span>住宿</span><strong>${confirmedNights}晚已确认 · ${pendingNights}晚确认中 · ${openNights}晚待订</strong><small>酒店详细信息统一放在每日行程展开后查看</small></div>
+      <div class="confirmed-booking-summary__pending"><span>待出票</span><strong>南京 MU2909</strong><small>当前仅为已选航班，不计入“已确认”</small></div>`;
+
+    const selected = document.querySelector("#selected-transport");
+    if (selected) {
+      selected.hidden = true;
+      selected.setAttribute("aria-hidden", "true");
+    }
   }
 
   function reorderCoreSections() {
@@ -204,8 +380,10 @@
     splitTodoAndPrep();
     rebuildMenu();
     integrateStaysIntoDays();
+    enhanceReservations();
+    compactConfirmedBookings();
     reorderCoreSections();
-    document.documentElement.dataset.smartTravelNav = "1";
+    document.documentElement.dataset.smartTravelNav = "2";
   }
 
   document.addEventListener("toggle", (event) => {

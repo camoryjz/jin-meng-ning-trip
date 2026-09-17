@@ -1,0 +1,348 @@
+/* 2026-09-18 readability refresh: fresh palette, clearer navigation, visible Trip Mode */
+:root {
+  --paper: #f7fbfa;
+  --surface: #ffffff;
+  --ink: #17372f;
+  --muted: #627970;
+  --line: #d7e8e2;
+  --lake: #178a78;
+  --lake-soft: #e8f6f2;
+  --forest: #3f7d64;
+  --terracotta: #d66f57;
+  --warning: #c65b4b;
+  --shadow: 0 14px 38px rgba(32, 78, 66, .09);
+}
+
+/* Avoid an automatic night skin making the handbook harder to read. Manual dark theme still works. */
+html[data-trip-theme="night"]:not([data-theme="dark"]) {
+  color-scheme: light;
+  --terminal-bg: #f7fbfa;
+  --terminal-surface: rgba(255,255,255,.95);
+  --terminal-surface-strong: #ffffff;
+  --terminal-text: #17372f;
+  --terminal-muted: #627970;
+  --terminal-line: #d7e8e2;
+  --terminal-accent: #178a78;
+  --terminal-accent-soft: #e8f6f2;
+  --terminal-warn: #a86a18;
+  --terminal-warn-soft: #fff6df;
+  --terminal-danger: #ba574c;
+  --terminal-danger-soft: #fff0ed;
+  --terminal-ok: #35755c;
+  --terminal-ok-soft: #ecf7f1;
+}
+html[data-trip-theme="night"]:not([data-theme="dark"]) body {
+  color: var(--ink);
+  background: #f7fbfa;
+}
+html[data-trip-theme="night"]:not([data-theme="dark"]) .topbar {
+  background: rgba(250,253,252,.96);
+  border-color: #dceae5;
+}
+
+:root[data-theme="dark"] {
+  --paper: #10201b;
+  --surface: #173029;
+  --ink: #f2faf7;
+  --muted: #bdd0c8;
+  --line: #35554a;
+  --lake: #71d3bb;
+  --lake-soft: #1b4037;
+  --forest: #91c9ae;
+  --terracotta: #f09b83;
+  --warning: #ffad93;
+  --shadow: 0 16px 42px rgba(0,0,0,.28);
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% -10%, rgba(88, 199, 168, .10), transparent 28%),
+    linear-gradient(180deg, #fbfefd 0%, var(--paper) 38%, #f3f9f6 100%);
+}
+
+/* Header: Trip Mode is left, handbook controls are clearly visible on the right. */
+.topbar {
+  min-height: calc(66px + var(--safe-top));
+  height: auto;
+  padding: var(--safe-top) 14px 0;
+  display: grid;
+  grid-template-columns: auto minmax(74px, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid #dceae5;
+  background: rgba(250,253,252,.94);
+  box-shadow: 0 8px 24px rgba(35, 78, 67, .05);
+  overflow: visible;
+}
+.wordmark {
+  justify-self: center;
+  min-width: 0;
+  color: #527068;
+  white-space: nowrap;
+}
+.primary-navigation {
+  justify-self: end;
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  gap: 7px !important;
+}
+
+.trip-mode-launch.trip-mode-launch--topbar {
+  position: static !important;
+  inset: auto !important;
+  z-index: auto;
+  min-height: 42px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #b9ddd3;
+  border-radius: 14px;
+  color: #106d5e;
+  background: #e8f7f3;
+  box-shadow: 0 6px 18px rgba(23,138,120,.10);
+  font-size: 12px;
+  font-weight: 820;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+.trip-mode-launch.trip-mode-launch--topbar:hover,
+.trip-mode-launch.trip-mode-launch--topbar:focus-visible {
+  border-color: #80c5b5;
+  background: #dcf3ed;
+  outline: none;
+}
+.trip-mode-launch__icon { font-size: 14px; line-height: 1; }
+
+.travel-navigation {
+  position: relative;
+  overflow: visible;
+}
+#travel-navigation-trigger {
+  min-height: 44px;
+  min-width: 112px;
+  padding: 7px 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 7px;
+  align-items: center;
+  list-style: none;
+  border: 1px solid #cfe2dc;
+  border-radius: 14px;
+  color: #17372f;
+  background: #fff;
+  box-shadow: 0 7px 20px rgba(34, 83, 70, .08);
+  cursor: pointer;
+}
+#travel-navigation-trigger::-webkit-details-marker { display: none; }
+.nav-summary-main { grid-column: 1; font-size: 12px; font-weight: 820; line-height: 1.15; }
+.nav-summary-sub { grid-column: 1; color: #6b8179; font-size: 9px; font-weight: 700; line-height: 1.15; }
+.nav-summary-chevron { grid-column: 2; grid-row: 1 / span 2; color: #178a78; font-size: 12px; transition: transform .18s ease; }
+.travel-navigation[open] .nav-summary-chevron { transform: rotate(180deg); }
+
+.travel-navigation-menu {
+  position: absolute;
+  top: calc(100% + 9px);
+  right: 0;
+  z-index: 80;
+  width: min(300px, calc(100vw - 28px));
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 8px;
+  border: 1px solid #cfe2dc;
+  border-radius: 18px;
+  color: #17372f;
+  background: rgba(255,255,255,.985);
+  box-shadow: 0 22px 58px rgba(30, 72, 61, .20);
+  backdrop-filter: blur(18px);
+}
+.travel-navigation-menu__intro {
+  grid-column: 1 / -1;
+  padding: 5px 6px 9px;
+  border-bottom: 1px solid #e3eee9;
+}
+.travel-navigation-menu__intro strong { display: block; font-size: 13px; }
+.travel-navigation-menu__intro small { display: block; margin-top: 3px; color: #70847d; font-size: 10px; }
+.topbar .travel-navigation-menu a {
+  min-height: 48px;
+  padding: 0 11px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  border: 1px solid #e0ece8;
+  border-radius: 12px;
+  color: #294a41;
+  background: #f8fcfa;
+  font-size: 12px;
+  font-weight: 780;
+}
+.topbar .travel-navigation-menu a::before {
+  width: 21px;
+  height: 21px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  color: #147565;
+  background: #e4f4ef;
+  font-size: 11px;
+  content: "·";
+}
+.topbar .travel-navigation-menu a[data-module="flights"]::before { content: "✓"; }
+.topbar .travel-navigation-menu a[data-module="overview"]::before { content: "⌖"; }
+.topbar .travel-navigation-menu a[data-module="itinerary"]::before { content: "日"; }
+.topbar .travel-navigation-menu a[data-module="driving"]::before { content: "i"; }
+.topbar .travel-navigation-menu a[data-module="todo"]::before { content: "□"; }
+.topbar .travel-navigation-menu a:hover,
+.topbar .travel-navigation-menu a:focus-visible {
+  border-color: #a9d2c7;
+  background: #edf8f4;
+  outline: none;
+}
+#ledger-navigation-link {
+  min-height: 44px;
+  padding-inline: 10px !important;
+  border: 1px solid #d9e6e2;
+  border-radius: 12px;
+  color: #5a7169 !important;
+  background: #fff;
+}
+
+/* Fresh, light cover instead of a low-contrast dark block. */
+.cover-hero {
+  min-height: 300px;
+  color: #17372f;
+  background:
+    radial-gradient(circle at 85% 12%, rgba(255, 197, 118, .28), transparent 28%),
+    radial-gradient(circle at 14% 15%, rgba(85, 197, 169, .20), transparent 32%),
+    linear-gradient(145deg, #f8fdfb 0%, #eaf7f3 58%, #fff8ec 100%);
+  border-bottom: 1px solid #d7e8e2;
+}
+.cover-hero .hero__eyebrow { color: #418274; }
+.cover-hero h1 { color: #153b32; text-shadow: none; }
+.cover-meta span {
+  border-color: #cfe2dc;
+  color: #49685f;
+  background: rgba(255,255,255,.72);
+}
+.cover-focus-section {
+  color: #17372f;
+  background: #eef8f4;
+  border-bottom-color: #d7e8e2;
+}
+.cover-focus-heading h2 { color: #17372f; }
+.cover-focus-heading span { color: #748a82; }
+.cover-focus-card {
+  border-color: #cfe2dc;
+  background: rgba(255,255,255,.91);
+  box-shadow: 0 18px 45px rgba(32, 78, 66, .09);
+}
+.cover-focus-copy small { color: #668077; }
+.cover-focus-copy strong { color: #17372f; }
+.cover-focus-copy time { color: #627970; }
+.cover-live-clock { color: #6c8179; }
+#enh-theme-toggle {
+  border-color: #c7ded6;
+  color: #196d60;
+  background: #f5fbf9;
+}
+.cover-countdown-unit { background: #e7f5f1; }
+.cover-countdown-unit strong { color: #165f53; }
+.cover-countdown-unit span { color: #668077; }
+.cover-alert {
+  border-left-color: #e8946e;
+  color: #795848;
+  background: #fff7ed;
+}
+
+/* Improve hierarchy and reading contrast in the long itinerary. */
+.section-heading h2 { color: #17372f; }
+.section-kicker { color: #178a78; }
+.soft-label, .section-index { color: #70847d; }
+.day-card + .day-card { margin-top: 11px; }
+.day-toggle {
+  padding: 15px 14px;
+  border: 1px solid #d9e8e3;
+  border-radius: 16px;
+  color: #17372f;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(34,83,70,.045);
+}
+.day-toggle[aria-expanded="true"] {
+  border-color: #9fcfc3;
+  background: #fbfefd;
+  box-shadow: 0 10px 26px rgba(23,138,120,.09);
+}
+.day-title { color: #17372f; }
+.day-locations { color: #61776f; }
+.day-meta { color: #178a78; }
+.day-detail { padding: 16px 10px 26px; }
+.schedule-text { color: #29463e; }
+.schedule-time { color: #6c827a; }
+.schedule-map-link,
+.schedule-guide-name { border-color: #bddbd2 !important; color: #146c5d !important; background: #edf8f4 !important; }
+.booking-card,
+.tip-card,
+.stay-panel,
+.day-route-panel,
+.tm-stops article,
+.tm-advice article,
+.tm-ledger { box-shadow: 0 7px 22px rgba(34,83,70,.045); }
+
+/* Field-guide dialog: brighter and clearer. */
+.field-guide-dialog,
+.place-guide-dialog {
+  border: 1px solid #cfe2dc !important;
+  background: #ffffff !important;
+  color: #17372f !important;
+}
+.field-guide-head,
+.place-guide-head { background: #f2faf7 !important; }
+.field-guide-route-card,
+.place-guide-why { background: #eef8f4 !important; }
+.field-guide-stop-loss,
+.place-guide-tips { background: #fff7eb !important; }
+
+/* Explicit dark theme remains available, but with higher contrast. */
+:root[data-theme="dark"] body { background: #10201b; color: #f2faf7; }
+:root[data-theme="dark"] .topbar { background: rgba(16,32,27,.96); border-color: #35554a; }
+:root[data-theme="dark"] .trip-mode-launch.trip-mode-launch--topbar { color: #dff9f1; background: #1c4b40; border-color: #3c7e6d; }
+:root[data-theme="dark"] #travel-navigation-trigger,
+:root[data-theme="dark"] #ledger-navigation-link,
+:root[data-theme="dark"] .travel-navigation-menu,
+:root[data-theme="dark"] .topbar .travel-navigation-menu a,
+:root[data-theme="dark"] .day-toggle,
+:root[data-theme="dark"] .field-guide-dialog,
+:root[data-theme="dark"] .place-guide-dialog { color: #f2faf7 !important; background: #173029 !important; border-color: #35554a !important; }
+:root[data-theme="dark"] .cover-hero { color: #f2faf7; background: linear-gradient(145deg,#132b24,#193b32 58%,#3b3020); border-color:#35554a; }
+:root[data-theme="dark"] .cover-hero h1,
+:root[data-theme="dark"] .cover-focus-heading h2,
+:root[data-theme="dark"] .cover-focus-copy strong,
+:root[data-theme="dark"] .section-heading h2,
+:root[data-theme="dark"] .day-title { color: #f2faf7; }
+:root[data-theme="dark"] .cover-focus-section { background:#142921; border-color:#35554a; }
+:root[data-theme="dark"] .cover-focus-card { background:#173029; border-color:#35554a; }
+:root[data-theme="dark"] .cover-countdown-unit { background:#1b4037; }
+:root[data-theme="dark"] .cover-countdown-unit strong { color:#89e0ca; }
+:root[data-theme="dark"] .schedule-text { color:#e6f3ee; }
+
+@media (max-width: 700px) {
+  .topbar {
+    min-height: calc(62px + var(--safe-top));
+    grid-template-columns: auto 1fr auto;
+    gap: 6px;
+    padding-inline: 8px;
+  }
+  .trip-mode-launch.trip-mode-launch--topbar { min-height: 40px; padding: 0 10px; border-radius: 12px; font-size: 11px; }
+  .wordmark { font-size: 9px; letter-spacing: .03em; }
+  #travel-navigation-trigger { min-width: 96px; min-height: 40px; padding: 6px 9px; border-radius: 12px; }
+  .nav-summary-main { font-size: 11px; }
+  .nav-summary-sub { font-size: 8px; }
+  #ledger-navigation-link { display: none !important; }
+  .travel-navigation-menu { width: min(286px, calc(100vw - 16px)); right: 0; }
+  .cover-hero { min-height: 265px; padding-top: 34px; }
+  .cover-focus-section { padding-top: 25px; }
+  .day-toggle { padding: 14px 12px; }
+}

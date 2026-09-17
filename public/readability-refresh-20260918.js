@@ -16,11 +16,25 @@
       link.dataset.responsivePolish = "1";
       document.head.append(link);
     }
+    if (!document.querySelector('link[data-itinerary-ux-fix]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "itinerary-mobile-desktop-fix-20260918.css?v=20260918-1";
+      link.dataset.itineraryUxFix = "1";
+      document.head.append(link);
+    }
     if (!document.querySelector('script[data-nav-itinerary-integration]')) {
       const script = document.createElement("script");
       script.src = "navigation-itinerary-integration-20260918.js?v=20260918-3";
       script.defer = true;
       script.dataset.navItineraryIntegration = "1";
+      document.head.append(script);
+    }
+    if (!document.querySelector('script[data-itinerary-ux-fix]')) {
+      const script = document.createElement("script");
+      script.src = "itinerary-mobile-desktop-fix-20260918.js?v=20260918-1";
+      script.defer = true;
+      script.dataset.itineraryUxFix = "1";
       document.head.append(script);
     }
   }

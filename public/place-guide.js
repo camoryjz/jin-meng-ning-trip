@@ -228,6 +228,8 @@
     }
   ];
 
+  window.JMN_PLACE_GUIDES = GUIDES;
+
   const normalize = (value = "") => String(value)
     .replace(/[·•・]/g, "")
     .replace(/[（）()\s]/g, "")

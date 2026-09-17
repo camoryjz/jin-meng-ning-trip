@@ -89,6 +89,7 @@
       Object.keys(ROUTES).map(d=>'<button data-offline-day="'+d+'" aria-pressed="'+(Number(d)===day)+'">D'+d+'</button>').join("")+
       '</div><button class="offline-map-all" data-offline-all aria-pressed="'+view.all+'">'+(view.all?'收起全部地点':'显示全部地点')+'</button></div>'+
       '<div class="offline-overview-shell '+(day?'is-day-zoom':'')+'">'+mapSvg(ids,day,false)+'</div>'+
+      (day?'<div class="offline-day-sequence" aria-label="D'+day+'路线顺序">'+ids.map((id,index)=>'<span><b>'+(index+1)+'</b>'+esc(POINTS[id]?.name||id)+'</span>').join('<i>→</i>')+'</div>':'')+
       '<div class="offline-map-legend"><span>● 主要地标</span><span class="hotel">● 酒店</span><span class="transport">● 机场/交通</span><small>'+(day?'D'+day+'：只显示当天完整路线，并自动放大':view.all?'显示全部路线与景点':'默认只显示机场、酒店和主要地标')+'</small></div>'+
       '<p class="offline-map-source">离线底图已内嵌；标点使用固定经纬度和 Web Mercator 投影。地图展示运行时零外部瓦片请求，只有点击导航后才会打开高德/百度。</p>';
   }

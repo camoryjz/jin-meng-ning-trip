@@ -1,6 +1,23 @@
 (() => {
   "use strict";
 
+  function loadNavigationIntegration() {
+    if (!document.querySelector('link[data-nav-itinerary-integration]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "navigation-itinerary-integration-20260918.css?v=20260918-2";
+      link.dataset.navItineraryIntegration = "1";
+      document.head.append(link);
+    }
+    if (!document.querySelector('script[data-nav-itinerary-integration]')) {
+      const script = document.createElement("script");
+      script.src = "navigation-itinerary-integration-20260918.js?v=20260918-2";
+      script.defer = true;
+      script.dataset.navItineraryIntegration = "1";
+      document.head.append(script);
+    }
+  }
+
   function setThemeColor() {
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute("content", "#f7fbfa");
@@ -61,12 +78,14 @@
   }
 
   function apply() {
+    loadNavigationIntegration();
     setThemeColor();
     promoteTripMode();
     improveHandbookMenu();
     keepLayoutClear();
   }
 
+  loadNavigationIntegration();
   [0, 80, 220, 500, 1000, 1800, 3200].forEach((delay) => window.setTimeout(apply, delay));
   document.addEventListener("travel-data-ready", apply);
   window.addEventListener("travel-view:shown", apply);

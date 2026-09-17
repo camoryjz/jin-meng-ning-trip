@@ -121,6 +121,16 @@
     const nightHotel = tonight ? routeHotelRow(tonight, "night") : "";
     const count = (startHotel ? 1 : 0) + (nightHotel ? 1 : 0) + [...source.querySelectorAll(".daily-route-stop[data-route-stop]")].filter((row) => !CITY_ROUTE_IDS.has(row.dataset.routeStop || "")).length;
 
+    let quick = detail.querySelector(":scope > .daily-route-quicknav");
+    if (!quick) {
+      quick = document.createElement("div");
+      quick.className = "daily-route-quicknav";
+    }
+    const sourceActions = source.querySelector(".daily-route-actions");
+    quick.innerHTML = `
+      <div class="daily-route-quicknav__copy"><strong>一键多点导航</strong><small>按全天路线顺序交给地图App，途中仍以实时路况为准</small></div>
+      ${sourceActions ? sourceActions.outerHTML : ""}`;
+
     let inline = detail.querySelector(":scope > .daily-route-inline");
     if (!inline) {
       inline = document.createElement("details");
@@ -133,9 +143,13 @@
         <ol class="daily-route-stops">${startHotel}${attractionRows}${nightHotel}</ol>
       </div>`;
 
-    const photoAnchor = [...detail.children].find((node) => node !== inline && /摄影提示/.test(node.textContent || ""));
-    if (photoAnchor) detail.insertBefore(inline, photoAnchor);
-    else detail.append(inline);
+    const photoAnchor = [...detail.children].find((node) => node !== inline && node !== quick && /摄影提示/.test(node.textContent || ""));
+    if (photoAnchor) {
+      detail.insertBefore(quick, photoAnchor);
+      detail.insertBefore(inline, photoAnchor);
+    } else {
+      detail.append(quick, inline);
+    }
   }
 
   function normalizeTimes(card) {

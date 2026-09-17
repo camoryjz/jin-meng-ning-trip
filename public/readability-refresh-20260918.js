@@ -32,7 +32,7 @@
     }
     if (!document.querySelector('script[data-itinerary-ux-fix]')) {
       const script = document.createElement("script");
-      script.src = "itinerary-mobile-desktop-fix-20260918.js?v=20260918-3";
+      script.src = "itinerary-mobile-desktop-fix-20260918.js?v=20260918-4";
       script.defer = true;
       script.dataset.itineraryUxFix = "1";
       document.head.append(script);

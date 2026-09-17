@@ -134,8 +134,12 @@
   function apply(data) {
     if (!data || typeof data !== "object") return;
 
-    upsert(data.places ||= [], SHAPOTOU);
-    upsert(data.map?.places ||= [], { ...SHAPOTOU, countryCode: "CN" });
+    data.places ||= [];
+    upsert(data.places, SHAPOTOU);
+    if (data.map) {
+      data.map.places ||= [];
+      upsert(data.map.places, { ...SHAPOTOU, countryCode: "CN" });
+    }
 
     replaceDay(data, DAY13);
     replaceDay(data, DAY14);

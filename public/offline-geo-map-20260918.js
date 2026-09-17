@@ -63,44 +63,76 @@
       '<div class="offline-place-nav"><a href="https://uri.amap.com/search?keyword='+encodeURIComponent(p.keyword)+'&callnative=1" target="_blank" rel="noopener">高德导航 ↗</a><a href="https://map.baidu.com/search/'+encodeURIComponent(p.keyword)+'" target="_blank" rel="noopener">百度导航 ↗</a></div>';
     d.showModal?.();
   }
-  function markerLayer(ids){
-    return '<g class="offline-markers">'+ids.map(id=>{
+  function markerLayer(ids, numbered=false){
+    const seen=new Map();
+    return '<g class="offline-markers">'+ids.map((id,index)=>{
       const p=POINTS[id];if(!p)return"";
-      const m=merc(p.lng,p.lat);
+      const base=merc(p.lng,p.lat);
+      const occurrence=seen.get(id)||0;seen.set(id,occurrence+1);
+      const shift=numbered&&occurrence ? occurrence*10 : 0;
+      const x=base.x+shift,y=base.y-shift;
       const cls=/酒店/.test(p.category)?"hotel":/机场|车站/.test(p.category)?"transport":"poi";
-      return '<g class="offline-marker '+cls+'" data-offline-point="'+id+'" transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')" tabindex="0" role="button" aria-label="'+esc(p.name)+'"><circle r="'+(p.major?7:5)+'"/><text x="10" y="-8">'+esc(p.name)+'</text></g>';
+      const inner=numbered
+        ? '<circle r="10"/><text class="offline-marker-number" x="0" y="3.5" text-anchor="middle">'+(index+1)+'</text>'
+        : '<circle r="'+(p.major?7:5)+'"/><text class="offline-marker-label" x="10" y="-8">'+esc(p.name)+'</text>';
+      return '<g class="offline-marker '+cls+'" data-offline-point="'+id+'" transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+')" tabindex="0" role="button" aria-label="'+(index+1)+'. '+esc(p.name)+'">'+inner+'</g>';
     }).join("")+'</g>';
   }
   function routeLayer(day){
     const days=day?[day]:Object.keys(ROUTES).map(Number);
     return '<g class="offline-routes">'+days.map(d=>'<path class="route-day route-day-'+d+'" d="'+lineFor(ROUTES[d])+'" data-day="'+d+'"/>').join("")+'</g>';
   }
+  function localGrid(vb){
+    const cols=6,rows=4;
+    let out='<g class="offline-local-grid">';
+    for(let i=1;i<cols;i++){const x=vb.x+vb.w*i/cols;out+='<line x1="'+x+'" y1="'+vb.y+'" x2="'+x+'" y2="'+(vb.y+vb.h)+'"/>';}
+    for(let i=1;i<rows;i++){const y=vb.y+vb.h*i/rows;out+='<line x1="'+vb.x+'" y1="'+y+'" x2="'+(vb.x+vb.w)+'" y2="'+y+'"/>';}
+    return out+'</g><text class="offline-north" x="'+(vb.x+vb.w-24)+'" y="'+(vb.y+30)+'">N ↑</text>';
+  }
   function mapSvg(ids,day,mini){
     const vb=day?boundsFor(ids):{x:0,y:0,w:B.width,h:B.height};
+    const dayBase=day?'<rect class="offline-local-bg" x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'"/>'+localGrid(vb):'<image href="'+basemap+'" x="0" y="0" width="'+B.width+'" height="'+B.height+'" preserveAspectRatio="none"/>';
     return '<svg class="'+(mini?'offline-mini-svg':'offline-overview-svg')+'" viewBox="'+vb.x+' '+vb.y+' '+vb.w+' '+vb.h+'" role="img" aria-label="'+(day?'第'+day+'天完整路线':'晋蒙宁15天行程总览')+'">'+
-      '<image href="'+basemap+'" x="0" y="0" width="'+B.width+'" height="'+B.height+'" preserveAspectRatio="none"/>'+routeLayer(day)+markerLayer(ids)+'</svg>';
+      dayBase+routeLayer(day)+markerLayer(ids,Boolean(day))+'</svg>';
+  }
+  function dayPointList(ids){
+    return '<div class="offline-day-points">'+ids.map((id,index)=>{
+      const p=POINTS[id];if(!p)return"";
+      return '<button type="button" data-offline-point="'+id+'"><b>'+(index+1)+'</b><span><strong>'+esc(p.name)+'</strong><small>'+esc(p.category)+' · 点击查看介绍</small></span><i>›</i></button>';
+    }).join("")+'</div>';
   }
   function renderOverview(){
     const root=document.querySelector("#route-explorer");if(!root)return;
     const day=view.day;
     const ids=day?(ROUTES[day]||[]):view.all?[...new Set(Object.values(ROUTES).flat())]:Object.keys(POINTS).filter(id=>POINTS[id].major);
+    const mapContent=day
+      ? '<div class="offline-day-map-layout"><div class="offline-day-map-canvas">'+mapSvg(ids,day,false)+'</div><aside><div class="offline-day-map-title"><small>D'+day+' · '+ids.length+'站</small><strong>当天完整路线</strong><span>编号与地图圆点一致；点击地点查看介绍</span></div>'+dayPointList(ids)+'</aside></div>'
+      : mapSvg(ids,0,false);
     root.innerHTML=
       '<div class="offline-map-toolbar"><div class="offline-map-days"><button data-offline-day="0" aria-pressed="'+(!day)+'">总览</button>'+
       Object.keys(ROUTES).map(d=>'<button data-offline-day="'+d+'" aria-pressed="'+(Number(d)===day)+'">D'+d+'</button>').join("")+
       '</div><button class="offline-map-all" data-offline-all aria-pressed="'+view.all+'">'+(view.all?'收起全部地点':'显示全部地点')+'</button></div>'+
-      '<div class="offline-overview-shell '+(day?'is-day-zoom':'')+'">'+mapSvg(ids,day,false)+'</div>'+
-      (day?'<div class="offline-day-sequence" aria-label="D'+day+'路线顺序">'+ids.map((id,index)=>'<span><b>'+(index+1)+'</b>'+esc(POINTS[id]?.name||id)+'</span>').join('<i>→</i>')+'</div>':'')+
-      '<div class="offline-map-legend"><span>● 主要地标</span><span class="hotel">● 酒店</span><span class="transport">● 机场/交通</span><small>'+(day?'D'+day+'：只显示当天完整路线，并自动放大':view.all?'显示全部路线与景点':'默认只显示机场、酒店和主要地标')+'</small></div>'+
+      '<div class="offline-overview-shell '+(day?'is-day-zoom':'')+'">'+mapContent+'</div>'+
+      '<div class="offline-map-legend"><span>● 主要地标</span><span class="hotel">● 酒店</span><span class="transport">● 机场/交通</span><small>'+(day?'D'+day+'：真实方位放大视图 · 编号表示行程顺序':view.all?'显示全部路线与景点':'默认只显示机场、酒店和主要地标')+'</small></div>'+
       '<p class="offline-map-source">离线底图已内嵌；标点使用固定经纬度和 Web Mercator 投影。地图展示运行时零外部瓦片请求，只有点击导航后才会打开高德/百度。</p>';
+  }
+  function miniMarkup(day){
+    const ids=ROUTES[day]||[];
+    if(!ids.length)return "";
+    return '<div class="offline-daily-mini-map"><div class="offline-daily-mini-head"><strong>D'+day+' 当天小地图</strong><span>真实方位 · 编号即顺序</span></div><div class="offline-mini-canvas">'+mapSvg(ids,day,true)+'</div><div class="offline-mini-sequence">'+ids.map((id,index)=>'<button type="button" data-offline-point="'+id+'"><b>'+(index+1)+'</b>'+esc(POINTS[id]?.name||id)+'</button>').join("")+'</div></div>';
+  }
+  function hydrateDay(day,root){
+    const host=root?.querySelector?.('.offline-daily-mini-map-host')||document.querySelector('.day-card[data-day="'+day+'"] .offline-daily-mini-map-host');
+    if(!host)return;
+    host.innerHTML=miniMarkup(day);
   }
   function enhanceDailyMaps(){
     document.querySelectorAll(".day-card[data-day]").forEach(card=>{
       const day=Number(card.dataset.day),ids=ROUTES[day];if(!ids)return;
       const body=card.querySelector(".daily-route-inline__body");if(!body)return;
-      body.querySelector(".offline-daily-mini-map")?.remove();
-      const box=document.createElement("div");box.className="offline-daily-mini-map";
-      box.innerHTML='<div class="offline-daily-mini-head"><strong>D'+day+' 当天小地图</strong><span>Web Mercator · 离线</span></div>'+mapSvg(ids,day,true);
-      body.prepend(box);
+      let host=body.querySelector(".offline-daily-mini-map-host");
+      if(!host){host=document.createElement("div");host.className="offline-daily-mini-map-host";host.dataset.offlineMiniDay=day;body.prepend(host);}
+      host.innerHTML=miniMarkup(day);
     });
   }
   function enhanceLegCapsules(){
@@ -117,7 +149,8 @@
       });
     });
   }
-  function apply(){renderOverview();enhanceDailyMaps();enhanceLegCapsules();document.documentElement.dataset.offlineGeoMap="1";}
+  window.JMN_OFFLINE_MAP_API={miniMarkup,hydrateDay,openPoint,renderOverview};
+    function apply(){renderOverview();enhanceDailyMaps();enhanceLegCapsules();document.documentElement.dataset.offlineGeoMap="1";}
   document.addEventListener("click",e=>{
     const dayBtn=e.target.closest("[data-offline-day]");
     if(dayBtn){view.day=Number(dayBtn.dataset.offlineDay);view.all=false;renderOverview();return;}

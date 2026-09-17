@@ -84,6 +84,28 @@
 .tm-route b { width:26px; height:26px; display:grid; place-items:center; border-radius:50%; color:white; background:var(--lake); font-size:10px; }
 .tm-route span { font-size:12px; font-weight:700; }
 .tm-route a { min-height:30px; padding:0 8px; display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:9px; text-decoration:none; font-size:10px; }
+.tm-live-note { margin:0 0 10px; padding:9px 10px; border:1px solid var(--line); border-radius:12px; color:var(--muted); background:var(--surface); font-size:10px; line-height:1.55; }
+.tm-main-schedule { margin:0; padding:0; list-style:none; }
+.tm-main-schedule .schedule-item { padding-left:74px; padding-bottom:18px; }
+.tm-main-schedule .schedule-time { width:56px; font-size:10px; }
+.tm-main-schedule .schedule-item::before { left:63px; }
+.tm-main-schedule .schedule-item::after { left:59px; }
+.tm-main-schedule .schedule-text { font-size:12px; }
+.tm-main-schedule .schedule-map-links { gap:5px; }
+.tm-main-schedule .schedule-map-link { min-height:32px; }
+.tm-live-route .daily-route-quicknav { margin:0 0 10px !important; }
+.tm-live-route .daily-route-inline { margin:0 !important; }
+.tm-live-route .daily-route-actions { grid-template-columns:1fr !important; }
+.tm-live-route .daily-route-stops { margin:0; padding:0; }
+.tm-live-route .daily-route-stop { grid-template-columns:28px minmax(0,1fr) !important; gap:7px !important; }
+.tm-live-route .daily-route-stop__status { grid-column:2; }
+.tm-live-route .daily-route-stop__actions { grid-column:2; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+.tm-live-route .daily-route-stop__actions button { min-height:34px; }
+.tm-main-advice { display:grid; gap:9px; }
+.tm-main-advice details { border:1px solid var(--line); border-radius:14px; background:var(--surface); overflow:hidden; }
+.tm-main-advice summary { padding:12px 14px; font-size:12px; font-weight:760; }
+.tm-main-advice p { margin:0; padding:0 14px 14px; color:var(--muted); font-size:12px; line-height:1.7; }
+
 .tm-advice { display:grid; gap:9px; }
 .tm-advice article { padding:14px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
 .tm-advice h3 { margin:0 0 6px; font-size:15px; }

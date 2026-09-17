@@ -139,6 +139,7 @@
     inline.innerHTML = `
       <summary><span><b>当日路线地图</b><small>${count}个有效节点 · 仅保留景点与住宿</small></span><span class="daily-route-topper__chevron">⌄</span></summary>
       <div class="daily-route-inline__body">
+        <div class="offline-daily-mini-map-host" data-offline-mini-day="${day}"></div>
         <p class="daily-route-note">城市级导航节点已隐藏，避免干扰。住宿作为出发/收尾节点；景点保留逐点高德、百度导航。</p>
         <ol class="daily-route-stops">${startHotel}${attractionRows}${nightHotel}</ol>
       </div>`;
@@ -150,6 +151,7 @@
     } else {
       detail.append(quick, inline);
     }
+    window.JMN_OFFLINE_MAP_API?.hydrateDay?.(day, inline);
   }
 
   function normalizeTimes(card) {

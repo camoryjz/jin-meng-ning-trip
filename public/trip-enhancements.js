@@ -584,6 +584,16 @@
         const r = route.cloneNode(true);
         r.open = true;
         r.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+        const miniMarkup = window.JMN_OFFLINE_MAP_API?.miniMarkup?.(Number(day.day)) || "";
+        if (miniMarkup) {
+          let host = r.querySelector(".offline-daily-mini-map-host");
+          if (!host) {
+            host = document.createElement("div");
+            host.className = "offline-daily-mini-map-host";
+            r.querySelector(".daily-route-inline__body")?.prepend(host);
+          }
+          host.innerHTML = miniMarkup;
+        }
         wrap.append(r);
       }
       return wrap.outerHTML;

@@ -161,6 +161,20 @@
 
 /* Desktop: keep the menu fully visible and make day information breathe. */
 @media (min-width: 901px) {
+  /* Force the expanded day into the intended desktop two-column layout.
+     Left = time schedule. Right = quick nav, route, photo/outfit/fallback. */
+  .day-detail:not([hidden]) {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.35fr) minmax(310px, .65fr) !important;
+    gap: 15px 22px !important;
+    align-items: start !important;
+  }
+  .day-detail > .schedule {
+    grid-column: 1 !important;
+    grid-row: 2 / span 30 !important;
+    min-width: 0 !important;
+  }
+
   .travel-navigation-menu {
     top: 72px !important;
     right: 24px !important;

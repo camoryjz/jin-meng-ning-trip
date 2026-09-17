@@ -1,0 +1,190 @@
+/* Targeted UX fix: compact handbook menu + integrated lodging + single route panel. */
+
+/* Handbook dropdown: fixed to viewport so it is never clipped by header containers. */
+.travel-navigation-menu {
+  position: fixed !important;
+  top: calc(var(--safe-top, 0px) + 66px) !important;
+  right: 18px !important;
+  left: auto !important;
+  width: 318px !important;
+  max-width: calc(100vw - 36px) !important;
+  max-height: calc(100dvh - var(--safe-top, 0px) - 84px) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  padding: 10px !important;
+  border-radius: 16px !important;
+  z-index: 500 !important;
+  box-shadow: 0 20px 58px rgba(30, 70, 60, .22) !important;
+}
+.travel-navigation-menu__intro {
+  padding: 3px 4px 8px !important;
+  margin: 0 0 2px !important;
+}
+.travel-navigation-menu__intro strong { font-size: 13px !important; }
+.travel-navigation-menu__intro small { font-size: 10px !important; }
+.topbar .travel-navigation-menu a[data-smart-nav] {
+  min-height: 40px !important;
+  padding: 7px 9px !important;
+  gap: 8px !important;
+  border-radius: 10px !important;
+  font-size: 12px !important;
+}
+.smart-nav-icon {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 7px !important;
+}
+
+/* Old detached lodging block is deliberately removed from view. */
+.day-stay-integrated { display: none !important; }
+
+/* Lodging is now part of the schedule timeline. */
+.schedule-item--stay {
+  border-radius: 14px;
+  padding-block: 8px;
+}
+.schedule-item--stay .schedule-text {
+  display: grid;
+  gap: 4px;
+}
+.schedule-item--stay .schedule-text strong {
+  color: #1f5548;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.schedule-item--stay .schedule-text small {
+  color: #74877f;
+  font-size: 10px;
+  line-height: 1.45;
+}
+.schedule-item--stay-start {
+  background: linear-gradient(90deg, rgba(228,246,240,.72), rgba(255,255,255,0));
+}
+.schedule-item--stay-night {
+  background: linear-gradient(90deg, rgba(255,245,232,.76), rgba(255,255,255,0));
+}
+.schedule-stay-actions { margin-top: 8px; }
+
+.day-departure-advice {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #176f5f;
+  background: #e9f7f2;
+  border: 1px solid #cce8df;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* The original route source remains a direct child so daily-route-tools does not reinject it.
+   It is hidden; a cleaned route panel is rendered inside the expanded day instead. */
+.day-card > .daily-route-topper.daily-route-source,
+.day-card > .daily-route-topper { display: none !important; }
+.daily-route-inline {
+  margin-top: 18px;
+  border: 1px solid #d8e8e3;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+}
+.daily-route-inline > summary {
+  min-height: 54px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+}
+.daily-route-inline > summary::-webkit-details-marker { display: none; }
+.daily-route-inline > summary span:first-child { display: grid; gap: 2px; }
+.daily-route-inline > summary b { color: #224d42; font-size: 13px; }
+.daily-route-inline > summary small { color: #72867f; font-size: 10px; }
+.daily-route-inline__body { padding: 0 12px 12px; }
+.daily-route-inline .daily-route-note {
+  margin: 0 0 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  color: #60766e;
+  background: #f5faf8;
+  font-size: 10px;
+  line-height: 1.55;
+}
+.daily-route-inline .daily-route-stops { margin: 0; }
+.daily-route-stop--hotel {
+  border-color: #c9e4db !important;
+  background: #f5fbf8 !important;
+}
+.daily-route-stop--hotel .daily-route-stop__index {
+  color: #fff !important;
+  background: #278c78 !important;
+}
+
+/* Desktop: keep the menu fully visible and make day information breathe. */
+@media (min-width: 901px) {
+  .travel-navigation-menu {
+    top: 72px !important;
+    right: 24px !important;
+    width: 300px !important;
+    max-height: min(560px, calc(100dvh - 92px)) !important;
+  }
+  .topbar .travel-navigation-menu a[data-smart-nav] { min-height: 38px !important; }
+  .day-departure-advice { font-size: 10px; }
+  .daily-route-inline { margin-left: 0; }
+}
+
+/* Phone: menu should be a compact popover, not a full-page sheet. */
+@media (max-width: 700px) {
+  .travel-navigation-menu {
+    top: calc(var(--safe-top, 0px) + 60px) !important;
+    right: 10px !important;
+    left: auto !important;
+    width: min(286px, calc(100vw - 24px)) !important;
+    max-height: min(66dvh, 470px) !important;
+    padding: 8px !important;
+    border-radius: 14px !important;
+  }
+  .travel-navigation-menu__intro {
+    padding: 2px 3px 6px !important;
+  }
+  .topbar .travel-navigation-menu a[data-smart-nav] {
+    min-height: 38px !important;
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+  }
+  .smart-nav-icon {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 10px !important;
+  }
+  .schedule-item--stay { padding-block: 6px; }
+  .schedule-item--stay .schedule-text strong { font-size: 12px; }
+  .schedule-stay-actions .schedule-map-link { min-height: 36px; }
+  .daily-route-inline {
+    margin: 16px 0 0 !important;
+    border-radius: 15px;
+  }
+  .daily-route-inline > summary {
+    min-height: 52px;
+    padding: 11px 13px;
+  }
+  .daily-route-inline .daily-route-stop__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+:root[data-theme="dark"] .schedule-item--stay-start,
+:root[data-theme="dark"] .schedule-item--stay-night,
+:root[data-theme="dark"] .daily-route-inline,
+:root[data-theme="dark"] .daily-route-stop--hotel {
+  background: #173029 !important;
+  border-color: #35554a !important;
+}
+:root[data-theme="dark"] .schedule-item--stay .schedule-text strong,
+:root[data-theme="dark"] .daily-route-inline > summary b { color: #effaf6 !important; }
+:root[data-theme="dark"] .schedule-item--stay .schedule-text small,
+:root[data-theme="dark"] .daily-route-inline > summary small { color: #bdd0c8 !important; }

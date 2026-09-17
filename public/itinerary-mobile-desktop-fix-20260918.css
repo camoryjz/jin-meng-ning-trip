@@ -124,6 +124,41 @@
   background: #278c78 !important;
 }
 
+
+.daily-route-quicknav {
+  margin-top: 18px;
+  padding: 11px 12px;
+  display: grid;
+  gap: 9px;
+  border: 1px solid #d8e8e3;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f6fbf9, #ffffff);
+}
+.daily-route-quicknav__copy {
+  display: grid;
+  gap: 2px;
+}
+.daily-route-quicknav__copy strong {
+  color: #224d42;
+  font-size: 12px;
+}
+.daily-route-quicknav__copy small {
+  color: #72867f;
+  font-size: 9px;
+  line-height: 1.45;
+}
+.daily-route-quicknav .daily-route-actions {
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px !important;
+}
+.daily-route-quicknav .daily-route-actions button {
+  min-height: 36px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
 /* Desktop: keep the menu fully visible and make day information breathe. */
 @media (min-width: 901px) {
   .travel-navigation-menu {
@@ -134,7 +169,26 @@
   }
   .topbar .travel-navigation-menu a[data-smart-nav] { min-height: 38px !important; }
   .day-departure-advice { font-size: 10px; }
-  .daily-route-inline { margin-left: 0; }
+
+  /* Desktop right rail: quick navigation → route map → photography/outfit/fallback. */
+  .day-detail > .daily-route-quicknav {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    margin: 0 !important;
+  }
+  .day-detail > .daily-route-inline {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: start;
+    margin: 0 !important;
+  }
+  .day-detail > .day-extra-grid {
+    grid-column: 2;
+    grid-row: 4;
+    align-self: start;
+    margin-top: 0 !important;
+  }
 }
 
 /* Phone: menu should be a compact popover, not a full-page sheet. */
@@ -161,6 +215,13 @@
     height: 22px !important;
     font-size: 10px !important;
   }
+  .daily-route-quicknav {
+    margin: 16px 0 0 !important;
+    padding: 10px 11px;
+  }
+  .daily-route-quicknav .daily-route-actions {
+    grid-template-columns: 1fr !important;
+  }
   .schedule-item--stay { padding-block: 6px; }
   .schedule-item--stay .schedule-text strong { font-size: 12px; }
   .schedule-stay-actions .schedule-map-link { min-height: 36px; }
@@ -177,6 +238,7 @@
   }
 }
 
+:root[data-theme="dark"] .daily-route-quicknav,
 :root[data-theme="dark"] .schedule-item--stay-start,
 :root[data-theme="dark"] .schedule-item--stay-night,
 :root[data-theme="dark"] .daily-route-inline,

@@ -181,3 +181,31 @@
 }
 .offline-overview-shell.is-day-zoom .offline-routes .route-day{stroke-width:3.2!important}
 .offline-mini-canvas{background:#edf4f0}
+
+
+/* 2026-09-18 clean vector basemap: complete viewport, no third-party watermark. */
+.offline-clean-basemap>rect{fill:#edf4f0}
+.offline-clean-relief ellipse{
+  fill:#e4efe9;stroke:#d6e4de;stroke-width:1;opacity:.78;
+  vector-effect:non-scaling-stroke
+}
+.offline-clean-river{
+  fill:none;stroke:#a8c9d0;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
+  opacity:.78;vector-effect:non-scaling-stroke
+}
+.offline-clean-river-label{
+  fill:#6d9098;font-size:5.2px;font-weight:760;
+  paint-order:stroke;stroke:#edf4f0;stroke-width:1.7px;stroke-linejoin:round
+}
+.offline-clean-region{
+  fill:#9caea8;font-size:11px;font-weight:850;letter-spacing:.16em;opacity:.5;
+  paint-order:stroke;stroke:#edf4f0;stroke-width:3px;stroke-linejoin:round
+}
+.offline-mini-svg .offline-clean-region{font-size:6.2px;opacity:.38;letter-spacing:.08em}
+.offline-mini-svg .offline-clean-river{stroke-width:1.7;opacity:.62}
+.offline-mini-svg .offline-clean-relief ellipse{opacity:.56}
+:root[data-theme="dark"] .offline-clean-basemap>rect{fill:#13231e}
+:root[data-theme="dark"] .offline-clean-relief ellipse{fill:#1b322a;stroke:#28443a}
+:root[data-theme="dark"] .offline-clean-river{stroke:#527982}
+:root[data-theme="dark"] .offline-clean-river-label{fill:#82a5ad;stroke:#13231e}
+:root[data-theme="dark"] .offline-clean-region{fill:#6f8c82;stroke:#13231e}

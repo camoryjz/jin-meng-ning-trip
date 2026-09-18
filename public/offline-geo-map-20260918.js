@@ -73,24 +73,34 @@
       '<div class="offline-place-nav"><a href="https://uri.amap.com/search?keyword='+encodeURIComponent(p.keyword)+'&callnative=1" target="_blank" rel="noopener">高德导航 ↗</a><a href="https://map.baidu.com/search/'+encodeURIComponent(p.keyword)+'" target="_blank" rel="noopener">百度导航 ↗</a></div>';
     d.showModal?.();
   }
-  function markerLayer(ids, numbered=false){
+  // D3 is the visual reference: marker diameter stays constant relative to the
+  // visible map width, so short city days do not get oversized numbered dots.
+  const D3_MARKER_RADIUS_RATIO=6.2/431.29701375342387;
+  const D3_MARKER_TEXT_RATIO=5.8/431.29701375342387;
+  function markerLayer(ids, numbered=false, vb=null){
     const seen=new Map();
+    const dynamicRadius=numbered&&vb?Math.max(.72,vb.w*D3_MARKER_RADIUS_RATIO):6.2;
+    const dynamicText=numbered&&vb?Math.max(.66,vb.w*D3_MARKER_TEXT_RATIO):5.8;
     return '<g class="offline-markers">'+ids.map((id,index)=>{
       const p=POINTS[id];if(!p)return"";
       const base=merc(p.lng,p.lat);
       const occurrence=seen.get(id)||0;seen.set(id,occurrence+1);
-      const shift=numbered&&occurrence ? occurrence*10 : 0;
+      const shift=numbered&&occurrence ? occurrence*Math.max(dynamicRadius*1.65,1.5) : 0;
       const x=base.x+shift,y=base.y-shift;
       const cls=/酒店/.test(p.category)?"hotel":/机场|车站/.test(p.category)?"transport":"poi";
       const inner=numbered
-        ? '<circle r="6.2"/><text class="offline-marker-number" x="0" y="2.5" text-anchor="middle">'+(index+1)+'</text>'
+        ? '<circle r="'+dynamicRadius.toFixed(2)+'"/><text class="offline-marker-number" style="font-size:'+dynamicText.toFixed(2)+'px!important" x="0" y="'+(dynamicText*.36).toFixed(2)+'" text-anchor="middle">'+(index+1)+'</text>'
         : '<circle r="'+(p.major?7:5)+'"/><text class="offline-marker-label" x="10" y="-8">'+esc(p.name)+'</text>';
       return '<g class="offline-marker '+cls+'" data-offline-point="'+id+'" transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+')" tabindex="0" role="button" aria-label="'+(index+1)+'. '+esc(p.name)+'">'+inner+'</g>';
     }).join("")+'</g>';
   }
-  function routeLayer(day){
+  function routeLayer(day,mini=false){
     const days=day?[day]:Object.keys(ROUTES).map(Number);
-    return '<g class="offline-routes">'+days.map(d=>'<path class="route-day route-day-'+d+'" d="'+lineFor(ROUTES[d])+'" data-day="'+d+'"/>').join("")+'</g>';
+    return '<g class="offline-routes">'+days.map(d=>{
+      const path=lineFor(ROUTES[d]);
+      const halo=mini?'<path class="route-day-halo route-day-'+d+'" d="'+path+'" aria-hidden="true"/>':'';
+      return halo+'<path class="route-day route-day-'+d+'" d="'+path+'" data-day="'+d+'"/>';
+    }).join("")+'</g>';
   }
   function localGrid(vb){
     const cols=7,rows=5;
@@ -99,15 +109,17 @@
     for(let i=1;i<rows;i++){const y=vb.y+vb.h*i/rows;out+='<line x1="'+vb.x+'" y1="'+y+'" x2="'+(vb.x+vb.w)+'" y2="'+y+'"/>';}
     return out+'</g><text class="offline-north" x="'+(vb.x+vb.w-16)+'" y="'+(vb.y+18)+'">N ↑</text>';
   }
-  function contextLayer(vb,currentIds){
+  function contextLayer(vb,currentIds,compact=false){
     const current=new Set(currentIds);
     const padX=vb.w*.28,padY=vb.h*.3;
     const inView=(p)=>{const m=merc(p.lng,p.lat);return m.x>=vb.x-padX&&m.x<=vb.x+vb.w+padX&&m.y>=vb.y-padY&&m.y<=vb.y+vb.h+padY;};
+    const cityItems=CONTEXT_CITIES.filter(inView).slice(0,compact?4:CONTEXT_CITIES.length);
+    const cities='<g class="offline-context-cities'+(compact?' offline-context-cities--mini':'')+'">'+cityItems.map(city=>{const m=merc(city.lng,city.lat);return '<g transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')"><circle r="2.8"/><text x="5" y="3">'+esc(city.name)+'</text></g>';}).join("")+'</g>';
+    if(compact)return cities;
     const nearby=Object.entries(POINTS).filter(([id,p])=>!current.has(id)&&inView(p)).slice(0,12);
     const roadPaths=Object.values(ROUTES).map(ids=>'<path d="'+lineFor(ids)+'"/>').join("");
     const roadNet='<g class="offline-context-road-casing">'+roadPaths+'</g><g class="offline-context-routes">'+roadPaths+'</g>';
     const contextPts='<g class="offline-context-points">'+nearby.map(([id,p])=>{const m=merc(p.lng,p.lat);return '<g transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')"><circle r="2.4"/><text x="4.5" y="-3">'+esc(p.name)+'</text></g>';}).join("")+'</g>';
-    const cities='<g class="offline-context-cities">'+CONTEXT_CITIES.filter(inView).map(city=>{const m=merc(city.lng,city.lat);return '<g transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')"><circle r="2.8"/><text x="5" y="3">'+esc(city.name)+'</text></g>';}).join("")+'</g>';
     const cx=vb.x+vb.w/2,cy=vb.y+vb.h/2;
     const contours='<g class="offline-terrain-contours">'+
       '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+(vb.w*.44)+'" ry="'+(vb.h*.32)+'"/>'+
@@ -156,11 +168,13 @@
     const ratio=mini?1.55:1.62;
     const vb=day?boundsFor(ids,ratio):{x:0,y:0,w:B.width,h:B.height};
     const base='<image class="offline-basemap-image" href="'+basemap+'" x="0" y="0" width="'+B.width+'" height="'+B.height+'" preserveAspectRatio="none"/>';
-    const local=day?'<rect class="offline-local-wash" x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'"/>'+contextLayer(vb,ids)+localGrid(vb):'';
-    const online=day?rasterTileLayer(vb):'';
-    const attr=day?'<text class="osm-attribution" x="'+(vb.x+vb.w-4)+'" y="'+(vb.y+vb.h-5)+'" text-anchor="end">© OpenStreetMap contributors · 在线底图 / 离线回退</text>':'';
+    // Daily mini maps intentionally use a quieter embedded background: no dense
+    // OSM tiles, route network, nearby labels or grid. The day's route is the focus.
+    const local=day?'<rect class="offline-local-wash" x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'"/>'+contextLayer(vb,ids,mini)+(mini?'':localGrid(vb)):'';
+    const online=day&&!mini?rasterTileLayer(vb):'';
+    const attr=day&&!mini?'<text class="osm-attribution" x="'+(vb.x+vb.w-4)+'" y="'+(vb.y+vb.h-5)+'" text-anchor="end">© OpenStreetMap contributors · 在线底图 / 离线回退</text>':'';
     return '<svg class="'+(mini?'offline-mini-svg':'offline-overview-svg')+'" viewBox="'+vb.x+' '+vb.y+' '+vb.w+' '+vb.h+'" role="img" aria-label="'+(day?'第'+day+'天完整路线':'晋蒙宁15天行程总览')+'">'+
-      base+local+online+routeLayer(day)+markerLayer(ids,Boolean(day))+attr+'</svg>';
+      base+local+online+routeLayer(day,mini)+markerLayer(ids,Boolean(day),vb)+attr+'</svg>';
   }
   function dayPointList(ids){
     return '<div class="offline-day-points">'+ids.map((id,index)=>{

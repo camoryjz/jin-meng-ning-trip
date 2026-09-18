@@ -154,3 +154,19 @@
 .offline-mini-svg .offline-context-cities text{font-size:5.4px}
 @media(max-width:900px){.offline-mini-canvas{height:330px}}
 @media(max-width:560px){.offline-mini-canvas{height:320px}}
+
+
+/* 2026-09-18 actual-map visual pass. Online OSM tiles sit above the embedded fallback. */
+.online-osm-tiles{opacity:.94}
+.online-osm-tile{image-rendering:auto}
+.osm-attribution{
+  fill:#53665f;font-size:4.6px;font-weight:700;
+  paint-order:stroke;stroke:rgba(255,255,255,.95);stroke-width:1.8px;stroke-linejoin:round
+}
+.offline-mini-svg .offline-marker circle{r:6.2!important;stroke-width:1.4!important}
+.offline-mini-svg .offline-marker-number{font-size:5.5px!important;font-weight:900!important}
+.offline-overview-shell.is-day-zoom .offline-marker circle{r:6.6!important}
+.offline-overview-shell.is-day-zoom .offline-marker-number{font-size:5.8px!important}
+.offline-mini-svg .offline-routes path{stroke-width:2.8!important}
+.offline-overview-shell.is-day-zoom .offline-routes path{stroke-width:3.2!important}
+.offline-mini-canvas{background:#eaf1ec}

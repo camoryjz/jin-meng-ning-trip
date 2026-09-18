@@ -20,4 +20,4 @@ npx wrangler@latest pages deploy public --project-name jin-meng-ning-trip
 curl 'https://jin-meng-ning-trip.pages.dev/api/trip/jin-meng-ning-roadtrip-20260924?collections=todos,tickets'
 ```
 
-GET 读取接口公开可访问；写入接口需要 Cloudflare Secret EDIT_PIN 验证。不要把证件号、完整订单号、二维码、支付信息等敏感内容写入共享数据。
+站点与共享写入统一由 Cloudflare Pages 访问密码保护，不再使用单独的同行共享编辑码。不要把证件号、完整订单号、二维码、支付信息等敏感内容写入共享数据。

@@ -83,7 +83,7 @@
       const x=base.x+shift,y=base.y-shift;
       const cls=/酒店/.test(p.category)?"hotel":/机场|车站/.test(p.category)?"transport":"poi";
       const inner=numbered
-        ? '<circle r="10"/><text class="offline-marker-number" x="0" y="3.5" text-anchor="middle">'+(index+1)+'</text>'
+        ? '<circle r="6.2"/><text class="offline-marker-number" x="0" y="2.5" text-anchor="middle">'+(index+1)+'</text>'
         : '<circle r="'+(p.major?7:5)+'"/><text class="offline-marker-label" x="10" y="-8">'+esc(p.name)+'</text>';
       return '<g class="offline-marker '+cls+'" data-offline-point="'+id+'" transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+')" tabindex="0" role="button" aria-label="'+(index+1)+'. '+esc(p.name)+'">'+inner+'</g>';
     }).join("")+'</g>';
@@ -116,13 +116,51 @@
       '</g>';
     return contours+roadNet+cities+contextPts;
   }
+  function tileXToLng(x,z){return x/Math.pow(2,z)*360-180;}
+  function tileYToLat(y,z){const n=Math.PI-2*Math.PI*y/Math.pow(2,z);return 180/Math.PI*Math.atan(.5*(Math.exp(n)-Math.exp(-n)));}
+  function chooseTileZoom(vb){
+    if(vb.w<58)return 13;
+    if(vb.w<105)return 12;
+    if(vb.w<190)return 11;
+    if(vb.w<360)return 10;
+    return 9;
+  }
+  function rasterTileLayer(vb){
+    const z=chooseTileZoom(vb),n=Math.pow(2,z);
+    const west=B.west+(vb.x/B.width)*(B.east-B.west);
+    const east=B.west+((vb.x+vb.w)/B.width)*(B.east-B.west);
+    const yS=Math.log(Math.tan(Math.PI/4+B.south*Math.PI/360));
+    const yN=Math.log(Math.tan(Math.PI/4+B.north*Math.PI/360));
+    const yTop=yN-(vb.y/B.height)*(yN-yS);
+    const yBottom=yN-((vb.y+vb.h)/B.height)*(yN-yS);
+    const north=(Math.atan(Math.exp(yTop))*360/Math.PI)-90;
+    const south=(Math.atan(Math.exp(yBottom))*360/Math.PI)-90;
+    const tx0=Math.max(0,Math.floor((west+180)/360*n));
+    const tx1=Math.min(n-1,Math.floor((east+180)/360*n));
+    const latToTy=(lat)=>Math.floor((1-Math.asinh(Math.tan(lat*Math.PI/180))/Math.PI)/2*n);
+    const ty0=Math.max(0,latToTy(north)),ty1=Math.min(n-1,latToTy(south));
+    let images='';
+    let count=0;
+    for(let x=tx0;x<=tx1;x++){
+      for(let y=ty0;y<=ty1;y++){
+        if(count++>24)break;
+        const lng0=tileXToLng(x,z),lng1=tileXToLng(x+1,z);
+        const lat0=tileYToLat(y,z),lat1=tileYToLat(y+1,z);
+        const p0=merc(lng0,lat0),p1=merc(lng1,lat1);
+        images+='<image class="online-osm-tile" href="https://tile.openstreetmap.org/'+z+'/'+x+'/'+y+'.png" x="'+p0.x.toFixed(2)+'" y="'+p0.y.toFixed(2)+'" width="'+(p1.x-p0.x).toFixed(2)+'" height="'+(p1.y-p0.y).toFixed(2)+'" preserveAspectRatio="none"/>';
+      }
+    }
+    return '<g class="online-osm-tiles">'+images+'</g>';
+  }
   function mapSvg(ids,day,mini){
     const ratio=mini?1.55:1.62;
     const vb=day?boundsFor(ids,ratio):{x:0,y:0,w:B.width,h:B.height};
     const base='<image class="offline-basemap-image" href="'+basemap+'" x="0" y="0" width="'+B.width+'" height="'+B.height+'" preserveAspectRatio="none"/>';
     const local=day?'<rect class="offline-local-wash" x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'"/>'+contextLayer(vb,ids)+localGrid(vb):'';
+    const online=day?rasterTileLayer(vb):'';
+    const attr=day?'<text class="osm-attribution" x="'+(vb.x+vb.w-4)+'" y="'+(vb.y+vb.h-5)+'" text-anchor="end">© OpenStreetMap contributors · 在线底图 / 离线回退</text>':'';
     return '<svg class="'+(mini?'offline-mini-svg':'offline-overview-svg')+'" viewBox="'+vb.x+' '+vb.y+' '+vb.w+' '+vb.h+'" role="img" aria-label="'+(day?'第'+day+'天完整路线':'晋蒙宁15天行程总览')+'">'+
-      base+local+routeLayer(day)+markerLayer(ids,Boolean(day))+'</svg>';
+      base+local+online+routeLayer(day)+markerLayer(ids,Boolean(day))+attr+'</svg>';
   }
   function dayPointList(ids){
     return '<div class="offline-day-points">'+ids.map((id,index)=>{

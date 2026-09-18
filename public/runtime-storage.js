@@ -221,25 +221,13 @@
       if (method === "GET") {
         init = { cache: "no-store" };
       } else {
-        const pinKey = `${DEFAULT_KEY_PREFIX}:edit-pin`;
-        let editPin = "";
-        try { editPin = sessionStorage.getItem(pinKey) || ""; } catch {}
-        if (!editPin) {
-          editPin = String(globalThis.prompt?.("请输入共享编辑 PIN（仅保存在当前浏览器会话）") || "").trim();
-          if (!editPin) throw new Error("EDIT_PIN_REQUIRED");
-          try { sessionStorage.setItem(pinKey, editPin); } catch {}
-        }
         init = {
           method,
-          headers: { "content-type": "application/json", "x-edit-pin": editPin },
+          headers: { "content-type": "application/json" },
           body: JSON.stringify({ changes })
         };
       }
       const response = await fetch(endpoint(), init);
-      if (response.status === 401) {
-        try { sessionStorage.removeItem(`${DEFAULT_KEY_PREFIX}:edit-pin`); } catch {}
-        throw new Error("EDIT_PIN_INVALID");
-      }
       if (!response.ok) throw new Error(`API ${response.status}`);
       previous = await withLocalSettings(await response.json());
       return normalizeSnapshot(previous);

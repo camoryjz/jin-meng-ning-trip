@@ -170,8 +170,8 @@
 .offline-mini-svg .offline-context-cities text{font-size:4.8px;opacity:.62;stroke-width:1.5px}
 .offline-mini-svg .offline-marker circle{stroke-width:1.6!important}
 .offline-mini-svg .offline-marker-number{font-weight:900!important}
-.offline-overview-shell.is-day-zoom .offline-marker circle{stroke-width:1.6!important}
-.offline-overview-shell.is-day-zoom .offline-marker-number{font-weight:900!important}
+.offline-overview-shell.is-day-zoom .offline-marker circle{r:6.6!important;stroke-width:1.6!important}
+.offline-overview-shell.is-day-zoom .offline-marker-number{font-size:5.8px!important;font-weight:900!important}
 .offline-mini-svg .offline-routes .route-day-halo{
   fill:none;stroke:rgba(255,255,255,.92);stroke-width:6.4!important;opacity:.96;
   stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke

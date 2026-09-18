@@ -734,3 +734,27 @@
   #ledger-navigation-link { min-width: 42px; padding-inline: 7px !important; }
   .cover-countdown-unit { min-height: 70px !important; padding-inline: 4px !important; }
 }
+
+/* 2026-09-18 preparation checklist + practical tips */
+.prep-checklist-intro{margin:0 0 12px}
+.prep-checklist{display:grid;gap:12px}
+.prep-check-group{padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.prep-check-group h3{margin:0 0 9px;color:var(--ink);font-size:12px}
+.prep-check-group__items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.prep-check-card{min-width:0;display:grid;grid-template-columns:28px minmax(0,1fr);gap:9px;align-items:center;padding:9px 10px;border:1px solid #dde9e5;border-radius:12px;background:var(--paper);cursor:pointer}
+.prep-check-card input{position:absolute;opacity:0;pointer-events:none}
+.prep-check-card__check{width:26px;height:26px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;color:transparent;background:var(--surface);font-weight:850}
+.prep-check-card__text{font-size:10.5px;line-height:1.5}
+.prep-check-card.is-complete{opacity:.66}
+.prep-check-card.is-complete .prep-check-card__check{color:white;background:var(--forest);border-color:var(--forest)}
+.prep-check-card.is-complete .prep-check-card__text{text-decoration:line-through}
+.practical-tip-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.practical-tip-card{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;padding:13px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.practical-tip-card>span{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:var(--lake-soft);font-size:16px}
+.practical-tip-card b{font-size:12px}
+.practical-tip-card p{margin:5px 0 0;color:var(--muted);font-size:10.5px;line-height:1.65}
+@media(max-width:700px){
+  .prep-check-group__items,.practical-tip-grid{grid-template-columns:1fr}
+  .prep-check-group{padding:10px}
+  .prep-check-card{padding:9px}
+}

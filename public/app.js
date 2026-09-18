@@ -760,13 +760,22 @@ async function loadSharedState() {
   state.todos = Array.isArray(todoSnapshot.todos) ? todoSnapshot.todos : [];
   state.purchasedTickets = new Set((Array.isArray(ticketSnapshot.tickets) ? ticketSnapshot.tickets : []).filter((item) => item.completed).map((item) => item.id));
   const authoredTodos = state.data.preTrip?.todoItems || state.data.preTrip?.packingItems || [];
-  if (todoAdapter?.mode === "local" && !hasLocalTodoSnapshot && !state.todos.length && authoredTodos.length) {
-    state.todos = authoredTodos.map((item, index) => ({
-      id: String(item.id || `todo-initial-${index + 1}`),
-      text: String(item.text || item.title || "").trim(),
-      completed: Boolean(item.completed)
-    })).filter((item) => item.text);
-    await Promise.all(state.todos.map((todo) => todoAdapter.applyChange("todos", todo, "upsert")));
+  const authoredNormalized = authoredTodos.map((item, index) => ({
+    id: String(item.id || `todo-initial-${index + 1}`),
+    text: String(item.text || item.title || "").trim(),
+    category: String(item.category || "其他推荐"),
+    source: String(item.source || "authored"),
+    completed: Boolean(item.completed)
+  })).filter((item) => item.text);
+
+  // Seed/merge the authored preparation checklist without removing custom todos.
+  // IDs are stable, so the same checklist is shared across collaborators through
+  // the existing todos adapter and does not create duplicates.
+  const existingTodoIds = new Set(state.todos.map((todo) => String(todo.id)));
+  const missingAuthored = authoredNormalized.filter((todo) => !existingTodoIds.has(todo.id));
+  if (missingAuthored.length) {
+    state.todos.push(...missingAuthored);
+    await Promise.all(missingAuthored.map((todo) => todoAdapter?.applyChange("todos", todo, "upsert")));
   }
 }
 
@@ -779,9 +788,10 @@ async function saveSharedChange(collection, value, op = "upsert") {
 function saveTodoState() { return Promise.all(state.todos.map((todo) => saveSharedChange("todos", todo))); }
 
 function renderTodoList() {
-  const completed = state.todos.filter((todo) => todo.completed).length;
-  $("#todo-progress").textContent = `${completed} / ${state.todos.length}`;
-  $("#todo-list").innerHTML = state.todos.length ? state.todos.map((todo) => `
+  const customTodos = state.todos.filter((todo) => !String(todo.id).startsWith("prep-"));
+  const completed = customTodos.filter((todo) => todo.completed).length;
+  $("#todo-progress").textContent = `${completed} / ${customTodos.length}`;
+  $("#todo-list").innerHTML = customTodos.length ? customTodos.map((todo) => `
     <div class="todo-item${todo.completed ? " is-complete" : ""}" data-todo-id="${escapeHtml(todo.id)}">
       <label>
         <input type="checkbox" ${todo.completed ? "checked" : ""} aria-label="完成：${escapeHtml(todo.text)}">
@@ -789,11 +799,51 @@ function renderTodoList() {
         <span class="todo-text">${escapeHtml(todo.text)}</span>
       </label>
       <button type="button" class="todo-delete" aria-label="删除：${escapeHtml(todo.text)}">删除</button>
-    </div>`).join("") : `<p class="todo-empty">还没有准备事项，添加第一项吧。</p>`;
+    </div>`).join("") : `<p class="todo-empty">这里放临时待办；固定旅行前准备请在下方“旅行前准备”逐项勾选。</p>`;
+}
+
+function renderPrepChecklist() {
+  const host = $("#prep");
+  if (!host) return;
+  const authored = state.data.preTrip?.todoItems || state.data.preTrip?.packingItems || [];
+  const authoredIds = new Set(authored.map((item) => String(item.id || "")));
+  const prepTodos = state.todos.filter((todo) => authoredIds.has(String(todo.id)));
+  const categories = [...new Set(authored.map((item) => String(item.category || "其他推荐")))];
+  const completed = prepTodos.filter((todo) => todo.completed).length;
+
+  let progress = host.querySelector("#prep-checklist-progress");
+  if (!progress) {
+    progress = document.createElement("span");
+    progress.id = "prep-checklist-progress";
+    progress.className = "soft-label";
+    host.querySelector(".section-heading")?.append(progress);
+  }
+  progress.textContent = `${completed} / ${prepTodos.length}`;
+
+  let mount = host.querySelector("#prep-checklist");
+  if (!mount) {
+    mount = document.createElement("div");
+    mount.id = "prep-checklist";
+    mount.className = "prep-checklist";
+    host.querySelector(".section-heading")?.insertAdjacentElement("afterend", mount);
+  }
+
+  mount.innerHTML = categories.map((category) => {
+    const items = authored.filter((item) => String(item.category || "其他推荐") === category).map((authoredItem) => {
+      const todo = prepTodos.find((entry) => String(entry.id) === String(authoredItem.id)) || authoredItem;
+      return `<label class="prep-check-card${todo.completed ? " is-complete" : ""}" data-prep-id="${escapeHtml(todo.id)}">
+        <input type="checkbox" ${todo.completed ? "checked" : ""} aria-label="完成：${escapeHtml(todo.text)}">
+        <span class="prep-check-card__check" aria-hidden="true">✓</span>
+        <span class="prep-check-card__text">${escapeHtml(todo.text)}</span>
+      </label>`;
+    }).join("");
+    return `<section class="prep-check-group"><h3>${escapeHtml(category)}</h3><div class="prep-check-group__items">${items}</div></section>`;
+  }).join("");
 }
 
 function renderTravelPrep() {
   renderTodoList();
+  renderPrepChecklist();
   $("#todo-form").onsubmit = (event) => {
     event.preventDefault();
     const input = $("#todo-input");
@@ -811,6 +861,16 @@ function renderTravelPrep() {
     todo.completed = event.target.checked;
     saveSharedChange("todos", todo).catch(console.error);
     renderTodoList();
+  };
+  const prepChecklist = $("#prep-checklist");
+  if (prepChecklist) prepChecklist.onchange = (event) => {
+    const item = event.target.closest("[data-prep-id]");
+    if (!item || !event.target.matches("input[type='checkbox']")) return;
+    const todo = state.todos.find((entry) => String(entry.id) === String(item.dataset.prepId));
+    if (!todo) return;
+    todo.completed = event.target.checked;
+    saveSharedChange("todos", todo).catch(console.error);
+    renderPrepChecklist();
   };
   $("#todo-list").onclick = (event) => {
     const button = event.target.closest(".todo-delete");

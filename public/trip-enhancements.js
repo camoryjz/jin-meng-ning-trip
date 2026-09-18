@@ -612,13 +612,31 @@
   }
 
   function syncedDaySummaryMarkup(day) {
-    const source = mainDayCard(day.day)?.querySelector(".day-route-weather");
-    if (source) {
-      const clone = source.cloneNode(true);
+    const card = mainDayCard(day.day);
+    const departure = card?.querySelector(".day-departure-advice");
+    const routeWeather = card?.querySelector(".day-route-weather");
+    const fallbackTime = window.JMN_DAY_DEPARTURES?.[Number(day.day)] || "";
+
+    let departureHtml = "";
+    if (departure) {
+      const clone = departure.cloneNode(true);
       clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
-      return `<div class="tm-day-route-weather-sync" data-tm-day-summary="${day.day}">${clone.outerHTML}</div>`;
+      departureHtml = clone.outerHTML;
+    } else if (fallbackTime) {
+      departureHtml = `<span class="day-departure-advice">建议出发 ${esc(fallbackTime)}</span>`;
     }
-    return `<div class="tm-day-route-weather-sync" data-tm-day-summary="${day.day}"></div>`;
+
+    let routeWeatherHtml = "";
+    if (routeWeather) {
+      const clone = routeWeather.cloneNode(true);
+      clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+      routeWeatherHtml = clone.outerHTML;
+    }
+
+    return `<div class="tm-day-summary-sync" data-tm-day-summary="${day.day}">
+      ${departureHtml ? `<div class="tm-day-departure-sync">${departureHtml}</div>` : ""}
+      <div class="tm-day-route-weather-sync">${routeWeatherHtml}</div>
+    </div>`;
   }
 
   function tripModeMarkup(day) {

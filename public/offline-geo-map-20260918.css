@@ -127,3 +127,30 @@
   .offline-day-map-canvas .offline-overview-svg{min-height:330px}
   .offline-mini-canvas{height:300px}
 }
+
+
+/* 2026-09-18 offline background detail pass. */
+.offline-local-wash{fill:rgba(248,252,250,.16)}
+.offline-terrain-contours ellipse{
+  fill:none;stroke:#d7e6df;stroke-width:1.2;stroke-dasharray:2 4;opacity:.72;
+  vector-effect:non-scaling-stroke
+}
+.offline-context-road-casing path{
+  fill:none;stroke:#c8d5d1;stroke-width:4.4;stroke-linecap:round;stroke-linejoin:round;
+  opacity:.72;vector-effect:non-scaling-stroke
+}
+.offline-context-routes path{
+  fill:none;stroke:#fbfdfc;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
+  opacity:.98;vector-effect:non-scaling-stroke
+}
+.offline-context-cities circle{fill:#809f95;stroke:#fff;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.offline-context-cities text{
+  fill:#58756c;font-size:6.2px;font-weight:850;
+  paint-order:stroke;stroke:#f8fbfa;stroke-width:2px;stroke-linejoin:round
+}
+.offline-context-points circle{fill:#a9beb7;opacity:.85}
+.offline-context-points text{fill:#70877f;font-size:5px;font-weight:760;opacity:.95;stroke-width:1.8px}
+.offline-mini-canvas{height:350px}
+.offline-mini-svg .offline-context-cities text{font-size:5.4px}
+@media(max-width:900px){.offline-mini-canvas{height:330px}}
+@media(max-width:560px){.offline-mini-canvas{height:320px}}

@@ -845,9 +845,733 @@
     "items": []
   },
   "preTrip": {
-    "packingItems": [],
-    "preparationsExplicitlyMentioned": [],
-    "missingNote": "暂无用户明确提供的 To Do，可在网页中自行添加。"
+    "packingItems": [
+      {
+        "id": "prep-id-card",
+        "category": "证件与订单",
+        "text": "身份证（必带）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-driver-license",
+        "category": "证件与订单",
+        "text": "驾驶证（司机必带）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-rental-order",
+        "category": "证件与订单",
+        "text": "租车订单、保险/保障方案与取还车信息离线截图",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-flight-hotel",
+        "category": "证件与订单",
+        "text": "航班、酒店订单与地址各保存一份离线截图",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-ticket-proof",
+        "category": "证件与订单",
+        "text": "悬空寺、云冈、博物馆等门票/预约凭证集中收藏",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-bank-cash",
+        "category": "证件与订单",
+        "text": "银行卡/信用卡＋少量现金",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-discount-id",
+        "category": "证件与订单",
+        "text": "学生证、老年证等优惠证件（如适用）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-travel-insurance",
+        "category": "证件与订单",
+        "text": "确认旅行/意外保险保障范围与紧急联系电话",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-short-shirt",
+        "category": "衣物装备",
+        "text": "短袖T恤1—2件，作为白天或内层换洗",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-long-shirt",
+        "category": "衣物装备",
+        "text": "长袖打底/衬衫2—3件",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-fleece",
+        "category": "衣物装备",
+        "text": "抓绒或薄毛衣1件",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-windproof",
+        "category": "衣物装备",
+        "text": "防风外套/冲锋衣1件",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-light-down",
+        "category": "衣物装备",
+        "text": "轻薄羽绒服1件，草原/沙漠夜间备用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-pants",
+        "category": "衣物装备",
+        "text": "长裤/速干裤2—3条",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-underwear",
+        "category": "衣物装备",
+        "text": "内衣裤、袜子按天数准备并留1—2套余量",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-hat-scarf",
+        "category": "衣物装备",
+        "text": "遮阳帽＋围巾/头巾；怕冷者加薄手套",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-walking-shoes",
+        "category": "衣物装备",
+        "text": "防滑且适合长时间步行的运动/徒步鞋",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-slippers",
+        "category": "衣物装备",
+        "text": "酒店用轻便拖鞋",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-toiletries",
+        "category": "日常用品",
+        "text": "牙刷牙膏、毛巾等洗漱用品",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-skincare",
+        "category": "日常用品",
+        "text": "保湿面霜/乳液＋润唇膏，西北干燥重点使用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-sunscreen",
+        "category": "日常用品",
+        "text": "SPF50+防晒霜，户外每2—3小时按需补涂",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-sunglasses",
+        "category": "日常用品",
+        "text": "墨镜，火山、草原、沙漠和宁夏西线随身",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-moisture",
+        "category": "日常用品",
+        "text": "保湿喷雾/面膜等按个人习惯准备",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-tissues",
+        "category": "日常用品",
+        "text": "纸巾＋湿厕纸/湿巾",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-trash-bags",
+        "category": "日常用品",
+        "text": "小号垃圾袋/密封袋，车内和户外使用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-bottle",
+        "category": "日常用品",
+        "text": "水杯/保温杯，每人至少1个",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-neck-pillow",
+        "category": "日常用品",
+        "text": "U型枕/眼罩，长距离转场备用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-phone-charge",
+        "category": "电子设备",
+        "text": "手机及充电器/充电线",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-car-charge",
+        "category": "电子设备",
+        "text": "车载充电器＋多口充电线",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-powerbank",
+        "category": "电子设备",
+        "text": "大容量充电宝并提前充满",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-camera",
+        "category": "电子设备",
+        "text": "相机电池、充电器、存储卡并清空容量",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-drone",
+        "category": "电子设备",
+        "text": "无人机如携带，提前核对禁飞区与当地规定",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-phone-mount",
+        "category": "电子设备",
+        "text": "车载手机支架",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-power-strip",
+        "category": "电子设备",
+        "text": "转换插头/小型排插或多口充电头",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-car-inspection",
+        "category": "自驾与车辆",
+        "text": "取车时检查车身、轮毂、轮胎、灯光、油量并拍视频留存",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-offline-map",
+        "category": "自驾与车辆",
+        "text": "高德地图离线包＋关键酒店/景点/集合点提前收藏",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-emergency-kit",
+        "category": "自驾与车辆",
+        "text": "确认随车警示三角牌、灭火器及基础工具齐全",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-jump-start",
+        "category": "自驾与车辆",
+        "text": "应急启动电源/搭电宝（有条件可带）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-tow-rope",
+        "category": "自驾与车辆",
+        "text": "拖车绳等应急用品按租车规则与车辆配置确认",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-car-storage",
+        "category": "自驾与车辆",
+        "text": "车载收纳袋、车内垃圾袋，保持5人长途乘坐空间",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-common-meds",
+        "category": "健康与安全",
+        "text": "常用药：感冒/退烧、肠胃、过敏药按个人情况准备",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-motion-sickness",
+        "category": "健康与安全",
+        "text": "晕车药（有需要的人）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-first-aid",
+        "category": "健康与安全",
+        "text": "创可贴、消毒棉片/碘伏等简单外伤用品",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-mask-dust",
+        "category": "健康与安全",
+        "text": "口罩＋防风沙面罩/头巾",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-thermometer",
+        "category": "健康与安全",
+        "text": "体温计（可选）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-personal-meds",
+        "category": "健康与安全",
+        "text": "个人长期用药按全程天数＋余量准备",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-snacks",
+        "category": "其他推荐",
+        "text": "巧克力、能量棒等车上小零食",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-rain-gear",
+        "category": "其他推荐",
+        "text": "折叠伞/轻便雨衣",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-picnic",
+        "category": "其他推荐",
+        "text": "野餐垫/保温箱按草原、沙漠使用需求选带",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-binoculars",
+        "category": "其他推荐",
+        "text": "小型望远镜（草原、沙漠、观星可选）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-notebook",
+        "category": "其他推荐",
+        "text": "笔记本/笔，记录路况、费用或旅行印章",
+        "completed": false,
+        "source": "prep-v2"
+      }
+    ],
+    "preparationsExplicitlyMentioned": [
+      "证件与订单",
+      "分层衣物",
+      "防风防晒",
+      "电子设备",
+      "自驾应急",
+      "常用药与安全用品"
+    ],
+    "missingNote": "已根据晋蒙宁9月底至10月上旬行程补充旅行前准备清单；可在网页中逐项勾选。",
+    "todoItems": [
+      {
+        "id": "prep-id-card",
+        "category": "证件与订单",
+        "text": "身份证（必带）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-driver-license",
+        "category": "证件与订单",
+        "text": "驾驶证（司机必带）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-rental-order",
+        "category": "证件与订单",
+        "text": "租车订单、保险/保障方案与取还车信息离线截图",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-flight-hotel",
+        "category": "证件与订单",
+        "text": "航班、酒店订单与地址各保存一份离线截图",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-ticket-proof",
+        "category": "证件与订单",
+        "text": "悬空寺、云冈、博物馆等门票/预约凭证集中收藏",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-bank-cash",
+        "category": "证件与订单",
+        "text": "银行卡/信用卡＋少量现金",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-discount-id",
+        "category": "证件与订单",
+        "text": "学生证、老年证等优惠证件（如适用）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-travel-insurance",
+        "category": "证件与订单",
+        "text": "确认旅行/意外保险保障范围与紧急联系电话",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-short-shirt",
+        "category": "衣物装备",
+        "text": "短袖T恤1—2件，作为白天或内层换洗",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-long-shirt",
+        "category": "衣物装备",
+        "text": "长袖打底/衬衫2—3件",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-fleece",
+        "category": "衣物装备",
+        "text": "抓绒或薄毛衣1件",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-windproof",
+        "category": "衣物装备",
+        "text": "防风外套/冲锋衣1件",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-light-down",
+        "category": "衣物装备",
+        "text": "轻薄羽绒服1件，草原/沙漠夜间备用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-pants",
+        "category": "衣物装备",
+        "text": "长裤/速干裤2—3条",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-underwear",
+        "category": "衣物装备",
+        "text": "内衣裤、袜子按天数准备并留1—2套余量",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-hat-scarf",
+        "category": "衣物装备",
+        "text": "遮阳帽＋围巾/头巾；怕冷者加薄手套",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-walking-shoes",
+        "category": "衣物装备",
+        "text": "防滑且适合长时间步行的运动/徒步鞋",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-slippers",
+        "category": "衣物装备",
+        "text": "酒店用轻便拖鞋",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-toiletries",
+        "category": "日常用品",
+        "text": "牙刷牙膏、毛巾等洗漱用品",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-skincare",
+        "category": "日常用品",
+        "text": "保湿面霜/乳液＋润唇膏，西北干燥重点使用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-sunscreen",
+        "category": "日常用品",
+        "text": "SPF50+防晒霜，户外每2—3小时按需补涂",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-sunglasses",
+        "category": "日常用品",
+        "text": "墨镜，火山、草原、沙漠和宁夏西线随身",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-moisture",
+        "category": "日常用品",
+        "text": "保湿喷雾/面膜等按个人习惯准备",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-tissues",
+        "category": "日常用品",
+        "text": "纸巾＋湿厕纸/湿巾",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-trash-bags",
+        "category": "日常用品",
+        "text": "小号垃圾袋/密封袋，车内和户外使用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-bottle",
+        "category": "日常用品",
+        "text": "水杯/保温杯，每人至少1个",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-neck-pillow",
+        "category": "日常用品",
+        "text": "U型枕/眼罩，长距离转场备用",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-phone-charge",
+        "category": "电子设备",
+        "text": "手机及充电器/充电线",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-car-charge",
+        "category": "电子设备",
+        "text": "车载充电器＋多口充电线",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-powerbank",
+        "category": "电子设备",
+        "text": "大容量充电宝并提前充满",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-camera",
+        "category": "电子设备",
+        "text": "相机电池、充电器、存储卡并清空容量",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-drone",
+        "category": "电子设备",
+        "text": "无人机如携带，提前核对禁飞区与当地规定",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-phone-mount",
+        "category": "电子设备",
+        "text": "车载手机支架",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-power-strip",
+        "category": "电子设备",
+        "text": "转换插头/小型排插或多口充电头",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-car-inspection",
+        "category": "自驾与车辆",
+        "text": "取车时检查车身、轮毂、轮胎、灯光、油量并拍视频留存",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-offline-map",
+        "category": "自驾与车辆",
+        "text": "高德地图离线包＋关键酒店/景点/集合点提前收藏",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-emergency-kit",
+        "category": "自驾与车辆",
+        "text": "确认随车警示三角牌、灭火器及基础工具齐全",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-jump-start",
+        "category": "自驾与车辆",
+        "text": "应急启动电源/搭电宝（有条件可带）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-tow-rope",
+        "category": "自驾与车辆",
+        "text": "拖车绳等应急用品按租车规则与车辆配置确认",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-car-storage",
+        "category": "自驾与车辆",
+        "text": "车载收纳袋、车内垃圾袋，保持5人长途乘坐空间",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-common-meds",
+        "category": "健康与安全",
+        "text": "常用药：感冒/退烧、肠胃、过敏药按个人情况准备",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-motion-sickness",
+        "category": "健康与安全",
+        "text": "晕车药（有需要的人）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-first-aid",
+        "category": "健康与安全",
+        "text": "创可贴、消毒棉片/碘伏等简单外伤用品",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-mask-dust",
+        "category": "健康与安全",
+        "text": "口罩＋防风沙面罩/头巾",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-thermometer",
+        "category": "健康与安全",
+        "text": "体温计（可选）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-personal-meds",
+        "category": "健康与安全",
+        "text": "个人长期用药按全程天数＋余量准备",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-snacks",
+        "category": "其他推荐",
+        "text": "巧克力、能量棒等车上小零食",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-rain-gear",
+        "category": "其他推荐",
+        "text": "折叠伞/轻便雨衣",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-picnic",
+        "category": "其他推荐",
+        "text": "野餐垫/保温箱按草原、沙漠使用需求选带",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-binoculars",
+        "category": "其他推荐",
+        "text": "小型望远镜（草原、沙漠、观星可选）",
+        "completed": false,
+        "source": "prep-v2"
+      },
+      {
+        "id": "prep-notebook",
+        "category": "其他推荐",
+        "text": "笔记本/笔，记录路况、费用或旅行印章",
+        "completed": false,
+        "source": "prep-v2"
+      }
+    ]
   },
   "mapLinks": {
     "providedGoogleMapsLinks": [],

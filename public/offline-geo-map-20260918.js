@@ -31,6 +31,23 @@
     return {x:cx-w/2,y:cy-h/2,w,h};
   };
   const lineFor=(ids)=>ids.map((id,i)=>{const p=POINTS[id];if(!p)return"";const m=merc(p.lng,p.lat);return (i?"L":"M")+m.x.toFixed(1)+" "+m.y.toFixed(1);}).filter(Boolean).join(" ");
+  const pathForCoords=(coords)=>coords.map(([lng,lat],i)=>{const m=merc(lng,lat);return (i?"L":"M")+m.x.toFixed(1)+" "+m.y.toFixed(1);}).join(" ");
+  const CLEAN_REGIONS=[
+    {name:"山西",lng:112.25,lat:38.25},
+    {name:"内蒙古",lng:109.75,lat:40.55},
+    {name:"宁夏",lng:106.05,lat:37.75}
+  ];
+  const CLEAN_RIVERS=[
+    {name:"黄河",coords:[[105.82,37.18],[105.99,37.88],[106.22,38.49],[106.72,39.58],[107.39,40.74],[109.84,40.66],[111.25,40.72],[111.72,40.82]]},
+    {name:"汾河",coords:[[112.35,36.95],[112.47,37.45],[112.55,37.88],[112.62,38.45]]}
+  ];
+  function cleanBasemapLayer(vb,mini=false){
+    const inView=(lng,lat)=>{const m=merc(lng,lat);return m.x>=vb.x-vb.w*.12&&m.x<=vb.x+vb.w*1.12&&m.y>=vb.y-vb.h*.12&&m.y<=vb.y+vb.h*1.12;};
+    const regions=CLEAN_REGIONS.filter(r=>inView(r.lng,r.lat)).map(r=>{const m=merc(r.lng,r.lat);return '<text class="offline-clean-region" x="'+m.x.toFixed(1)+'" y="'+m.y.toFixed(1)+'" text-anchor="middle">'+esc(r.name)+'</text>';}).join("");
+    const rivers=CLEAN_RIVERS.map(r=>'<path class="offline-clean-river" d="'+pathForCoords(r.coords)+'"/>').join("");
+    const riverLabels=mini?"":CLEAN_RIVERS.map(r=>{const mid=r.coords[Math.floor(r.coords.length/2)],m=merc(mid[0],mid[1]);return inView(mid[0],mid[1])?'<text class="offline-clean-river-label" x="'+(m.x+4).toFixed(1)+'" y="'+(m.y-4).toFixed(1)+'">'+esc(r.name)+'</text>':"";}).join("");
+    return '<g class="offline-clean-basemap"><rect x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'" rx="0"/><g class="offline-clean-relief"><ellipse cx="'+(vb.x+vb.w*.25)+'" cy="'+(vb.y+vb.h*.32)+'" rx="'+(vb.w*.24)+'" ry="'+(vb.h*.18)+'"/><ellipse cx="'+(vb.x+vb.w*.68)+'" cy="'+(vb.y+vb.h*.62)+'" rx="'+(vb.w*.28)+'" ry="'+(vb.h*.20)+'"/></g><g class="offline-clean-rivers">'+rivers+riverLabels+'</g><g class="offline-clean-regions">'+regions+'</g></g>';
+  }
 
   const EXPERIENCE={
     "博物馆":["先看核心展厅，再按体力补充","建议使用讲解或语音导览","控制停留时间，给后续转场留余量"],
@@ -169,14 +186,12 @@
   function mapSvg(ids,day,mini){
     const ratio=mini?1.55:1.62;
     const vb=day?boundsFor(ids,ratio):{x:0,y:0,w:B.width,h:B.height};
-    const base='<image class="offline-basemap-image" href="'+basemap+'" x="0" y="0" width="'+B.width+'" height="'+B.height+'" preserveAspectRatio="none"/>';
-    // Daily mini maps intentionally use a quieter embedded background: no dense
-    // OSM tiles, route network, nearby labels or grid. The day's route is the focus.
-    const local=day?'<rect class="offline-local-wash" x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'"/>'+contextLayer(vb,ids,mini)+(mini?'':localGrid(vb)):'';
-    const online=day&&!mini?rasterTileLayer(vb):'';
-    const attr=day&&!mini?'<text class="osm-attribution" x="'+(vb.x+vb.w-4)+'" y="'+(vb.y+vb.h-5)+'" text-anchor="end">© OpenStreetMap contributors · 在线底图 / 离线回退</text>':'';
+    // All route maps now use a self-drawn vector basemap. It always fills the
+    // viewport, carries no third-party watermark, and keeps the route readable.
+    const base=cleanBasemapLayer(vb,mini);
+    const local=day?contextLayer(vb,ids,mini)+(mini?'':localGrid(vb)):'';
     return '<svg class="'+(mini?'offline-mini-svg':'offline-overview-svg')+'" viewBox="'+vb.x+' '+vb.y+' '+vb.w+' '+vb.h+'" role="img" aria-label="'+(day?'第'+day+'天完整路线':'晋蒙宁15天行程总览')+'">'+
-      base+local+online+routeLayer(day,mini)+markerLayer(ids,Boolean(day),vb,mini)+attr+'</svg>';
+      base+local+routeLayer(day,mini)+markerLayer(ids,Boolean(day),vb,mini)+'</svg>';
   }
   function dayPointList(ids){
     return '<div class="offline-day-points">'+ids.map((id,index)=>{
@@ -197,7 +212,7 @@
       '</div><button class="offline-map-all" data-offline-all aria-pressed="'+view.all+'">'+(view.all?'收起全部地点':'显示全部地点')+'</button></div>'+
       '<div class="offline-overview-shell '+(day?'is-day-zoom':'')+'">'+mapContent+'</div>'+
       '<div class="offline-map-legend"><span>● 主要地标</span><span class="hotel">● 酒店</span><span class="transport">● 机场/交通</span><small>'+(day?'D'+day+'：真实方位放大视图 · 编号表示行程顺序':view.all?'显示全部路线与景点':'默认只显示机场、酒店和主要地标')+'</small></div>'+
-      '<p class="offline-map-source">离线底图已内嵌；标点使用固定经纬度和 Web Mercator 投影。地图展示运行时零外部瓦片请求，只有点击导航后才会打开高德/百度。</p>';
+      '<p class="offline-map-source">底图已改为自绘无水印简化矢量图；标点使用固定经纬度和 Web Mercator 投影。地图本身不再请求第三方瓦片，只有点击导航后才会打开高德/百度。</p>';
   }
   function miniMarkup(day){
     const ids=ROUTES[day]||[];

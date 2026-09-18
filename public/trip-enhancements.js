@@ -571,31 +571,37 @@
     if (quick || route) {
       const wrap = document.createElement("div");
       wrap.className = "tm-live-route";
-      const note = document.createElement("div");
-      note.className = "tm-live-note";
-      note.textContent = "与主页面当日路线同步：保留景点与住宿导航，城市级导航节点已过滤。";
-      wrap.append(note);
+      wrap.innerHTML = '<div class="tm-live-note">与主页面当日路线同步：保留景点与住宿，城市级导航节点已过滤。</div>';
+
       if (quick) {
         const q = quick.cloneNode(true);
+        q.classList.add("tm-route-quicknav");
         q.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
         wrap.append(q);
       }
-      if (route) {
-        const r = route.cloneNode(true);
-        r.open = true;
-        r.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
-        const miniMarkup = window.JMN_OFFLINE_MAP_API?.miniMarkup?.(Number(day.day)) || "";
-        if (miniMarkup) {
-          let host = r.querySelector(".offline-daily-mini-map-host");
-          if (!host) {
-            host = document.createElement("div");
-            host.className = "offline-daily-mini-map-host";
-            r.querySelector(".daily-route-inline__body")?.prepend(host);
-          }
-          host.innerHTML = miniMarkup;
-        }
-        wrap.append(r);
-      }
+
+      const panel = document.createElement("section");
+      panel.className = "tm-route-panel";
+      const miniMarkup = window.JMN_OFFLINE_MAP_API?.miniMarkup?.(Number(day.day)) || "";
+      const rows = route ? [...route.querySelectorAll(".daily-route-stop")] : [];
+      panel.innerHTML = '<header><div><small>D'+String(day.day).padStart(2,"0")+' ROUTE</small><strong>当天路线</strong></div><span>'+rows.length+'个地点</span></header>'+
+        (miniMarkup ? '<div class="tm-route-map">'+miniMarkup+'</div>' : '')+
+        '<div class="tm-route-card-list">'+rows.map((row,index)=>{
+          const name=(row.querySelector(".daily-route-stop__name")?.textContent||"").trim();
+          const status=(row.querySelector(".daily-route-stop__status")?.textContent||"").trim();
+          const directAmap=row.querySelector("[data-direct-amap]")?.dataset.directAmap||"";
+          const directBaidu=row.querySelector("[data-direct-baidu]")?.dataset.directBaidu||"";
+          const stayAmap=row.querySelector("[data-stay-amap]")?.dataset.stayAmap||"";
+          const disabled=Boolean(row.querySelector("button:disabled"));
+          const amapAction=directAmap
+            ? '<button type="button" data-direct-amap="'+esc(directAmap)+'" '+(disabled?"disabled":"")+'>高德导航</button>'
+            : '<a href="'+esc(AMAP_SEARCH(stayAmap||name))+'" target="_blank" rel="noopener noreferrer">高德导航</a>';
+          const baiduAction=directBaidu
+            ? '<button type="button" data-direct-baidu="'+esc(directBaidu)+'" '+(disabled?"disabled":"")+'>百度导航</button>'
+            : '<a href="'+esc(BAIDU_SEARCH(stayAmap||name))+'" target="_blank" rel="noopener noreferrer">百度导航</a>';
+          return '<article class="tm-route-card"><div class="tm-route-card__index">'+(index+1)+'</div><div class="tm-route-card__copy"><strong>'+esc(name)+'</strong><small>'+esc(status||"直接导航")+'</small></div><div class="tm-route-card__actions">'+amapAction+baiduAction+'</div></article>';
+        }).join("")+'</div>';
+      wrap.append(panel);
       return wrap.outerHTML;
     }
 

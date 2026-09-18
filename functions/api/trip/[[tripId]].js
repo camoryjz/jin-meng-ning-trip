@@ -60,11 +60,9 @@ export async function onRequest(context) {
   try {
     if (context.request.method === "GET") return json(await readSnapshot(context.env.DB, tripId, collections));
     if (context.request.method !== "POST") return json({ error: "method not allowed" }, 405);
-    if (!context.env.EDIT_PIN) return json({ error: "EDIT_PIN_NOT_CONFIGURED" }, 500);
 
-    const providedPin = context.request.headers.get("x-edit-pin") || "";
-    if (providedPin !== context.env.EDIT_PIN) return json({ error: "UNAUTHORIZED" }, 401);
-
+    // Site-wide access is already enforced by functions/_middleware.js.
+    // Do not require a second, user-visible edit PIN for shared trip updates.
     const body = await context.request.json();
     if (!Array.isArray(body.changes)) return json({ error: "changes must be an array" }, 400);
 

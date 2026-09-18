@@ -656,7 +656,12 @@
     const days = [...data.days].sort((a,b)=>Number(a.day)-Number(b.day));
     const day = days.find((item)=>Number(item.day)===Number(tripModeDay)) || days[0];
     tripModeDay = Number(day.day);
-    dialog.querySelector(".trip-mode-day-tabs").innerHTML = days.map((item)=>`<button type="button" data-tm-day="${item.day}" aria-pressed="${Number(item.day)===Number(day.day)}">${String(item.date || "").slice(5).replace("-","/")}</button>`).join("");
+    const dayTabs = dialog.querySelector(".trip-mode-day-tabs");
+    dayTabs.innerHTML = days.map((item)=>`<button type="button" data-tm-day="${item.day}" aria-pressed="${Number(item.day)===Number(day.day)}">${String(item.date || "").slice(5).replace("-","/")}</button>`).join("");
+    const activeDayTab = dayTabs.querySelector('[aria-pressed="true"]');
+    if (activeDayTab && window.matchMedia("(max-width:560px)").matches) {
+      requestAnimationFrame(() => activeDayTab.scrollIntoView({ behavior:"smooth", block:"nearest", inline:"center" }));
+    }
     dialog.querySelector("#trip-mode-title").textContent = `DAY ${String(day.day).padStart(2,"0")} · ${mainDayTitle(day)}`;
     dialog.querySelector(".trip-mode-body").innerHTML = tripModeMarkup(day);
     window.dispatchEvent(new CustomEvent("trip-mode:rendered", { detail: { day: Number(day.day) } }));

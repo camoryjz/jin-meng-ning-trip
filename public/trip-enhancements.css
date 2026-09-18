@@ -169,6 +169,16 @@
 @media (min-width:561px){
   .trip-mode-dialog{width:min(92vw,680px);max-width:680px}
   .trip-mode-shell header h2{max-width:530px}
+  .trip-mode-day-tabs{
+    flex-wrap:wrap;
+    overflow-x:visible;
+    align-content:flex-start;
+    row-gap:7px;
+    padding:10px 12px 11px;
+  }
+  .trip-mode-day-tabs button{
+    flex:0 0 auto;
+  }
 }
 .tm-live-route{display:grid;gap:10px}
 .tm-live-route .daily-route-inline{border-radius:15px!important;overflow:hidden}

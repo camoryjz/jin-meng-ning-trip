@@ -276,3 +276,8 @@
   .tm-route-card__actions button,.tm-route-card__actions a{min-height:42px;font-size:11px}
   .tm-route-quicknav .daily-route-actions{grid-template-columns:1fr!important}
 }
+
+
+/* v3: make the route map the visual focus. */
+.tm-route-map .offline-mini-canvas{height:360px!important}
+@media(max-width:560px){.tm-route-map .offline-mini-canvas{height:330px!important}}

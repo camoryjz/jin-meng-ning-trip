@@ -108,3 +108,21 @@
 :root[data-theme="dark"] .day-weather-chip b { color: #effaf6; }
 :root[data-theme="dark"] .day-drive-chip i,
 :root[data-theme="dark"] .day-weather-chip__text i { color: #b8cdc5; }
+
+
+/* Keep mileage and weather visible in Trip Mode and synced with the day card. */
+.tm-day-route-weather-sync {
+  margin: 10px 0 12px;
+}
+.tm-day-route-weather-sync .day-route-weather {
+  margin-top: 0;
+}
+.trip-mode-dialog .tm-day-route-weather-sync .day-drive-chip,
+.trip-mode-dialog .tm-day-route-weather-sync .day-weather-chip {
+  background: rgba(248,252,250,.98);
+}
+@media (max-width: 700px) {
+  .tm-day-route-weather-sync {
+    margin: 8px 0 10px;
+  }
+}

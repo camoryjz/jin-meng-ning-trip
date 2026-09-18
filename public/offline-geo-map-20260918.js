@@ -12,13 +12,15 @@
     const yN=Math.log(Math.tan(Math.PI/4+B.north*Math.PI/360));
     return {x:(lng-B.west)/(B.east-B.west)*B.width,y:(yN-y)/(yN-yS)*B.height};
   };
-  const boundsFor=(ids)=>{
+  const boundsFor=(ids,aspect=1.62)=>{
     const pts=ids.map(id=>POINTS[id]).filter(Boolean).map(p=>merc(p.lng,p.lat));
     if(!pts.length)return {x:0,y:0,w:B.width,h:B.height};
     let minX=Math.min(...pts.map(p=>p.x)),maxX=Math.max(...pts.map(p=>p.x)),minY=Math.min(...pts.map(p=>p.y)),maxY=Math.max(...pts.map(p=>p.y));
-    const px=Math.max(60,(maxX-minX)*.18),py=Math.max(55,(maxY-minY)*.28);
-    minX-=px;maxX+=px;minY-=py;maxY+=py;
-    return {x:minX,y:minY,w:Math.max(190,maxX-minX),h:Math.max(150,maxY-minY)};
+    let w=Math.max(42,maxX-minX),h=Math.max(28,maxY-minY);
+    const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
+    w*=1.34;h*=1.42;
+    if(w/h<aspect)w=h*aspect;else h=w/aspect;
+    return {x:cx-w/2,y:cy-h/2,w,h};
   };
   const lineFor=(ids)=>ids.map((id,i)=>{const p=POINTS[id];if(!p)return"";const m=merc(p.lng,p.lat);return (i?"L":"M")+m.x.toFixed(1)+" "+m.y.toFixed(1);}).filter(Boolean).join(" ");
 
@@ -83,17 +85,28 @@
     return '<g class="offline-routes">'+days.map(d=>'<path class="route-day route-day-'+d+'" d="'+lineFor(ROUTES[d])+'" data-day="'+d+'"/>').join("")+'</g>';
   }
   function localGrid(vb){
-    const cols=6,rows=4;
+    const cols=7,rows=5;
     let out='<g class="offline-local-grid">';
     for(let i=1;i<cols;i++){const x=vb.x+vb.w*i/cols;out+='<line x1="'+x+'" y1="'+vb.y+'" x2="'+x+'" y2="'+(vb.y+vb.h)+'"/>';}
     for(let i=1;i<rows;i++){const y=vb.y+vb.h*i/rows;out+='<line x1="'+vb.x+'" y1="'+y+'" x2="'+(vb.x+vb.w)+'" y2="'+y+'"/>';}
-    return out+'</g><text class="offline-north" x="'+(vb.x+vb.w-24)+'" y="'+(vb.y+30)+'">N ↑</text>';
+    return out+'</g><text class="offline-north" x="'+(vb.x+vb.w-16)+'" y="'+(vb.y+18)+'">N ↑</text>';
+  }
+  function contextLayer(vb,currentIds){
+    const current=new Set(currentIds);
+    const padX=vb.w*.18,padY=vb.h*.22;
+    const inView=(p)=>{const m=merc(p.lng,p.lat);return m.x>=vb.x-padX&&m.x<=vb.x+vb.w+padX&&m.y>=vb.y-padY&&m.y<=vb.y+vb.h+padY;};
+    const nearby=Object.entries(POINTS).filter(([id,p])=>!current.has(id)&&inView(p)).slice(0,10);
+    const roadNet='<g class="offline-context-routes">'+Object.values(ROUTES).map(ids=>'<path d="'+lineFor(ids)+'"/>').join("")+'</g>';
+    const contextPts='<g class="offline-context-points">'+nearby.map(([id,p])=>{const m=merc(p.lng,p.lat);return '<g transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')"><circle r="2.2"/><text x="4" y="-3">'+esc(p.name)+'</text></g>';}).join("")+'</g>';
+    return roadNet+contextPts;
   }
   function mapSvg(ids,day,mini){
-    const vb=day?boundsFor(ids):{x:0,y:0,w:B.width,h:B.height};
-    const dayBase=day?'<rect class="offline-local-bg" x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'"/>'+localGrid(vb):'<image href="'+basemap+'" x="0" y="0" width="'+B.width+'" height="'+B.height+'" preserveAspectRatio="none"/>';
+    const ratio=mini?1.55:1.62;
+    const vb=day?boundsFor(ids,ratio):{x:0,y:0,w:B.width,h:B.height};
+    const base='<image class="offline-basemap-image" href="'+basemap+'" x="0" y="0" width="'+B.width+'" height="'+B.height+'" preserveAspectRatio="none"/>';
+    const local=day?'<rect class="offline-local-wash" x="'+vb.x+'" y="'+vb.y+'" width="'+vb.w+'" height="'+vb.h+'"/>'+contextLayer(vb,ids)+localGrid(vb):'';
     return '<svg class="'+(mini?'offline-mini-svg':'offline-overview-svg')+'" viewBox="'+vb.x+' '+vb.y+' '+vb.w+' '+vb.h+'" role="img" aria-label="'+(day?'第'+day+'天完整路线':'晋蒙宁15天行程总览')+'">'+
-      dayBase+routeLayer(day)+markerLayer(ids,Boolean(day))+'</svg>';
+      base+local+routeLayer(day)+markerLayer(ids,Boolean(day))+'</svg>';
   }
   function dayPointList(ids){
     return '<div class="offline-day-points">'+ids.map((id,index)=>{

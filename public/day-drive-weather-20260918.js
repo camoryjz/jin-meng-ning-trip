@@ -22,8 +22,26 @@
     15: 30
   };
 
+  const DAY_DRIVE_TIME = {
+    1: "1小时40分",
+    2: "1小时40分",
+    3: "3小时30分",
+    4: "2小时",
+    5: "1小时40分",
+    6: "4小时",
+    7: "1小时50分",
+    8: "4小时20分",
+    9: "2小时50分",
+    10: "4小时",
+    11: "2小时15分",
+    12: "3小时40分",
+    13: "3小时50分",
+    14: "3小时30分",
+    15: "35分"
+  };
+
   const DAY_DRIVE_NOTE = {
-    10: "仅计租赁车辆公路段；腾格里五湖/六湖穿越的营地越野车里程不计入。"
+    10: "仅计租赁车辆公路段；腾格里五湖/六湖穿越的营地越野车里程与越野体验时间不计入。"
   };
 
   // One representative weather point per travel day. All points use WGS84.
@@ -45,8 +63,9 @@
     15: { name: "银川", lat: 38.4770, lng: 106.2740 }
   };
 
-  const WEATHER_CACHE_PREFIX = "jmn-weather-v1:";
+  const WEATHER_CACHE_PREFIX = "jmn-weather-v2:";
   const WEATHER_CACHE_MS = 30 * 60 * 1000;
+  const weatherRequests = new Map();
 
   const weatherText = (code) => {
     const c = Number(code);
@@ -78,10 +97,11 @@
 
   function mileageChip(dayNumber) {
     const km = DAY_DRIVE_KM[dayNumber];
-    if (!km) return "";
-    const note = DAY_DRIVE_NOTE[dayNumber] || "按当前行程节点估算；实际导航里程以当天高德/百度路线为准。";
+    const driveTime = DAY_DRIVE_TIME[dayNumber];
+    if (!km || !driveTime) return "";
+    const note = DAY_DRIVE_NOTE[dayNumber] || "按当前行程节点估算；实际导航里程与驾驶时间以当天高德/百度路线和实时路况为准。";
     return `<span class="day-drive-chip" title="${note.replace(/"/g, "&quot;")}">
-      <span aria-hidden="true">🚗</span><b>约${km} km</b><i>当天自驾</i>
+      <span aria-hidden="true">🚗</span><b>约${km}km｜约${driveTime}驾驶</b>
     </span>`;
   }
 
@@ -95,11 +115,16 @@
       if (!row) {
         row = document.createElement("span");
         row.className = "day-route-weather";
+        row.innerHTML = mileageChip(dayNumber) + weatherChip(dayNumber);
         const ticket = copy.querySelector(":scope > .day-ticket-summary");
         if (ticket) copy.insertBefore(row, ticket);
         else copy.append(row);
+      } else {
+        // Never replace an existing weather chip after it has loaded.
+        // Repeated itinerary decorators used to reset every card back to "天气加载中".
+        if (!row.querySelector(".day-drive-chip")) row.insertAdjacentHTML("afterbegin", mileageChip(dayNumber));
+        if (!row.querySelector("[data-day-weather]")) row.insertAdjacentHTML("beforeend", weatherChip(dayNumber));
       }
-      row.innerHTML = mileageChip(dayNumber) + weatherChip(dayNumber);
     });
   }
 
@@ -123,22 +148,51 @@
     const cached = readCache(target);
     if (cached) return cached;
 
-    const params = new URLSearchParams({
-      latitude: String(target.lat),
-      longitude: String(target.lng),
-      daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_gusts_10m_max",
-      timezone: "Asia/Shanghai",
-      past_days: "16",
-      forecast_days: "16"
-    });
-    const response = await fetch("https://api.open-meteo.com/v1/forecast?" + params.toString(), {
-      cache: "no-store",
-      mode: "cors"
-    });
-    if (!response.ok) throw new Error("Weather API " + response.status);
-    const data = await response.json();
-    writeCache(target, data);
-    return data;
+    const requestKey = target.lat.toFixed(4) + "," + target.lng.toFixed(4);
+    if (weatherRequests.has(requestKey)) return weatherRequests.get(requestKey);
+
+    const task = (async () => {
+      const params = new URLSearchParams({
+        lat: String(target.lat),
+        lng: String(target.lng)
+      });
+
+      // Use the same-origin Cloudflare function first so mobile browsers do not
+      // depend on cross-origin weather requests. Fall back to Open-Meteo direct.
+      let response;
+      try {
+        response = await fetch("/api/weather?" + params.toString(), {
+          cache: "no-store",
+          credentials: "same-origin"
+        });
+      } catch {}
+
+      if (!response || !response.ok) {
+        const direct = new URLSearchParams({
+          latitude: String(target.lat),
+          longitude: String(target.lng),
+          daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_gusts_10m_max",
+          timezone: "Asia/Shanghai",
+          forecast_days: "16"
+        });
+        response = await fetch("https://api.open-meteo.com/v1/forecast?" + direct.toString(), {
+          cache: "no-store",
+          mode: "cors"
+        });
+      }
+
+      if (!response.ok) throw new Error("Weather API " + response.status);
+      const data = await response.json();
+      writeCache(target, data);
+      return data;
+    })();
+
+    weatherRequests.set(requestKey, task);
+    try {
+      return await task;
+    } finally {
+      weatherRequests.delete(requestKey);
+    }
   }
 
   function dailyWeather(data, date) {
@@ -197,7 +251,16 @@
   async function loadDayWeather(dayNumber) {
     const target = WEATHER_TARGETS[dayNumber];
     const date = getDayDate(dayNumber);
-    if (!target || !date) return;
+    if (!target || !date) {
+      renderWeather(dayNumber, null, "error");
+      return;
+    }
+
+    const failSafe = window.setTimeout(() => {
+      const chip = document.querySelector(`[data-day-weather="${dayNumber}"].is-loading`);
+      if (chip) renderWeather(dayNumber, null, "error");
+    }, 9000);
+
     try {
       const data = await fetchWeather(target);
       const result = dailyWeather(data, date);
@@ -205,6 +268,8 @@
     } catch (error) {
       console.warn("Daily weather unavailable", dayNumber, error);
       renderWeather(dayNumber, null, "error");
+    } finally {
+      window.clearTimeout(failSafe);
     }
   }
 

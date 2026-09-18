@@ -353,7 +353,6 @@
   };
   const setLocalJson = (key, value) => localStorage.setItem(STORE_PREFIX + key, JSON.stringify(value));
 
-  let cloudEditPin = sessionStorage.getItem(STORE_PREFIX + "edit-pin") || "";
   let cloudCheckins = new Set();
   let localCheckins = new Set(getLocalJson("checkins", []));
   let cloudAvailable = false;
@@ -375,22 +374,11 @@
   async function cloudChange(collection, id, value, op = "upsert") {
     const tripId = window.TRAVEL_PLAN_DATA?.metadata?.tripId;
     if (!tripId || window.TRAVEL_PLAN_CONFIG?.persistence?.mode !== "d1") return false;
-    if (!cloudEditPin) {
-      cloudEditPin = window.prompt("输入同行共享编辑码（仅本次浏览器会话保存）") || "";
-      if (!cloudEditPin) return false;
-      sessionStorage.setItem(STORE_PREFIX + "edit-pin", cloudEditPin);
-    }
     const response = await fetch(`/api/trip/${encodeURIComponent(tripId)}?collections=${collection}`, {
       method:"POST",
-      headers:{ "content-type":"application/json", "x-edit-pin":cloudEditPin },
+      headers:{ "content-type":"application/json" },
       body:JSON.stringify({ changes:[{ collection, id, op, value }] })
     });
-    if (response.status === 401) {
-      cloudEditPin = "";
-      sessionStorage.removeItem(STORE_PREFIX + "edit-pin");
-      alert("编辑码不正确，请重试。");
-      return false;
-    }
     if (!response.ok) throw new Error(`Cloud save failed: ${response.status}`);
     cloudAvailable = true;
     return true;

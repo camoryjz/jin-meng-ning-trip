@@ -23,6 +23,7 @@
     6: "08:00", 7: "08:30", 8: "08:30", 9: "08:30", 10: "07:00",
     11: "08:00", 12: "07:30", 13: "08:30", 14: "08:30", 15: "07:30"
   };
+  window.JMN_DAY_DEPARTURES = Object.freeze({ ...DAY_DEPARTURES });
 
   const CITY_ROUTE_IDS = new Set([
     "taiyuan-city", "hunyuan", "datong", "hohhot", "baotou", "bayannur",

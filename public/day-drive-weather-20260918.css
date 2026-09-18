@@ -126,3 +126,39 @@
     margin: 8px 0 10px;
   }
 }
+
+
+/* Suggested departure time inside Trip Mode. */
+.tm-day-summary-sync {
+  margin: 10px 0 12px;
+}
+.tm-day-departure-sync {
+  margin-bottom: 7px;
+}
+.tm-day-departure-sync .day-departure-advice {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid #cce5dd;
+  border-radius: 999px;
+  background: #eef9f5;
+  color: #16725f;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.tm-day-summary-sync .tm-day-route-weather-sync {
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .tm-day-summary-sync {
+    margin: 8px 0 10px;
+  }
+  .tm-day-departure-sync .day-departure-advice {
+    min-height: 30px;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+}

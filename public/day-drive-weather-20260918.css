@@ -1,0 +1,110 @@
+/* Daily itinerary mileage + weather summary. */
+.day-route-weather {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 9px;
+}
+.day-drive-chip,
+.day-weather-chip {
+  min-width: 0;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border: 1px solid #dbe9e5;
+  border-radius: 999px;
+  background: rgba(248,252,250,.96);
+  color: #315b50;
+  font-size: 10px;
+  line-height: 1.25;
+}
+.day-drive-chip b,
+.day-weather-chip b {
+  color: #245247;
+  font-size: 10.5px;
+  font-weight: 820;
+}
+.day-drive-chip i {
+  color: #7a8e87;
+  font-style: normal;
+  font-size: 9px;
+}
+.day-weather-chip__icon {
+  flex: 0 0 auto;
+  font-size: 15px;
+  line-height: 1;
+}
+.day-weather-chip__text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.day-weather-chip__text b,
+.day-weather-chip__text i {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.day-weather-chip__text i {
+  color: #73877f;
+  font-style: normal;
+  font-size: 9px;
+}
+.day-weather-chip.is-loading { opacity: .68; }
+.day-weather-chip.is-unavailable { background: #faf8f2; border-color: #e9e1cf; }
+.day-weather-chip.is-error { background: #faf7f4; border-color: #eadfd7; }
+
+@media (max-width: 700px) {
+  .day-route-weather {
+    display: grid;
+    grid-template-columns: auto minmax(0,1fr);
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .day-drive-chip,
+  .day-weather-chip {
+    min-height: 32px;
+    padding: 5px 8px;
+    border-radius: 11px;
+  }
+  .day-drive-chip {
+    white-space: nowrap;
+  }
+  .day-drive-chip i {
+    display: none;
+  }
+  .day-weather-chip {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .day-weather-chip__text {
+    flex: 1 1 auto;
+  }
+  .day-weather-chip__text b { font-size: 10px; }
+  .day-weather-chip__text i { font-size: 8.5px; }
+}
+
+@media (max-width: 390px) {
+  .day-route-weather {
+    grid-template-columns: 1fr;
+  }
+  .day-drive-chip {
+    width: max-content;
+  }
+}
+
+:root[data-theme="dark"] .day-drive-chip,
+:root[data-theme="dark"] .day-weather-chip {
+  color: #d8ebe4;
+  background: #18312a;
+  border-color: #35554a;
+}
+:root[data-theme="dark"] .day-drive-chip b,
+:root[data-theme="dark"] .day-weather-chip b { color: #effaf6; }
+:root[data-theme="dark"] .day-drive-chip i,
+:root[data-theme="dark"] .day-weather-chip__text i { color: #b8cdc5; }

@@ -92,8 +92,9 @@
   }
   // D3 is the visual reference: marker diameter stays constant relative to the
   // visible map width, so short city days do not get oversized numbered dots.
-  const D3_MARKER_RADIUS_RATIO=6.2/431.29701375342387;
-  const D3_MARKER_TEXT_RATIO=5.8/431.29701375342387;
+  const D3_MINI_REFERENCE_WIDTH=(ROUTES[3]?.length?boundsFor(ROUTES[3],1.55).w:431.29701375342387);
+  const D3_MARKER_RADIUS_RATIO=6.2/D3_MINI_REFERENCE_WIDTH;
+  const D3_MARKER_TEXT_RATIO=5.8/D3_MINI_REFERENCE_WIDTH;
   function markerLayer(ids, numbered=false, vb=null, mini=false){
     const seen=new Map();
     // Only the compact daily map follows the D3 screen-size reference.
@@ -108,7 +109,7 @@
       const x=base.x+shift,y=base.y-shift;
       const cls=/酒店/.test(p.category)?"hotel":/机场|车站/.test(p.category)?"transport":"poi";
       const inner=numbered
-        ? '<circle r="'+dynamicRadius.toFixed(2)+'"/><text class="offline-marker-number" style="font-size:'+dynamicText.toFixed(2)+'px!important" x="0" y="'+(dynamicText*.36).toFixed(2)+'" text-anchor="middle">'+(index+1)+'</text>'
+        ? '<circle r="'+dynamicRadius.toFixed(2)+'" style="r:'+dynamicRadius.toFixed(2)+'px!important"/><text class="offline-marker-number" style="font-size:'+dynamicText.toFixed(2)+'px!important" x="0" y="'+(dynamicText*.36).toFixed(2)+'" text-anchor="middle">'+(index+1)+'</text>'
         : '<circle r="'+(p.major?7:5)+'"/><text class="offline-marker-label" x="10" y="-8">'+esc(p.name)+'</text>';
       return '<g class="offline-marker '+cls+'" data-offline-point="'+id+'" transform="translate('+x.toFixed(1)+' '+y.toFixed(1)+')" tabindex="0" role="button" aria-label="'+(index+1)+'. '+esc(p.name)+'">'+inner+'</g>';
     }).join("")+'</g>';

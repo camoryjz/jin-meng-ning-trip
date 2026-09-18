@@ -128,6 +128,26 @@
     });
   }
 
+  function decorateTripModeSummary(dayNumber = null) {
+    document.querySelectorAll("[data-tm-day-summary]").forEach((host) => {
+      const currentDay = Number(dayNumber || host.dataset.tmDaySummary);
+      if (!currentDay || Number(host.dataset.tmDaySummary) !== currentDay) return;
+
+      const source = document.querySelector(`.day-card[data-day="${currentDay}"] .day-route-weather`);
+      if (source) {
+        host.innerHTML = "";
+        const clone = source.cloneNode(true);
+        clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+        host.append(clone);
+      } else if (!host.querySelector(".day-route-weather")) {
+        const row = document.createElement("span");
+        row.className = "day-route-weather";
+        row.innerHTML = mileageChip(currentDay) + weatherChip(currentDay);
+        host.append(row);
+      }
+    });
+  }
+
   function readCache(target) {
     try {
       const key = WEATHER_CACHE_PREFIX + target.lat.toFixed(4) + "," + target.lng.toFixed(4);
@@ -275,6 +295,7 @@
 
   function refresh() {
     decorateDayCards();
+    decorateTripModeSummary();
     Object.keys(WEATHER_TARGETS).map(Number).forEach((dayNumber, index) => {
       window.setTimeout(() => loadDayWeather(dayNumber), index * 70);
     });
@@ -282,6 +303,16 @@
 
   document.addEventListener("travel-data-ready", () => window.setTimeout(refresh, 80));
   window.addEventListener("travel-view:shown", () => window.setTimeout(refresh, 50));
+  window.addEventListener("trip-mode:rendered", (event) => {
+    const dayNumber = Number(event.detail?.day || 0);
+    window.setTimeout(() => {
+      decorateTripModeSummary(dayNumber);
+      if (dayNumber) loadDayWeather(dayNumber);
+    }, 0);
+  });
   window.addEventListener("load", () => window.setTimeout(refresh, 220), { once: true });
-  [250, 900, 2200].forEach((delay) => window.setTimeout(decorateDayCards, delay));
+  [250, 900, 2200].forEach((delay) => window.setTimeout(() => {
+    decorateDayCards();
+    decorateTripModeSummary();
+  }, delay));
 })();

@@ -93,3 +93,37 @@
 :root[data-theme="dark"] .offline-mini-sequence button{background:#173029;color:#edf8f4;border-color:#35554a}
 :root[data-theme="dark"] .offline-local-bg{fill:#132821}
 :root[data-theme="dark"] .offline-local-grid line{stroke:#35554a}
+
+
+/* 2026-09-18 map refinement: tighter zoom + richer embedded background. */
+.offline-basemap-image{opacity:.92}
+.offline-local-wash{fill:rgba(246,251,249,.55)}
+.offline-context-routes path{
+  fill:none;stroke:#b9cbc5;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+  opacity:.5;vector-effect:non-scaling-stroke
+}
+.offline-context-points circle{fill:#9bb5ad;opacity:.75}
+.offline-context-points text{
+  fill:#799088;font-size:5.2px;font-weight:700;opacity:.8;
+  paint-order:stroke;stroke:#f5faf8;stroke-width:1.6px;stroke-linejoin:round
+}
+.offline-local-grid line{stroke:#cdded8;opacity:.55}
+.offline-day-map-canvas{min-height:520px}
+.offline-day-map-canvas .offline-overview-svg{min-height:520px}
+.offline-mini-canvas{height:300px}
+.offline-mini-canvas svg{width:100%;height:100%!important}
+.offline-mini-svg .offline-routes path{stroke-width:4.2;opacity:.95}
+.offline-mini-svg .offline-context-routes path{stroke-width:1.2;opacity:.42}
+.offline-mini-svg .offline-context-points text{font-size:4.4px}
+.offline-mini-svg .offline-marker circle{r:9}
+.offline-mini-svg .offline-marker-number{font-size:8px!important}
+@media(max-width:900px){
+  .offline-day-map-canvas{min-height:390px}
+  .offline-day-map-canvas .offline-overview-svg{min-height:390px}
+  .offline-mini-canvas{height:280px}
+}
+@media(max-width:560px){
+  .offline-day-map-canvas{min-height:330px}
+  .offline-day-map-canvas .offline-overview-svg{min-height:330px}
+  .offline-mini-canvas{height:300px}
+}

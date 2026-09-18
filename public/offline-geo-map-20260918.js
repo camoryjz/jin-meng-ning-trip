@@ -4,6 +4,14 @@
   if(!DATA)return;
   const {bounds:B,basemap,points:POINTS,routes:ROUTES,legs:LEGS}=DATA;
   let view={day:0,all:false};
+  const CONTEXT_CITIES=[
+    {name:"太原",lat:37.8706,lng:112.5489},{name:"忻州",lat:38.4167,lng:112.7333},
+    {name:"大同",lat:40.0768,lng:113.3001},{name:"呼和浩特",lat:40.8426,lng:111.7492},
+    {name:"包头",lat:40.6574,lng:109.8403},{name:"巴彦淖尔",lat:40.7432,lng:107.3877},
+    {name:"乌海",lat:39.6550,lng:106.7940},{name:"银川",lat:38.4872,lng:106.2309},
+    {name:"吴忠",lat:37.9976,lng:106.1988},{name:"中卫",lat:37.5002,lng:105.1968},
+    {name:"阿拉善左旗",lat:38.8448,lng:105.6662}
+  ];
 
   const esc=(v="")=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const merc=(lng,lat)=>{
@@ -93,12 +101,20 @@
   }
   function contextLayer(vb,currentIds){
     const current=new Set(currentIds);
-    const padX=vb.w*.18,padY=vb.h*.22;
+    const padX=vb.w*.28,padY=vb.h*.3;
     const inView=(p)=>{const m=merc(p.lng,p.lat);return m.x>=vb.x-padX&&m.x<=vb.x+vb.w+padX&&m.y>=vb.y-padY&&m.y<=vb.y+vb.h+padY;};
-    const nearby=Object.entries(POINTS).filter(([id,p])=>!current.has(id)&&inView(p)).slice(0,10);
-    const roadNet='<g class="offline-context-routes">'+Object.values(ROUTES).map(ids=>'<path d="'+lineFor(ids)+'"/>').join("")+'</g>';
-    const contextPts='<g class="offline-context-points">'+nearby.map(([id,p])=>{const m=merc(p.lng,p.lat);return '<g transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')"><circle r="2.2"/><text x="4" y="-3">'+esc(p.name)+'</text></g>';}).join("")+'</g>';
-    return roadNet+contextPts;
+    const nearby=Object.entries(POINTS).filter(([id,p])=>!current.has(id)&&inView(p)).slice(0,12);
+    const roadPaths=Object.values(ROUTES).map(ids=>'<path d="'+lineFor(ids)+'"/>').join("");
+    const roadNet='<g class="offline-context-road-casing">'+roadPaths+'</g><g class="offline-context-routes">'+roadPaths+'</g>';
+    const contextPts='<g class="offline-context-points">'+nearby.map(([id,p])=>{const m=merc(p.lng,p.lat);return '<g transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')"><circle r="2.4"/><text x="4.5" y="-3">'+esc(p.name)+'</text></g>';}).join("")+'</g>';
+    const cities='<g class="offline-context-cities">'+CONTEXT_CITIES.filter(inView).map(city=>{const m=merc(city.lng,city.lat);return '<g transform="translate('+m.x.toFixed(1)+' '+m.y.toFixed(1)+')"><circle r="2.8"/><text x="5" y="3">'+esc(city.name)+'</text></g>';}).join("")+'</g>';
+    const cx=vb.x+vb.w/2,cy=vb.y+vb.h/2;
+    const contours='<g class="offline-terrain-contours">'+
+      '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+(vb.w*.44)+'" ry="'+(vb.h*.32)+'"/>'+
+      '<ellipse cx="'+(cx-vb.w*.12)+'" cy="'+(cy+vb.h*.08)+'" rx="'+(vb.w*.31)+'" ry="'+(vb.h*.22)+'"/>'+
+      '<ellipse cx="'+(cx+vb.w*.16)+'" cy="'+(cy-vb.h*.11)+'" rx="'+(vb.w*.24)+'" ry="'+(vb.h*.18)+'"/>'+
+      '</g>';
+    return contours+roadNet+cities+contextPts;
   }
   function mapSvg(ids,day,mini){
     const ratio=mini?1.55:1.62;

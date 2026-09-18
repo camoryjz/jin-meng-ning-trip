@@ -77,10 +77,12 @@
   // visible map width, so short city days do not get oversized numbered dots.
   const D3_MARKER_RADIUS_RATIO=6.2/431.29701375342387;
   const D3_MARKER_TEXT_RATIO=5.8/431.29701375342387;
-  function markerLayer(ids, numbered=false, vb=null){
+  function markerLayer(ids, numbered=false, vb=null, mini=false){
     const seen=new Map();
-    const dynamicRadius=numbered&&vb?Math.max(.72,vb.w*D3_MARKER_RADIUS_RATIO):6.2;
-    const dynamicText=numbered&&vb?Math.max(.66,vb.w*D3_MARKER_TEXT_RATIO):5.8;
+    // Only the compact daily map follows the D3 screen-size reference.
+    // The large day view keeps its original geometry and remains the visual source of truth.
+    const dynamicRadius=numbered&&mini&&vb?Math.max(.72,vb.w*D3_MARKER_RADIUS_RATIO):6.2;
+    const dynamicText=numbered&&mini&&vb?Math.max(.66,vb.w*D3_MARKER_TEXT_RATIO):5.8;
     return '<g class="offline-markers">'+ids.map((id,index)=>{
       const p=POINTS[id];if(!p)return"";
       const base=merc(p.lng,p.lat);
@@ -174,7 +176,7 @@
     const online=day&&!mini?rasterTileLayer(vb):'';
     const attr=day&&!mini?'<text class="osm-attribution" x="'+(vb.x+vb.w-4)+'" y="'+(vb.y+vb.h-5)+'" text-anchor="end">© OpenStreetMap contributors · 在线底图 / 离线回退</text>':'';
     return '<svg class="'+(mini?'offline-mini-svg':'offline-overview-svg')+'" viewBox="'+vb.x+' '+vb.y+' '+vb.w+' '+vb.h+'" role="img" aria-label="'+(day?'第'+day+'天完整路线':'晋蒙宁15天行程总览')+'">'+
-      base+local+online+routeLayer(day,mini)+markerLayer(ids,Boolean(day),vb)+attr+'</svg>';
+      base+local+online+routeLayer(day,mini)+markerLayer(ids,Boolean(day),vb,mini)+attr+'</svg>';
   }
   function dayPointList(ids){
     return '<div class="offline-day-points">'+ids.map((id,index)=>{
@@ -200,7 +202,7 @@
   function miniMarkup(day){
     const ids=ROUTES[day]||[];
     if(!ids.length)return "";
-    return '<div class="offline-daily-mini-map"><div class="offline-daily-mini-head"><strong>D'+day+' 当天小地图</strong><span>真实方位 · 编号即顺序</span></div><div class="offline-mini-canvas">'+mapSvg(ids,day,true)+'</div><div class="offline-mini-sequence">'+ids.map((id,index)=>'<button type="button" data-offline-point="'+id+'"><b>'+(index+1)+'</b>'+esc(POINTS[id]?.name||id)+'</button>').join("")+'</div></div>';
+    return '<div class="offline-daily-mini-map"><div class="offline-daily-mini-head"><strong>D'+day+' 当天小地图</strong><span>简化底图 · 编号即顺序</span></div><div class="offline-mini-canvas">'+mapSvg(ids,day,true)+'</div><div class="offline-mini-sequence">'+ids.map((id,index)=>'<button type="button" data-offline-point="'+id+'"><b>'+(index+1)+'</b>'+esc(POINTS[id]?.name||id)+'</button>').join("")+'</div></div>';
   }
   function hydrateDay(day,root){
     const host=root?.querySelector?.('.offline-daily-mini-map-host')||document.querySelector('.day-card[data-day="'+day+'"] .offline-daily-mini-map-host');

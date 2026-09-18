@@ -66,8 +66,6 @@
 .offline-mini-sequence::-webkit-scrollbar{display:none}
 .offline-mini-sequence button{flex:0 0 auto;max-width:210px;min-height:32px;padding:5px 8px;display:flex;align-items:center;gap:6px;border:1px solid #dce9e5;border-radius:999px;background:#fff;color:#315b50;font-size:9px;font-weight:760;white-space:nowrap;cursor:pointer}
 .offline-mini-sequence button b{width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:#e3f3ee;color:#177565;font-size:9px}
-.offline-mini-svg .offline-marker circle{r:8}
-.offline-mini-svg .offline-marker-number{font-size:8px!important}
 .offline-mini-svg .offline-routes path{stroke-width:3.5;opacity:.9}
 .route-leg-capsule{box-shadow:0 4px 14px rgba(28,86,70,.04)}
 
@@ -115,8 +113,6 @@
 .offline-mini-svg .offline-routes path{stroke-width:4.2;opacity:.95}
 .offline-mini-svg .offline-context-routes path{stroke-width:1.2;opacity:.42}
 .offline-mini-svg .offline-context-points text{font-size:4.4px}
-.offline-mini-svg .offline-marker circle{r:9}
-.offline-mini-svg .offline-marker-number{font-size:8px!important}
 @media(max-width:900px){
   .offline-day-map-canvas{min-height:390px}
   .offline-day-map-canvas .offline-overview-svg{min-height:390px}

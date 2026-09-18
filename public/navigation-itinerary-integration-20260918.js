@@ -125,6 +125,29 @@
     if (confirmed) confirmed.id = "bookings";
   }
 
+  const PRACTICAL_TIPS = [
+    { icon:"☀", title:"分层穿衣，不按单一温度穿", text:"9月底至10月上旬昼夜温差明显。山西段以长袖＋薄外套为主；草原、火山和沙漠加抓绒/薄羽绒＋防风层；宁夏白天可减层、日落后及时加衣。具体以每日天气卡为准。" },
+    { icon:"✦", title:"风、晒、干燥是这趟更常见的问题", text:"乌兰哈达、希拉穆仁、腾格里和宁夏西线无遮挡且风大。SPF50+、墨镜、帽子/头巾、润唇膏和保湿用品放随身包，不要压在后备箱底部。" },
+    { icon:"💧", title:"长转场要主动补水", text:"每人准备水杯/保温杯，车内常备饮水和少量能量食品。草原、沙漠和西北城市空气偏干，不要等口渴才补水；酒后不要驾驶。" },
+    { icon:"🚗", title:"每天出发前做3分钟车辆检查", text:"看油量/续航、轮胎与仪表告警，确认手机支架、充电和当日停车点。取车与还车都拍车身、轮毂、内饰和油表；租赁SUV不进入腾格里无人沙地。" },
+    { icon:"🧭", title:"高德为主，关键地点提前离线", text:"酒店、景区入口、停车场、沙漠集合点提前收藏，高德离线地图作为弱网备用。山区、草原、66号公路只在正规停车区停靠，不为拍照急停或站在车道中央。" },
+    { icon:"♥", title:"安全和当地规则优先于打卡", text:"出发前1—2天复核天气、景区公告和预约状态。遇大风、沙尘、强降雨或运营方判断不宜深入时主动缩短行程；尊重当地生活习惯，不进入非开放区域，不随意丢弃垃圾。" }
+  ];
+
+  function ensurePracticalTips() {
+    let tips = document.querySelector("#tips");
+    if (!tips) {
+      tips = document.createElement("section");
+      tips.className = "section tips-section smart-nav-section";
+      tips.id = "tips";
+      tips.setAttribute("aria-labelledby", "tips-title");
+      tips.innerHTML = `<div class="section-heading"><div><p class="section-kicker">USEFUL TIPS</p><h2 id="tips-title">实用贴士</h2></div><span class="soft-label">晋 · 蒙 · 宁</span></div><div class="practical-tip-grid"></div>`;
+      document.querySelector("#prep")?.insertAdjacentElement("afterend", tips);
+    }
+    const grid = tips.querySelector(".practical-tip-grid");
+    if (grid) grid.innerHTML = PRACTICAL_TIPS.map((item) => `<article class="practical-tip-card"><span aria-hidden="true">${item.icon}</span><div><b>${item.title}</b><p>${item.text}</p></div></article>`).join("");
+  }
+
   function splitTodoAndPrep() {
     const prep = document.querySelector("#prep");
     if (!prep) return;
@@ -153,18 +176,11 @@
       if (progress && slot) slot.replaceWith(progress);
     }
 
-    if (!prep.querySelector(".travel-prep-grid")) {
-      const intro = document.createElement("div");
-      intro.className = "travel-prep-grid";
-      intro.innerHTML = `
-        <article><b>证件与订单</b><p>身份证、驾驶证、租车订单、航班订单、酒店订单集中留一份离线截图；悬空寺、云冈、博物馆等预约凭证单独收藏。</p></article>
-        <article><b>车辆与导航</b><p>每天出发前看油量、胎压提示和停车信息。高德为主、百度备用；山区、草原、沙漠段提前缓存关键地点。</p></article>
-        <article><b>衣物与天气</b><p>晋北、草原和沙漠昼夜温差明显，按分层穿衣准备。防风外套、舒适步行鞋、防晒与补水用品放在随手可取的位置。</p></article>
-        <article><b>多人协同</b><p>5人4司机建议每天明确主驾、替补驾和集合时间；门票、停车点、酒店地址统一在群里置顶，避免各自搜索到不同入口。</p></article>`;
-      const heading = prep.querySelector(".section-heading");
-      heading?.insertAdjacentElement("afterend", intro);
-      const prepLabel = prep.querySelector(".soft-label");
-      if (prepLabel && prepLabel.id !== "todo-progress") prepLabel.textContent = "CHECKLIST";
+    if (!prep.querySelector(".prep-checklist-intro")) {
+      const intro = document.createElement("p");
+      intro.className = "smart-section-intro prep-checklist-intro";
+      intro.textContent = "按晋北→内蒙古→腾格里→宁夏的气候和自驾场景整理；固定清单可逐项勾选，完成状态与同行共享。";
+      prep.querySelector(".section-heading")?.insertAdjacentElement("afterend", intro);
     }
   }
 
@@ -378,6 +394,7 @@
   function apply() {
     normalizeBookingIds();
     splitTodoAndPrep();
+    ensurePracticalTips();
     rebuildMenu();
     integrateStaysIntoDays();
     enhanceReservations();

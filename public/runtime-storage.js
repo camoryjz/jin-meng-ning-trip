@@ -1,6 +1,22 @@
 (() => {
   "use strict";
 
+  // Compatibility guard: older cached enhancement bundles used to request a
+  // second shared-edit code. Site access is now the only authentication step.
+  window.__JMN_DISABLE_SHARED_EDIT_PIN__ = true;
+  const nativePrompt = window.prompt.bind(window);
+  window.prompt = (message, defaultValue) => {
+    const text = String(message || "");
+    if (/同行共享编辑码|共享编辑\s*PIN|共享编辑码/i.test(text)) return "site-access";
+    return nativePrompt(message, defaultValue);
+  };
+  try {
+    for (let i = sessionStorage.length - 1; i >= 0; i -= 1) {
+      const key = sessionStorage.key(i);
+      if (key && /edit-pin/i.test(key)) sessionStorage.removeItem(key);
+    }
+  } catch {}
+
   const STORAGE_VERSION = 1;
   const DEFAULT_KEY_PREFIX = "travel-plan:runtime:v1";
   const RECORD_COLLECTIONS = Object.freeze(["bills", "travelers", "todos", "tickets"]);

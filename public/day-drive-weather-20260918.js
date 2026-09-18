@@ -133,17 +133,24 @@
       const currentDay = Number(dayNumber || host.dataset.tmDaySummary);
       if (!currentDay || Number(host.dataset.tmDaySummary) !== currentDay) return;
 
+      let routeHost = host.querySelector(".tm-day-route-weather-sync");
+      if (!routeHost) {
+        routeHost = document.createElement("div");
+        routeHost.className = "tm-day-route-weather-sync";
+        host.append(routeHost);
+      }
+
       const source = document.querySelector(`.day-card[data-day="${currentDay}"] .day-route-weather`);
       if (source) {
-        host.innerHTML = "";
+        routeHost.innerHTML = "";
         const clone = source.cloneNode(true);
         clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
-        host.append(clone);
-      } else if (!host.querySelector(".day-route-weather")) {
+        routeHost.append(clone);
+      } else if (!routeHost.querySelector(".day-route-weather")) {
         const row = document.createElement("span");
         row.className = "day-route-weather";
         row.innerHTML = mileageChip(currentDay) + weatherChip(currentDay);
-        host.append(row);
+        routeHost.append(row);
       }
     });
   }

@@ -93,14 +93,20 @@
   // D3 is the visual reference: marker diameter stays constant relative to the
   // visible map width, so short city days do not get oversized numbered dots.
   const D3_MINI_REFERENCE_WIDTH=(ROUTES[3]?.length?boundsFor(ROUTES[3],1.55).w:431.29701375342387);
-  const D3_MARKER_RADIUS_RATIO=6.2/D3_MINI_REFERENCE_WIDTH;
-  const D3_MARKER_TEXT_RATIO=5.8/D3_MINI_REFERENCE_WIDTH;
+  const D3_DAY_REFERENCE_WIDTH=(ROUTES[3]?.length?boundsFor(ROUTES[3],1.62).w:450);
+  const D3_MINI_MARKER_RADIUS_RATIO=6.2/D3_MINI_REFERENCE_WIDTH;
+  const D3_MINI_MARKER_TEXT_RATIO=5.8/D3_MINI_REFERENCE_WIDTH;
+  const D3_DAY_MARKER_RADIUS_RATIO=6.6/D3_DAY_REFERENCE_WIDTH;
+  const D3_DAY_MARKER_TEXT_RATIO=5.8/D3_DAY_REFERENCE_WIDTH;
   function markerLayer(ids, numbered=false, vb=null, mini=false){
     const seen=new Map();
-    // Only the compact daily map follows the D3 screen-size reference.
-    // The large day view keeps its original geometry and remains the visual source of truth.
-    const dynamicRadius=numbered&&mini&&vb?Math.max(.72,vb.w*D3_MARKER_RADIUS_RATIO):6.2;
-    const dynamicText=numbered&&mini&&vb?Math.max(.66,vb.w*D3_MARKER_TEXT_RATIO):5.8;
+    // D3 is the visual reference for BOTH the day-tab map and the itinerary mini map.
+    // Scale SVG marker geometry with each day's viewBox so its on-screen size remains
+    // visually consistent with D3 even for short, tightly zoomed routes such as D1/D5/D15.
+    const radiusRatio=mini?D3_MINI_MARKER_RADIUS_RATIO:D3_DAY_MARKER_RADIUS_RATIO;
+    const textRatio=mini?D3_MINI_MARKER_TEXT_RATIO:D3_DAY_MARKER_TEXT_RATIO;
+    const dynamicRadius=numbered&&vb?Math.max(.72,vb.w*radiusRatio):(mini?6.2:6.6);
+    const dynamicText=numbered&&vb?Math.max(.66,vb.w*textRatio):5.8;
     return '<g class="offline-markers">'+ids.map((id,index)=>{
       const p=POINTS[id];if(!p)return"";
       const base=merc(p.lng,p.lat);

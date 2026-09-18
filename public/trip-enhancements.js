@@ -611,6 +611,16 @@
     return `<div class="tm-advice"><article><h3>摄影</h3><p>${esc(extra.photo||"按当天光线和现场规则调整。")}</p></article><article><h3>穿搭</h3><p>${esc(extra.outfit||"以舒适和天气适配为主。")}</p></article><article><h3>备选</h3><p>${esc(extra.fallback||"按当天路况和体力调整。")}</p></article></div>`;
   }
 
+  function syncedDaySummaryMarkup(day) {
+    const source = mainDayCard(day.day)?.querySelector(".day-route-weather");
+    if (source) {
+      const clone = source.cloneNode(true);
+      clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+      return `<div class="tm-day-route-weather-sync" data-tm-day-summary="${day.day}">${clone.outerHTML}</div>`;
+    }
+    return `<div class="tm-day-route-weather-sync" data-tm-day-summary="${day.day}"></div>`;
+  }
+
   function tripModeMarkup(day) {
     const tabButtons = `<nav class="trip-mode-tabs"><button data-tm-tab="schedule" aria-pressed="${tripModeTab==="schedule"}">行程</button><button data-tm-tab="map" aria-pressed="${tripModeTab==="map"}">路线</button><button data-tm-tab="photo" aria-pressed="${tripModeTab==="photo"}">摄影/穿搭</button><button data-tm-tab="ledger" aria-pressed="${tripModeTab==="ledger"}">记账</button></nav>`;
     let body = "";
@@ -618,7 +628,7 @@
     if (tripModeTab === "map") body = syncedRouteMarkup(day);
     if (tripModeTab === "photo") body = syncedAdviceMarkup(day);
     if (tripModeTab === "ledger") body = `<div class="tm-ledger"><p>多人记账、分摊和结算继续使用原网页的云端记账模块。</p><button type="button" data-open-ledger>打开记账</button></div>`;
-    return `${tabButtons}${body}`;
+    return `${tabButtons}${syncedDaySummaryMarkup(day)}${body}`;
   }
 
   function renderTripMode() {
@@ -631,6 +641,7 @@
     dialog.querySelector(".trip-mode-day-tabs").innerHTML = days.map((item)=>`<button type="button" data-tm-day="${item.day}" aria-pressed="${Number(item.day)===Number(day.day)}">${String(item.date || "").slice(5).replace("-","/")}</button>`).join("");
     dialog.querySelector("#trip-mode-title").textContent = `DAY ${String(day.day).padStart(2,"0")} · ${mainDayTitle(day)}`;
     dialog.querySelector(".trip-mode-body").innerHTML = tripModeMarkup(day);
+    window.dispatchEvent(new CustomEvent("trip-mode:rendered", { detail: { day: Number(day.day) } }));
   }
 
   function injectTripMode() {

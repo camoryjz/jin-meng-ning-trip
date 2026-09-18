@@ -5,7 +5,7 @@
     if (!document.querySelector('link[data-nav-itinerary-integration]')) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = "navigation-itinerary-integration-20260918.css?v=20260918-3";
+      link.href = "navigation-itinerary-integration-20260918.css?v=20260918-4";
       link.dataset.navItineraryIntegration = "1";
       document.head.append(link);
     }
